@@ -25,6 +25,7 @@
                           <columns>
                             <TableColumn fx:id="fornavn" prefWidth="75.0" text="Fornavn" />
                             <TableColumn fx:id="etternavn" prefWidth="75.0" text="Etternavn" />
+                              <TableColumn fx:id="forsikringsNR" prefWidth="90.0" text="ForsikringsNR" />
                           </columns>
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />

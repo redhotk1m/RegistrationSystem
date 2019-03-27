@@ -10,6 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.PortUnreachableException;
+
 public class FXMLController {
 
     @FXML
@@ -27,21 +29,21 @@ public class FXMLController {
     @FXML
     public TextField testFelt;
 
+    @FXML
+    public TableColumn<Person, Integer> forsikringsNR;
+
+    CSVReader CSVReader = new CSVReader();
 
 
-    private ObservableList<Person> data = FXCollections.observableArrayList(
-            new Person("Kim Roger Moi", "Thorsen"),
-            new Person("Even Vik", "Olsen"), new Person("Thea Aksnes", "Janvin"),
-            new Person("Athisayan", "Suresh"),new Person("Jasothran", "Husker Ikke"),
-            new Person("Einar", "Ngo")
-    );
+
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
+        CSVReader.metodeTest();
 
-        KunderTable.setItems(data);
+        KunderTable.setItems(CSVReader.getData());
         KunderTable.setEditable(true);
 
         fornavn.setCellValueFactory(
@@ -51,6 +53,11 @@ public class FXMLController {
         etternavn.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("lastName")
         );
+
+        forsikringsNR.setCellValueFactory(
+                new PropertyValueFactory<Person, Integer>("forsikringsNR")
+        );
+
 
         testFelt.setVisible(true);
         testFelt.setDisable(false);
