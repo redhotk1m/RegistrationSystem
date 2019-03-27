@@ -5,13 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
 public class CSVReader {
 
-    String CSVFile = "C:\\Users\\Eier\\Desktop\\hellofx-intelliJ\\hellofx\\src\\main\\resources\\org\\openjfx\\test2.csv";
+    String absolutePath = new File("").getAbsolutePath();
+    String CSVFile = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
     String line = "";
     String cvsSplitBy = ";";
 
