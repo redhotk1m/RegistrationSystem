@@ -2,7 +2,9 @@ package org.openjfx;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private SimpleStringProperty firstName;
     private SimpleStringProperty lastName;
 
