@@ -121,10 +121,12 @@
       <ToolBar layoutX="121.0" layoutY="37.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="37.0">
         <items>
           <Button mnemonicParsing="false" text="Insert" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
             <Button mnemonicParsing="false" text="Edit" />
             <Button mnemonicParsing="false" text="Whatever" />
-            <Button mnemonicParsing="false" text="Test" />
+            <Button mnemonicParsing="false" onAction="#testButton" text="Test" />
+            <Button fx:id="delete1" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="delete" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
         </items>
       </ToolBar>
       <ImageView fitHeight="68.0" fitWidth="99.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">

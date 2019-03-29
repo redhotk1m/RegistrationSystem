@@ -64,6 +64,16 @@ public class FXMLController {
 
     }
 
+    @FXML
+    private void deleteButton(ActionEvent event){
+        KunderTable.getSelectionModel().getSelectedItem().setFirstName("tulling");
+    }
+
+    @FXML
+    private void testButton(ActionEvent event){
+        System.out.println(KunderTable.getSelectionModel().getSelectedItem().getFirstName());
+    }
+
 
 
     public void initialize() {
