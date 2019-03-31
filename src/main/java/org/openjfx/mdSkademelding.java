@@ -2,7 +2,7 @@ package org.openjfx;
 
 import java.util.Date;
 
-public class Skademelding {
+public class mdSkademelding {
 
     private Date SMDato;
     private int SkadeNR;
@@ -13,8 +13,8 @@ public class Skademelding {
     private double ErstatningsBeloep;
 
 
-    public Skademelding(Date SMDato, int skadeNR, String skadeType, String skadeBeskrivelse, String vitneKontaktInfo,
-                        double takseringsBeloep, double erstatningsBeloep) {
+    public mdSkademelding(Date SMDato, int skadeNR, String skadeType, String skadeBeskrivelse, String vitneKontaktInfo,
+                          double takseringsBeloep, double erstatningsBeloep) {
         this.SMDato = SMDato;
         SkadeNR = skadeNR;
         SkadeType = skadeType;
