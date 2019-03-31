@@ -1,27 +1,31 @@
 package org.openjfx;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.Date;
 
 public class mdSkademelding {
 
     private Date SMDato;
-    private int SkadeNR;
-    private String SkadeType; //????
-    private String SkadeBeskrivelse;
-    private String VitneKontaktInfo; // Egen klasse?
-    private double TakseringsBeloep;
-    private double ErstatningsBeloep;
+    private SimpleIntegerProperty SkadeNR;
+    private SimpleStringProperty SkadeType; //????
+    private SimpleStringProperty SkadeBeskrivelse;
+    private SimpleStringProperty VitneKontaktInfo; // Egen klasse?
+    private SimpleDoubleProperty TakseringsBeloep;
+    private SimpleDoubleProperty ErstatningsBeloep;
 
 
     public mdSkademelding(Date SMDato, int skadeNR, String skadeType, String skadeBeskrivelse, String vitneKontaktInfo,
                           double takseringsBeloep, double erstatningsBeloep) {
         this.SMDato = SMDato;
-        SkadeNR = skadeNR;
-        SkadeType = skadeType;
-        SkadeBeskrivelse = skadeBeskrivelse;
-        VitneKontaktInfo = vitneKontaktInfo;
-        TakseringsBeloep = takseringsBeloep;
-        ErstatningsBeloep = erstatningsBeloep;
+        SkadeNR =  new SimpleIntegerProperty(skadeNR);
+        SkadeType = new SimpleStringProperty(skadeType);
+        SkadeBeskrivelse = new SimpleStringProperty(skadeBeskrivelse);
+        VitneKontaktInfo = new SimpleStringProperty(vitneKontaktInfo);
+        TakseringsBeloep = new SimpleDoubleProperty(takseringsBeloep);
+        ErstatningsBeloep = new SimpleDoubleProperty(erstatningsBeloep);
     }
 
     // Gettere og settere
@@ -35,50 +39,48 @@ public class mdSkademelding {
     }
 
     public int getSkadeNR() {
-        return SkadeNR;
+        return SkadeNR.get();
     }
 
     public void setSkadeNR(int skadeNR) {
-        SkadeNR = skadeNR;
+        this.SkadeNR.set(skadeNR);
     }
 
     public String getSkadeType() {
-        return SkadeType;
+        return SkadeType.get();
     }
 
     public void setSkadeType(String skadeType) {
-        SkadeType = skadeType;
+        this.SkadeType.set(skadeType);
     }
 
     public String getSkadeBeskrivelse() {
-        return SkadeBeskrivelse;
+        return SkadeBeskrivelse.get();
     }
 
     public void setSkadeBeskrivelse(String skadeBeskrivelse) {
-        SkadeBeskrivelse = skadeBeskrivelse;
+        this.SkadeBeskrivelse.set(skadeBeskrivelse);
     }
 
     public String getVitneKontaktInfo() {
-        return VitneKontaktInfo;
+        return VitneKontaktInfo.get();
     }
 
-    public void setVitneKontaktInfo(String vitneKontaktInfo) {
-        VitneKontaktInfo = vitneKontaktInfo;
+    public void setVitneKontaktInfo(String vitneKontaktInfo) { this.VitneKontaktInfo.set(vitneKontaktInfo);
     }
 
     public double getTakseringsBeloep() {
-        return TakseringsBeloep;
+        return TakseringsBeloep.get();
     }
 
     public void setTakseringsBeloep(double takseringsBeloep) {
-        TakseringsBeloep = takseringsBeloep;
+        this.TakseringsBeloep.set(takseringsBeloep);
     }
 
     public double getErstatningsBeloep() {
-        return ErstatningsBeloep;
+        return ErstatningsBeloep.get();
     }
 
-    public void setErstatningsBeloep(double erstatningsBeloep) {
-        ErstatningsBeloep = erstatningsBeloep;
+    public void setErstatningsBeloep(double erstatningsBeloep) { this.ErstatningsBeloep.set(erstatningsBeloep);
     }
 }

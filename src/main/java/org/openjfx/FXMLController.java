@@ -2,7 +2,6 @@ package org.openjfx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,19 +10,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class FXMLController {
 
     @FXML
-    private TableView<mdPerson> KunderTable;
+    private TableView<mdClients> KunderTable;
 
     @FXML
-    public TableColumn<mdPerson, String> fornavn;
+    public TableColumn<mdClients, String> fornavn;
 
     @FXML
-    private TableColumn<mdPerson, String> etternavn;
+    private TableColumn<mdClients, String> etternavn;
 
     @FXML
     public TextField testFelt;
 
     @FXML
-    public TableColumn<mdPerson, Integer> forsikringsNR;
+    public TableColumn<mdClients, Integer> forsikringsNR;
 
 
 
@@ -44,15 +43,15 @@ public class FXMLController {
     private void assignAllColumns(){
 
         fornavn.setCellValueFactory(
-                new PropertyValueFactory<mdPerson, String>("firstName")
+                new PropertyValueFactory<mdClients, String>("firstName")
         );
 
         etternavn.setCellValueFactory(
-                new PropertyValueFactory<mdPerson, String>("lastName")
+                new PropertyValueFactory<mdClients, String>("lastName")
         );
 
         forsikringsNR.setCellValueFactory(
-                new PropertyValueFactory<mdPerson, Integer>("forsikringsNR")
+                new PropertyValueFactory<mdClients, Integer>("forsikringsNR")
         );
 
     }
@@ -84,27 +83,27 @@ public class FXMLController {
 
     //Setter and getter
 
-    public TableView<mdPerson> getKunderTable() {
+    public TableView<mdClients> getKunderTable() {
         return KunderTable;
     }
 
-    public void setKunderTable(TableView<mdPerson> kunderTable) {
+    public void setKunderTable(TableView<mdClients> kunderTable) {
         KunderTable = kunderTable;
     }
 
-    public TableColumn<mdPerson, String> getFornavn() {
+    public TableColumn<mdClients, String> getFornavn() {
         return fornavn;
     }
 
-    public void setFornavn(TableColumn<mdPerson, String> fornavn) {
+    public void setFornavn(TableColumn<mdClients, String> fornavn) {
         this.fornavn = fornavn;
     }
 
-    public TableColumn<mdPerson, String> getEtternavn() {
+    public TableColumn<mdClients, String> getEtternavn() {
         return etternavn;
     }
 
-    public void setEtternavn(TableColumn<mdPerson, String> etternavn) {
+    public void setEtternavn(TableColumn<mdClients, String> etternavn) {
         this.etternavn = etternavn;
     }
 
@@ -116,11 +115,11 @@ public class FXMLController {
         this.testFelt = testFelt;
     }
 
-    public TableColumn<mdPerson, Integer> getForsikringsNR() {
+    public TableColumn<mdClients, Integer> getForsikringsNR() {
         return forsikringsNR;
     }
 
-    public void setForsikringsNR(TableColumn<mdPerson, Integer> forsikringsNR) {
+    public void setForsikringsNR(TableColumn<mdClients, Integer> forsikringsNR) {
         this.forsikringsNR = forsikringsNR;
     }
 }

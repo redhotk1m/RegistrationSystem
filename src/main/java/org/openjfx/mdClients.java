@@ -5,13 +5,15 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.io.Serializable;
 
-public class mdPerson implements Serializable {
+public class mdClients implements Serializable {
     private SimpleStringProperty firstName;
     private SimpleStringProperty lastName;
     private SimpleIntegerProperty forsikringsNR;
+    //private SimpleStringProperty address;
 
 
-    mdPerson(String firstName, String lastName, int forsikringsNR){
+
+    mdClients(String firstName, String lastName, int forsikringsNR){
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.forsikringsNR = new SimpleIntegerProperty(forsikringsNR);

@@ -1,7 +1,6 @@
 package org.openjfx;
 
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
@@ -15,7 +14,7 @@ public class mCSVReader {
 
     private String absolutePath = new File("").getAbsolutePath();
     private String CSVFile = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
-    private ObservableList<mdPerson> data = observableArrayList();
+    private ObservableList<mdClients> data = observableArrayList();
 
     public void addFromFile() {
 
@@ -32,7 +31,7 @@ public class mCSVReader {
                 String cvsSplitBy = ";";
                 String [] array = line.split(cvsSplitBy); //Komma som separator
 
-                data.add(new mdPerson(array[0], array[1], Integer.parseInt(array[2]))); //ParseInt eller toString? (Kan vi bare ha alt string, og parse til int om vi trenger å regne med ?
+                data.add(new mdClients(array[0], array[1], Integer.parseInt(array[2]))); //ParseInt eller toString? (Kan vi bare ha alt string, og parse til int om vi trenger å regne med ?
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,11 +47,11 @@ public class mCSVReader {
 
     //Getter and setter
 
-    public ObservableList<mdPerson> getData() {
+    public ObservableList<mdClients> getData() {
         return data;
     }
 
-    public void setData(ObservableList<mdPerson> data) {
+    public void setData(ObservableList<mdClients> data) {
         this.data = data;
     }
 
