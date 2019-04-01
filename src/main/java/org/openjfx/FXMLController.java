@@ -7,6 +7,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class FXMLController {
 
@@ -24,6 +28,9 @@ public class FXMLController {
 
     @FXML
     public TableColumn<mdPerson, Integer> forsikringsNR;
+
+    @FXML
+    private AnchorPane mainFrame;
 
 
 
@@ -70,15 +77,20 @@ public class FXMLController {
 
     @FXML
     private void testButton(ActionEvent event){
-        //System.out.println(KunderTable.getSelectionModel().getSelectedItem().getFirstName());
-    }
+        System.out.println("trykker");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open stuff");
+        File file = fileChooser.showOpenDialog(mainFrame.getScene().getWindow());
 
+        if (file != null){
+            System.out.println(file.getName());
+        }
+    }
 
 
     public void initialize() {
         // TODO
         assignAllColumns();
-
     }
 
 

@@ -3,6 +3,7 @@ package org.openjfx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,11 +12,17 @@ import java.io.IOException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mCSVReader {
+public class mCSVReader implements FileManagement{
 
     private String absolutePath = new File("").getAbsolutePath();
     private String CSVFile = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
     private ObservableList<mdPerson> data = observableArrayList();
+
+
+    @Override
+    public void loadFile(Stage stage) {
+
+    }
 
     public void addFromFile() {
 
@@ -55,8 +62,6 @@ public class mCSVReader {
     public void setData(ObservableList<mdPerson> data) {
         this.data = data;
     }
-
-
 
 }
 
