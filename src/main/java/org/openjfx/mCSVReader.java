@@ -14,9 +14,8 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class mCSVReader implements FileManagement{
 
     private String absolutePath = new File("").getAbsolutePath();
-    private String CSVFile = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
+    private String CSVFileTest = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
     private ObservableList<mdClients> data = observableArrayList();
-
 
     @Override
     public void loadFile(Stage stage) {
@@ -29,7 +28,7 @@ public class mCSVReader implements FileManagement{
             data.clear();
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(CSVFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(CSVFileTest))) {
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -38,7 +37,8 @@ public class mCSVReader implements FileManagement{
                 String cvsSplitBy = ";";
                 String [] array = line.split(cvsSplitBy); //Komma som separator
 
-                data.add(new mdClients(array[0], array[1], Integer.parseInt(array[2]))); //ParseInt eller toString? (Kan vi bare ha alt string, og parse til int om vi trenger å regne med ?
+                data.add(new mdClients(array[0], array[1], Integer.parseInt(array[2])));
+                //ParseInt eller toString? (Kan vi bare ha alt string, og parse til int om vi trenger å regne med ?
             }
         } catch (IOException e) {
             e.printStackTrace();

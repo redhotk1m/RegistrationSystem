@@ -2,9 +2,12 @@ package org.openjfx;
 
 import java.util.Date;
 
-public class HomeInsurance extends Insurances {
+public class HomeInsurance extends SuperHouseInsurance {
 
-    HomeInsurance(int insurancePrice, Date dateCreated, int insuranceAmount) {
-        super(insurancePrice, dateCreated, insuranceAmount);
+    HomeInsurance(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions, String adress,
+                  int constructionYear, String residentalType, String materials, String standard, double SqMeters,
+                  double buildingInsuranceAmount, double housingInsuranceAmount) {
+        super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions, adress, constructionYear,
+                residentalType, materials, standard, SqMeters, buildingInsuranceAmount, housingInsuranceAmount);
     }
 }

@@ -31,6 +31,15 @@ public class FXMLController {
     @FXML
     private AnchorPane mainFrame;
 
+    @FXML
+    private TableView<BoatInsurance> BåtTable;
+
+    @FXML
+    private TableColumn<BoatInsurance, String> eier;
+
+    @FXML
+    private TableColumn<BoatInsurance, Double> forsikringsPremie;
+
 
 
 
@@ -44,6 +53,9 @@ public class FXMLController {
 
         testFelt.setVisible(true);
         testFelt.setDisable(false);
+
+        /*BåtTable.setItems(mCSVReader.getData());
+        BåtTable.setEditable(true);*/
 
     }
 
@@ -59,6 +71,14 @@ public class FXMLController {
 
         forsikringsNR.setCellValueFactory(
                 new PropertyValueFactory<mdClients, Integer>("forsikringsNR")
+        );
+
+        eier.setCellValueFactory(
+                new PropertyValueFactory<BoatInsurance, String>("eier")
+        );
+
+        forsikringsPremie.setCellValueFactory(
+                new PropertyValueFactory<BoatInsurance, Double>("insurancePrice")
         );
 
     }
