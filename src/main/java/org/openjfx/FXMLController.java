@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 
 public class FXMLController {
 
@@ -33,7 +34,7 @@ public class FXMLController {
     private AnchorPane mainFrame;
 
     @FXML
-    private TableView<BoatInsurance> BåtTable;
+    private TableView<BoatInsurance> BoatTable;
 
     @FXML
     private TableColumn<BoatInsurance, String> eier;
@@ -42,7 +43,7 @@ public class FXMLController {
     private TableColumn<BoatInsurance, Double> forsikringsPremie;
 
     @FXML
-    private void loadFile(ActionEvent event) {
+    private void loadFile(ActionEvent event) throws IOException {
         mCSVReader mCSVReader = new mCSVReader();
         mCSVReader.addFromFile();
 

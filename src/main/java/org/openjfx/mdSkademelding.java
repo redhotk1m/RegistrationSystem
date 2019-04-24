@@ -1,48 +1,47 @@
 package org.openjfx;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.Date;
 
 public class mdSkademelding {
 
-    private Date SMDato;
-    private SimpleIntegerProperty SkadeNR;
+    private SimpleStringProperty SMDato;
+    private SimpleStringProperty SkadeNR;
     private SimpleStringProperty SkadeType; //????
     private SimpleStringProperty SkadeBeskrivelse;
     private SimpleStringProperty VitneKontaktInfo; // Egen klasse?
-    private SimpleDoubleProperty TakseringsBeloep;
-    private SimpleDoubleProperty ErstatningsBeloep;
+    private SimpleStringProperty TakseringsBeloep;
+    private SimpleStringProperty ErstatningsBeloep;
 
 
-    public mdSkademelding(Date SMDato, int skadeNR, String skadeType, String skadeBeskrivelse, String vitneKontaktInfo,
-                          double takseringsBeloep, double erstatningsBeloep) {
-        this.SMDato = SMDato;
-        SkadeNR =  new SimpleIntegerProperty(skadeNR);
+    public mdSkademelding(String SMDato, String skadeNR, String skadeType, String skadeBeskrivelse,
+                          String vitneKontaktInfo, String takseringsBeloep, String erstatningsBeloep) {
+        this.SMDato = new SimpleStringProperty(SMDato);
+        SkadeNR =  new SimpleStringProperty(skadeNR);
         SkadeType = new SimpleStringProperty(skadeType);
         SkadeBeskrivelse = new SimpleStringProperty(skadeBeskrivelse);
         VitneKontaktInfo = new SimpleStringProperty(vitneKontaktInfo);
-        TakseringsBeloep = new SimpleDoubleProperty(takseringsBeloep);
-        ErstatningsBeloep = new SimpleDoubleProperty(erstatningsBeloep);
+        TakseringsBeloep = new SimpleStringProperty(takseringsBeloep);
+        ErstatningsBeloep = new SimpleStringProperty(erstatningsBeloep);
     }
 
     // Gettere og settere
 
-    public Date getSMDato() {
-        return SMDato;
+    public String getSMDato() {
+        return SMDato.get();
     }
 
-    public void setSMDato(Date SMDato) {
-        this.SMDato = SMDato;
+    public void setSMDato(String SMDato) {
+        this.SMDato.set(SMDato);
     }
 
-    public int getSkadeNR() {
+    public String getSkadeNR() {
         return SkadeNR.get();
     }
 
-    public void setSkadeNR(int skadeNR) {
+    public void setSkadeNR(String skadeNR) {
         this.SkadeNR.set(skadeNR);
     }
 
@@ -69,18 +68,18 @@ public class mdSkademelding {
     public void setVitneKontaktInfo(String vitneKontaktInfo) { this.VitneKontaktInfo.set(vitneKontaktInfo);
     }
 
-    public double getTakseringsBeloep() {
+    public String getTakseringsBeloep() {
         return TakseringsBeloep.get();
     }
 
-    public void setTakseringsBeloep(double takseringsBeloep) {
+    public void setTakseringsBeloep(String takseringsBeloep) {
         this.TakseringsBeloep.set(takseringsBeloep);
     }
 
-    public double getErstatningsBeloep() {
+    public String getErstatningsBeloep() {
         return ErstatningsBeloep.get();
     }
 
-    public void setErstatningsBeloep(double erstatningsBeloep) { this.ErstatningsBeloep.set(erstatningsBeloep);
+    public void setErstatningsBeloep(String erstatningsBeloep) { this.ErstatningsBeloep.set(erstatningsBeloep);
     }
 }
