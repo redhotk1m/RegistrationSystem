@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
@@ -17,16 +18,16 @@ public class FXMLController {
     private TableView<mdClients> KunderTable;
 
     @FXML
-    public TableColumn<mdClients, String> fornavn;
+    private TableColumn<mdClients, String> fornavn;
 
     @FXML
     private TableColumn<mdClients, String> etternavn;
 
     @FXML
-    public TextField testFelt;
+    private TableColumn<mdClients, String> forsikringsNR;
 
     @FXML
-    public TableColumn<mdClients, Integer> forsikringsNR;
+    private TextField testFelt;
 
     @FXML
     private AnchorPane mainFrame;
@@ -40,9 +41,6 @@ public class FXMLController {
     @FXML
     private TableColumn<BoatInsurance, Double> forsikringsPremie;
 
-
-
-
     @FXML
     private void loadFile(ActionEvent event) {
         mCSVReader mCSVReader = new mCSVReader();
@@ -50,6 +48,10 @@ public class FXMLController {
 
         KunderTable.setItems(mCSVReader.getData());
         KunderTable.setEditable(true);
+        fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
+        etternavn.setCellFactory(TextFieldTableCell.forTableColumn());
+        forsikringsNR.setCellFactory(TextFieldTableCell.forTableColumn());
+
 
         testFelt.setVisible(true);
         testFelt.setDisable(false);
@@ -70,7 +72,7 @@ public class FXMLController {
         );
 
         forsikringsNR.setCellValueFactory(
-                new PropertyValueFactory<mdClients, Integer>("forsikringsNR")
+                new PropertyValueFactory<mdClients, String>("forsikringsNR")
         );
 
         eier.setCellValueFactory(
@@ -106,6 +108,11 @@ public class FXMLController {
         }
     }
 
+    @FXML
+    private void onEdit(TableColumn.CellEditEvent<mdClients,String> editEvent){
+        //mdClients mdClients = getKunderTable().getSelectionModel().getSelectedItem(); KANSKJE ikke helt? Sjekk om alt lagres, og hvor, lagres det i klassen, bare CSV, hva skjer?
+        //mdClients.setFirstName(editEvent.getNewValue());
+    }
 
     public void initialize() {
         // TODO
@@ -147,11 +154,11 @@ public class FXMLController {
         this.testFelt = testFelt;
     }
 
-    public TableColumn<mdClients, Integer> getForsikringsNR() {
+    public TableColumn<mdClients, String> getForsikringsNR() {
         return forsikringsNR;
     }
 
-    public void setForsikringsNR(TableColumn<mdClients, Integer> forsikringsNR) {
+    public void setForsikringsNR(TableColumn<mdClients, String> forsikringsNR) {
         this.forsikringsNR = forsikringsNR;
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
         <tabs>
@@ -23,7 +23,7 @@
                      <children>
                         <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="212.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                            <TableColumn fx:id="fornavn" prefWidth="75.0" text="Fornavn" />
+                            <TableColumn fx:id="fornavn" onEditCommit="#onEdit" prefWidth="75.0" text="Fornavn" />
                             <TableColumn fx:id="etternavn" prefWidth="75.0" text="Etternavn" />
                               <TableColumn fx:id="forsikringsNR" prefWidth="90.0" text="ForsikringsNR" />
                           </columns>

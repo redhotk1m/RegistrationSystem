@@ -8,30 +8,30 @@ import java.io.Serializable;
 public class mdClients implements Serializable {
     private SimpleStringProperty firstName;
     private SimpleStringProperty lastName;
-    private SimpleIntegerProperty forsikringsNR;
+    private SimpleStringProperty forsikringsNR;
     //private SimpleStringProperty address;
 
 
 
-    mdClients(String firstName, String lastName, int forsikringsNR){
+    mdClients(String firstName, String lastName, String forsikringsNR){
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.forsikringsNR = new SimpleIntegerProperty(forsikringsNR);
+        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
     }
 
 
     //Getters and setters
 
 
-    public int getForsikringsNR() {
+    public String getForsikringsNR() {
         return forsikringsNR.get();
     }
 
-    public SimpleIntegerProperty forsikringsNRProperty() {
+    public SimpleStringProperty forsikringsNRProperty() {
         return forsikringsNR;
     }
 
-    public void setForsikringsNR(int forsikringsNR) {
+    public void setForsikringsNR(String forsikringsNR) {
         this.forsikringsNR.set(forsikringsNR);
     }
 

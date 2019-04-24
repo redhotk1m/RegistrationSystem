@@ -14,7 +14,9 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class mCSVReader implements FileManagement{
 
     private String absolutePath = new File("").getAbsolutePath();
-    private String CSVFileTest = absolutePath + "/src/main/resources/org/openjfx/test2.csv";
+    private String CSVFileFolder = absolutePath + "/src/main/resources/org/openjfx/";
+    private String ClientsCSV = CSVFileFolder + "Clients.csv";
+    private String BoatInsurance = CSVFileFolder + "BoatInsurance.csv";
     private ObservableList<mdClients> data = observableArrayList();
 
     @Override
@@ -28,19 +30,21 @@ public class mCSVReader implements FileManagement{
             data.clear();
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(CSVFileTest))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(ClientsCSV))) {
 
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { //Så lenge neste linje i CSV filen ikke er tom, ...
 
                 //Setter hva som skal separere strengene i filen
-                String cvsSplitBy = ";";
-                String [] array = line.split(cvsSplitBy); //Komma som separator
+                String cvsSplitBy = ";"; //Semikolon som separator
+                String [] array = line.split(cvsSplitBy); //Lager et array med teksten i CSV filen, seprarert med ; som elementer
 
-                data.add(new mdClients(array[0], array[1], Integer.parseInt(array[2])));
+                data.add(new mdClients(array[0], array[1], array[2])); //Legger inn verdiene inn i ObservableList
+
                 //ParseInt eller toString? (Kan vi bare ha alt string, og parse til int om vi trenger å regne med ?
             }
         } catch (IOException e) {
+            //TODO Legge inn feilmelding på GUI ved feil innlasting
             e.printStackTrace();
         }
 
