@@ -2,6 +2,7 @@ package org.openjfx;
 
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mCSVReader extends FileHandler {
+public class mCSVReader extends FileHandler{
 
     private String absolutePath = new File("").getAbsolutePath();
     private String CSVFileFolder = absolutePath + "/src/main/resources/org/openjfx/";
@@ -21,15 +22,15 @@ public class mCSVReader extends FileHandler {
     private String SkademeldingCSV = CSVFileFolder + "Skademelding.csv";
     private ObservableList data = observableArrayList();
     private String line;
+    private TableView tableView;
     //BufferedReader br = new BufferedReader(new FileReader(FILECHOOSER))
     BufferedReader br;
     ArrayList<String> allValues = new ArrayList<>();
 
-    mCSVReader(TableView tableView){
+    mCSVReader(){
 
     }
 
-    @Override
     public void addFromFile(File file) throws IOException {
         //TODO Håndter feilmelding når ingen fil er valgt
         br = new BufferedReader(new FileReader(file));
@@ -131,6 +132,7 @@ public class mCSVReader extends FileHandler {
 
     //Getter and setter
 
+    @Override
     public ObservableList getData() {
         return data;
     }
@@ -139,5 +141,13 @@ public class mCSVReader extends FileHandler {
         this.data = data;
     }
 
+
+    public TableView getTableView() {
+        return tableView;
+    }
+
+    public void setTableView(TableView tableView) {
+        this.tableView = tableView;
+    }
 }
 

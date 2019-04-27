@@ -16,7 +16,7 @@ import java.io.IOException;
 public class FXMLController {
 
     @FXML
-    private TableView<mdClients> KunderTable;
+    private TableView KunderTable, SkadeMldTable, BoatTable;
 
     @FXML
     private TableColumn<mdClients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
@@ -28,14 +28,10 @@ public class FXMLController {
     @FXML
     private AnchorPane mainFrame;
 
-    @FXML
-    private TableView<mdSkademelding> SkadeMldTable;
 
     @FXML
     private TableColumn<mdSkademelding, String> smDato, skadeNr, skadeType, skadeBeskrivelse, vitneKontaktInfo,
                                                 takseringsBeløp, erstatningsBeløp;
-    @FXML
-    private TableView<BoatInsurance> BoatTable;
 
     @FXML
     private TableColumn<BoatInsurance, String> boatDate, boatOwner, boatInsurancePrice, boatInsuranceAmount,
@@ -52,14 +48,14 @@ public class FXMLController {
 
     @FXML
     private void loadClients (ActionEvent event) throws IOException {
-        mCSVReader reader = loadFile();
+        FileHandler reader = loadFile();
         KunderTable.setItems(reader.getData());
         KunderTable.setEditable(true);
     }
 
     @FXML
     private void loadBoat(ActionEvent event) throws IOException {
-        mCSVReader reader = loadFile();
+        FileHandler reader = loadFile();
         BoatTable.setItems(reader.getData());
         BoatTable.setEditable(true);
 
@@ -75,24 +71,29 @@ public class FXMLController {
     @FXML
     private void loadSkademld(ActionEvent event) throws IOException {
         // TODO få dette til å funke
-        mCSVReader reader = loadFile();
+        FileHandler reader = loadFile();
         SkadeMldTable.setItems(reader.getData());
         SkadeMldTable.setEditable(true);
 
     }
 
-    private void loadFile() throws IOException {
+    private FileHandler loadFile() throws IOException {
         FileHandler reader;
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
+        //CheckFileType checkFileType = new CheckFileType(file);
         if (file.getName().contains(".csv")){//TODO Bruk annen måte, fordi filen kan hete kim.csv.exe, da skal det ikke funke
             reader = new mCSVReader();
             reader.addFromFile(file);
+            return reader;
         }else if (file.getName().contains(".jobj")){
             //TODO Lage jobj reader/writer
+            reader = new mJOBJReader();
+            return reader;
         }else {
             //TODO Throw invalid FileType exception
+            return null;
         }
-        System.out.println("hei");
+
     }
     private void assignKunderColumns() {
         clientDateCreated.setCellValueFactory(
