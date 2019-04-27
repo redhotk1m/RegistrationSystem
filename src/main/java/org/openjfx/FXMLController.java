@@ -266,6 +266,7 @@ public class FXMLController {
     private void onEdit(TableColumn.CellEditEvent<mdClients,String> editEvent){
         //mdClients mdClients = getKunderTable().getSelectionModel().getSelectedItem(); KANSKJE ikke helt? Sjekk om alt lagres, og hvor, lagres det i klassen, bare CSV, hva skjer?
         //mdClients.setFirstName(editEvent.getNewValue());
+        editEvent.getTableColumn().getText();
     }
 
     public void initialize() {
