@@ -92,6 +92,7 @@ public class FXMLController {
         }else {
             //TODO Throw invalid FileType exception
         }
+        System.out.println("hei");
     }
     private void assignKunderColumns() {
         clientDateCreated.setCellValueFactory(
