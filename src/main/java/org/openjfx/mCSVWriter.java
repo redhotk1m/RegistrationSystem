@@ -18,7 +18,6 @@ public class mCSVWriter {
                 fileWriter.write(datum.getFirstName() + ";");
                 fileWriter.write(datum.getLastName() + ";");
                 fileWriter.write(datum.getForsikringsNR() + "\n");
-
             }
             fileWriter.close();
 

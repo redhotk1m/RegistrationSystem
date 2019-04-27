@@ -6,50 +6,59 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.Date;
 
 public class Insurances {
-    private SimpleIntegerProperty insurancePrice;
-    private Date dateCreated;
-    private SimpleIntegerProperty insuranceAmount;
+    private SimpleStringProperty insurancePrice;
+    private SimpleStringProperty dateCreated;
+    private SimpleStringProperty insuranceAmount;
     private SimpleStringProperty insuranceConditions;
 
-    Insurances(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions) {
-        this.insurancePrice = new SimpleIntegerProperty(insurancePrice);
-        this.dateCreated = dateCreated;
-        this.insuranceAmount = new SimpleIntegerProperty(insuranceAmount);
+
+    public Insurances() {
+        this.insurancePrice = new SimpleStringProperty();
+        this.dateCreated = new SimpleStringProperty();
+        this.insuranceAmount = new SimpleStringProperty();
+        this.insuranceConditions = new SimpleStringProperty();
+    }
+
+
+    Insurances(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions) {
+        this.insurancePrice = new SimpleStringProperty(insurancePrice);
+        this.dateCreated = new SimpleStringProperty(dateCreated);
+        this.insuranceAmount = new SimpleStringProperty(insuranceAmount);
         this.insuranceConditions = new SimpleStringProperty(insuranceConditions);
     }
 
     //getters and setters ?
 
 
-    public int getInsurancePrice() {
+    public String getInsurancePrice() {
         return insurancePrice.get();
     }
 
-    public SimpleIntegerProperty insurancePriceProperty() {
+    public SimpleStringProperty insurancePriceProperty() {
         return insurancePrice;
     }
 
-    public void setInsurancePrice(int insurancePrice) {
+    public void setInsurancePrice(String insurancePrice) {
         this.insurancePrice.set(insurancePrice);
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public String getDateCreated() {
+        return dateCreated.get();
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDateCreated (String dateCreated) {
+        this.dateCreated.set(dateCreated);
     }
 
-    public int getInsuranceAmount() {
+    public String getInsuranceAmount() {
         return insuranceAmount.get();
     }
 
-    public SimpleIntegerProperty insuranceAmountProperty() {
+    public SimpleStringProperty insuranceAmountProperty() {
         return insuranceAmount;
     }
 
-    public void setInsuranceAmount(int insuranceAmount) {
+    public void setInsuranceAmount(String insuranceAmount) {
         this.insuranceAmount.set(insuranceAmount);
     }
 

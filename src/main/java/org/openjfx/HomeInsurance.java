@@ -4,9 +4,13 @@ import java.util.Date;
 
 public class HomeInsurance extends SuperHouseInsurance {
 
-    HomeInsurance(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions, String adress,
-                  int constructionYear, String residentalType, String materials, String standard, double SqMeters,
-                  double buildingInsuranceAmount, double housingInsuranceAmount) {
+    public HomeInsurance() {
+
+    }
+
+    HomeInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
+                  String adress, String constructionYear, String residentalType, String materials, String standard,
+                  String SqMeters, String buildingInsuranceAmount, String housingInsuranceAmount) {
         super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions, adress, constructionYear,
                 residentalType, materials, standard, SqMeters, buildingInsuranceAmount, housingInsuranceAmount);
     }

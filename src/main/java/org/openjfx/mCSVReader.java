@@ -2,22 +2,22 @@ package org.openjfx;
 
 
 import javafx.collections.ObservableList;
-import javafx.stage.FileChooser;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mCSVReader implements FileManagement{
+public class mCSVReader extends FileHandler {
 
     private String absolutePath = new File("").getAbsolutePath();
     private String CSVFileFolder = absolutePath + "/src/main/resources/org/openjfx/";
     private String ClientsCSV = CSVFileFolder + "Clients.csv";
+    private String BåtCSV = CSVFileFolder + "boatInsurance.csv";
     private String SkademeldingCSV = CSVFileFolder + "Skademelding.csv";
     private ObservableList data = observableArrayList();
     private String line;
@@ -25,29 +25,65 @@ public class mCSVReader implements FileManagement{
     BufferedReader br;
     ArrayList<String> allValues = new ArrayList<>();
 
-    @Override
-    public void loadFile(Stage stage) {
+    mCSVReader(TableView tableView){
 
     }
 
+    @Override
     public void addFromFile(File file) throws IOException {
-        br = new BufferedReader(new FileReader(ClientsCSV)); //TODO filechooser for å velge fil, ved å ha addFromFile(File file) hvor file blir hentet med FileChooser
+        //TODO Håndter feilmelding når ingen fil er valgt
+        br = new BufferedReader(new FileReader(file));
         if (data.size()>0) {
-            data.clear();
+            //data.clear();
         }
         String fileType = br.readLine();
         createArray();
         switch (fileType){
             case "Clients":
                 System.out.println(allValues.size());
-                for (int i = 0; i<allValues.size(); i+=3) {
-                    data.add(new mdClients(allValues.get(i), allValues.get(i + 1), allValues.get(i + 2)));
+                for (int i = 0; i<allValues.size(); i+=8) {
+                    mdClients clients = new mdClients();
+                    clients.setDateCreated(allValues.get(i));
+                    clients.setFirstName(allValues.get(i + 1));
+                    clients.setLastName(allValues.get(i + 2));
+                    clients.setAdress(allValues.get(i + 3));
+                    clients.setForsikringsNR(allValues.get(i + 4));
+                    clients.setForsikringer(allValues.get(i + 5));
+                    clients.setSkademeldinger(allValues.get(i + 6));
+                    clients.setUbetalt(allValues.get(i + 7));
+                    data.add(clients);
                 }
                 break;
+
+            case "Boatforsikring":
+                for (int i = 0; i<allValues.size(); i+=11) {
+                    BoatInsurance boat = new BoatInsurance();
+                    boat.setDateCreated(allValues.get(i));
+                    boat.setOwner(allValues.get(i + 1));
+                    boat.setInsurancePrice(allValues.get(i + 2));
+                    boat.setInsuranceAmount(allValues.get(i + 3));
+                    boat.setInsuranceConditions(allValues.get(i + 4));
+                    boat.setRegNr(allValues.get(i + 5));
+                    boat.setTypeModel(allValues.get(i + 6));
+                    boat.setLength(allValues.get(i + 7));
+                    boat.setYear(allValues.get(i + 8));
+                    boat.setMotorType(allValues.get(i + 9));
+                    boat.setMotorStrength(allValues.get(i + 10));
+                    data.add(boat);
+                }
+                break;
+
             case "Skademelding":
                 for (int i = 0; i<allValues.size(); i+=7) {//TODO Returnere mdskademelding.getFieldsize?
-                    data.add(new mdSkademelding(allValues.get(i), allValues.get(i + 1), allValues.get(i + 2),
-                            allValues.get(i + 3) ,allValues.get(i +4), allValues.get(i + 5), allValues.get(i + 6)));
+                    mdSkademelding skadeMld = new mdSkademelding();
+                    skadeMld.setSMDato(allValues.get(i));
+                    skadeMld.setSkadeNR(allValues.get(i + 1));
+                    skadeMld.setSkadeType(allValues.get(i + 2));
+                    skadeMld.setSkadeBeskrivelse(allValues.get(i + 3));
+                    skadeMld.setVitneKontaktInfo(allValues.get(i + 4));
+                    skadeMld.setTakseringsBeloep(allValues.get(i + 5));
+                    skadeMld.setErstatningsBeloep(allValues.get(i + 6));
+                    data.add(skadeMld);
                 }
             break;
                 default:
@@ -95,7 +131,7 @@ public class mCSVReader implements FileManagement{
 
     //Getter and setter
 
-    public ObservableList<mdClients> getData() {
+    public ObservableList getData() {
         return data;
     }
 

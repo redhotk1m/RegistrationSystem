@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
         <tabs>
@@ -23,13 +23,19 @@
                      <children>
                         <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="212.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                            <TableColumn fx:id="fornavn" onEditCommit="#onEdit" prefWidth="75.0" text="Fornavn" />
-                            <TableColumn fx:id="etternavn" prefWidth="75.0" text="Etternavn" />
-                              <TableColumn fx:id="forsikringsNR" prefWidth="90.0" text="ForsikringsNR" />
+                              <TableColumn fx:id="clientDateCreated" prefWidth="75.0" text="Opprettet" />
+                            <TableColumn fx:id="fornavn" onEditCommit="#onEdit" prefWidth="65.0" text="Fornavn" />
+                            <TableColumn fx:id="etternavn" prefWidth="71.0" text="Etternavn" />
+                              <TableColumn fx:id="adress" prefWidth="73.0" text="Adresse" />
+                              <TableColumn fx:id="forsikringsNR" prefWidth="91.0" text="ForsikringsNR" />
+                              <TableColumn fx:id="insurances" prefWidth="82.0" text="Forsikringer" />
+                              <TableColumn fx:id="skademeldinger" prefWidth="106.0" text="Skademeldinger" />
+                              <TableColumn fx:id="unpaid" prefWidth="126.0" text="Ubetalte erstatninger" />
                           </columns>
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />
-                        <Button layoutX="290.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Lagre kunder" />
+                        <Button layoutX="358.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Lagre kunder" />
+                        <Button fx:id="loadClients" layoutX="163.0" layoutY="234.0" mnemonicParsing="false" onAction="#loadClients" prefHeight="32.0" prefWidth="125.0" text="Hent Kunder" />
                      </children>
                   </AnchorPane>
             </content>
@@ -38,22 +44,23 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="BåtTable" editable="true" layoutY="13.0" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="BoatTable" editable="true" layoutY="13.0" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true">
                           <columns>
-                            <TableColumn fx:id="eier" prefWidth="52.0" text="Eier" />
-                            <TableColumn fx:id="forsikringsPremie" prefWidth="100.0" text="Forsikringspremie" />
-                              <TableColumn minWidth="0.0" prefWidth="40.0" text="Dato Opprettet" />
-                              <TableColumn prefWidth="45.0" text="Forsikringspris" />
-                              <TableColumn prefWidth="75.0" text="Forsikringsbetingelser" />
-                              <TableColumn prefWidth="63.0" text="Registreringsnummer" />
-                              <TableColumn prefWidth="89.0" text="Type og modell" />
-                              <TableColumn prefWidth="83.0" text="Lengde i fot" />
-                              <TableColumn prefWidth="75.0" text="Årsmodell" />
-                              <TableColumn prefWidth="75.0" text="Motortype" />
-                              <TableColumn prefWidth="66.0" text="Motortype" />
+                              <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Dato Opprettet" />
+                            <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Eier" />
+                            <TableColumn fx:id="boatInsurancePrice" prefWidth="100.0" text="Forsikringspremie" />
+                              <TableColumn fx:id="boatInsuranceAmount" prefWidth="45.0" text="Forsikringspris" />
+                              <TableColumn fx:id="boatInsuranceConditions" prefWidth="75.0" text="Forsikringsbetingelser" />
+                              <TableColumn fx:id="regNr" prefWidth="63.0" text="Registreringsnummer" />
+                              <TableColumn fx:id="typeModel" prefWidth="89.0" text="Type og modell" />
+                              <TableColumn fx:id="length" prefWidth="83.0" text="Lengde i fot" />
+                              <TableColumn fx:id="yearModel" prefWidth="36.0" text="Årsmodell" />
+                              <TableColumn fx:id="motorType" prefWidth="86.0" text="Motortype" />
+                              <TableColumn fx:id="motorStrength" prefWidth="33.0" text="Motortype" />
                           </columns>
                         </TableView>
-                        <Button layoutX="287.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Lagre båtforsikring" />
+                        <Button layoutX="383.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Lagre båtforsikring" />
+                        <Button fx:id="loadBoat" layoutX="145.0" layoutY="227.0" mnemonicParsing="false" onAction="#loadBoat" prefHeight="32.0" prefWidth="129.0" text="Hent Båtforsikring" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -130,18 +137,19 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0">
+                        <TableView fx:id="SkadeMldTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0">
                            <columns>
-                              <TableColumn prefWidth="110.0" text="Dato for skade" />
-                              <TableColumn prefWidth="89.0" text="Skadenummer" />
-                              <TableColumn prefWidth="70.0" text="Type skade" />
-                              <TableColumn prefWidth="94.0" text="Beskrivelse av skaden" />
-                              <TableColumn prefWidth="168.0" text="Kontaktinformasjon til eventuelle vitner" />
-                              <TableColumn prefWidth="91.0" text="Takseringsbeløp" />
-                              <TableColumn prefWidth="79.0" text="Utbetalt erstatningsbeløp" />
+                              <TableColumn fx:id="smDato" prefWidth="110.0" text="Dato for skade" />
+                              <TableColumn fx:id="skadeNr" prefWidth="89.0" text="Skadenummer" />
+                              <TableColumn fx:id="skadeType" prefWidth="70.0" text="Type skade" />
+                              <TableColumn fx:id="skadeBeskrivelse" prefWidth="94.0" text="Beskrivelse av skaden" />
+                              <TableColumn fx:id="vitneKontaktInfo" prefWidth="168.0" text="Kontaktinformasjon til eventuelle vitner" />
+                              <TableColumn fx:id="takseringsBeløp" prefWidth="91.0" text="Takseringsbeløp" />
+                              <TableColumn fx:id="erstatningsBeløp" prefWidth="79.0" text="Utbetalt erstatningsbeløp" />
                            </columns>
                         </TableView>
-                        <Button layoutX="283.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="137.0" text="Lagre skademelding" />
+                        <Button layoutX="382.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="145.0" text="Lagre skademelding" />
+                        <Button fx:id="loadSkademld" layoutX="140.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadSkademld" prefHeight="33.0" prefWidth="146.0" text="Hent Skademelding" />
                      </children>
                   </AnchorPane>
                </content>
@@ -153,9 +161,9 @@
           <Button mnemonicParsing="false" text="Insert" />
             <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
             <Button mnemonicParsing="false" text="Edit" />
-            <Button mnemonicParsing="false" onAction="#testButton" text="Whatever" />
+            <Button mnemonicParsing="false" onAction="#testButton" text="Open File" />
             <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />
-            <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadFile" text="Load File" />
+            <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" text="Load File" />
             <Button fx:id="delete" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
         </items>
       </ToolBar>

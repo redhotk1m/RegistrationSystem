@@ -15,10 +15,20 @@ public class mdSkademelding {
     private SimpleStringProperty TakseringsBeloep;
     private SimpleStringProperty ErstatningsBeloep;
 
+    public mdSkademelding() {
+        this.SMDato = new SimpleStringProperty();
+        this.SkadeNR = new SimpleStringProperty();
+        this.SkadeType = new SimpleStringProperty();
+        this.SkadeBeskrivelse = new SimpleStringProperty();
+        this.VitneKontaktInfo = new SimpleStringProperty();
+        this.TakseringsBeloep = new SimpleStringProperty();
+        this.ErstatningsBeloep = new SimpleStringProperty();
+    }
+
 
     public mdSkademelding(String SMDato, String skadeNR, String skadeType, String skadeBeskrivelse,
                           String vitneKontaktInfo, String takseringsBeloep, String erstatningsBeloep) {
-        this.SMDato = new SimpleStringProperty(SMDato);
+        this.SMDato = new SimpleStringProperty();
         SkadeNR =  new SimpleStringProperty(skadeNR);
         SkadeType = new SimpleStringProperty(skadeType);
         SkadeBeskrivelse = new SimpleStringProperty(skadeBeskrivelse);

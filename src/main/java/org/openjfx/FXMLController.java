@@ -19,13 +19,8 @@ public class FXMLController {
     private TableView<mdClients> KunderTable;
 
     @FXML
-    private TableColumn<mdClients, String> fornavn;
-
-    @FXML
-    private TableColumn<mdClients, String> etternavn;
-
-    @FXML
-    private TableColumn<mdClients, String> forsikringsNR;
+    private TableColumn<mdClients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
+                                            insurances, unpaid;
 
     @FXML
     private TextField testFelt;
@@ -34,56 +29,213 @@ public class FXMLController {
     private AnchorPane mainFrame;
 
     @FXML
+    private TableView<mdSkademelding> SkadeMldTable;
+
+    @FXML
+    private TableColumn<mdSkademelding, String> smDato, skadeNr, skadeType, skadeBeskrivelse, vitneKontaktInfo,
+                                                takseringsBeløp, erstatningsBeløp;
+    @FXML
     private TableView<BoatInsurance> BoatTable;
 
     @FXML
-    private TableColumn<BoatInsurance, String> eier;
+    private TableColumn<BoatInsurance, String> boatDate, boatOwner, boatInsurancePrice, boatInsuranceAmount,
+                                                boatInsuranceConditions, typeModel, regNr, length, yearModel, motorType,
+                                                motorStrength;
+    @FXML
+    private TableView<HouseholdInsurance> Householdtable;
 
     @FXML
-    private TableColumn<BoatInsurance, Double> forsikringsPremie;
+    private TableColumn<HouseholdInsurance, String> houseAdress, houseInsurancePrice, houseDate, houseInsuranceAmount,
+                                                    houseInsuranceConditions, houseConstructionYear, houseResidentalType,
+                                                    houseMaterials, houseStandard, houseSqMeters,
+                                                    houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
 
     @FXML
-    private void loadFile(ActionEvent event) throws IOException {
-        mCSVReader mCSVReader = new mCSVReader();
-        mCSVReader.addFromFile();
-
-        KunderTable.setItems(mCSVReader.getData());
+    private void loadClients (ActionEvent event) throws IOException {
+        mCSVReader reader = loadFile();
+        KunderTable.setItems(reader.getData());
         KunderTable.setEditable(true);
-        fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    @FXML
+    private void loadBoat(ActionEvent event) throws IOException {
+        mCSVReader reader = loadFile();
+        BoatTable.setItems(reader.getData());
+        BoatTable.setEditable(true);
+
+        /*fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
         etternavn.setCellFactory(TextFieldTableCell.forTableColumn());
         forsikringsNR.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        */
 
         testFelt.setVisible(true);
         testFelt.setDisable(false);
+    }
 
-        /*BåtTable.setItems(mCSVReader.getData());
-        BåtTable.setEditable(true);*/
+    @FXML
+    private void loadSkademld(ActionEvent event) throws IOException {
+        // TODO få dette til å funke
+        mCSVReader reader = loadFile();
+        SkadeMldTable.setItems(reader.getData());
+        SkadeMldTable.setEditable(true);
+
+    }
+
+    private void loadFile() throws IOException {
+        FileHandler reader;
+        File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
+        if (file.getName().contains(".csv")){//TODO Bruk annen måte, fordi filen kan hete kim.csv.exe, da skal det ikke funke
+            reader = new mCSVReader();
+            reader.addFromFile(file);
+        }else if (file.getName().contains(".jobj")){
+            //TODO Lage jobj reader/writer
+        }else {
+            //TODO Throw invalid FileType exception
+        }
+    }
+    private void assignKunderColumns() {
+        clientDateCreated.setCellValueFactory(
+                new PropertyValueFactory<>("dateCreated")
+        );
+        fornavn.setCellValueFactory(
+                new PropertyValueFactory<>("firstName")
+        );
+
+        etternavn.setCellValueFactory(
+                new PropertyValueFactory<>("lastName")
+        );
+
+        adress.setCellValueFactory(
+                new PropertyValueFactory<>("adress")
+        );
+
+        forsikringsNR.setCellValueFactory(
+                new PropertyValueFactory<>("forsikringsNR")
+        );
+
+        skademeldinger.setCellValueFactory(
+                new PropertyValueFactory<>("skademeldinger")
+        );
+
+        insurances.setCellValueFactory(
+                new PropertyValueFactory<>("forsikringer")
+        );
+
+        unpaid.setCellValueFactory(
+                new PropertyValueFactory<>("ubetalt")
+        );
+    }
+
+    private void assignBoatInsuranceColumns() {
+        boatOwner.setCellValueFactory(
+                new PropertyValueFactory<>("Owner")
+        );
+
+        boatInsurancePrice.setCellValueFactory(
+                new PropertyValueFactory<>("insurancePrice")
+        );
+
+        boatDate.setCellValueFactory(
+                new PropertyValueFactory<>("dateCreated")
+        );
+
+        boatInsuranceAmount.setCellValueFactory(
+                new PropertyValueFactory<>("insuranceAmount")
+        );
+
+        boatInsuranceConditions.setCellValueFactory(
+                new PropertyValueFactory<>("insuranceConditions")
+        );
+
+        regNr.setCellValueFactory(
+                new PropertyValueFactory<>("RegNr")
+        );
+
+        typeModel.setCellValueFactory(
+                new PropertyValueFactory<>("TypeModel")
+        );
+
+        length.setCellValueFactory(
+                new PropertyValueFactory<>("length")
+        );
+
+        yearModel.setCellValueFactory(
+                new PropertyValueFactory<>("year")
+        );
+
+        motorType.setCellValueFactory(
+                new PropertyValueFactory<>("motorType")
+        );
+
+        motorStrength.setCellValueFactory(
+                new PropertyValueFactory<>("motorStrength")
+        );
+    }
+
+    /*private void assignHouseholdColumns() {
+        houseAdress.setCellValueFactory(
+                new PropertyValueFactory<>("adress")
+        );
+
+        houseInsurancePrice.setCellValueFactory(
+                new PropertyValueFactory<>("insurancePrice")
+        );
+
+        houseDate.setCellValueFactory(
+                new PropertyValueFactory<>("dateCreated")
+        );
+
+        houseInsuranceAmount.setCellValueFactory(
+                new PropertyValueFactory<>("insuranceAmount")
+        );
+
+        houseInsuranceConditions.setCellValueFactory(
+                new PropertyValueFactory<>("insuranceConditions")
+        );
+
+        houseResidentalType.setCellValueFactory(
+                new PropertyValueFactory<>("residentalType")
+        );
+
+
+    }*/
+
+    private void assignSkademldColumns() {
+        smDato.setCellValueFactory(
+                new PropertyValueFactory<>("SMDato")
+        );
+
+        skadeNr.setCellValueFactory(
+                new PropertyValueFactory<>("SkadeNR")
+        );
+
+        skadeType.setCellValueFactory(
+                new PropertyValueFactory<>("SkadeType")
+        );
+
+        skadeBeskrivelse.setCellValueFactory(
+                new PropertyValueFactory<>("SkadeBeskrivelse")
+        );
+
+        vitneKontaktInfo.setCellValueFactory(
+                new PropertyValueFactory<>("VitneKontaktInfo")
+        );
+
+        takseringsBeløp.setCellValueFactory(
+                new PropertyValueFactory<>("TakseringsBeloep")
+        );
+
+        erstatningsBeløp.setCellValueFactory(
+                new PropertyValueFactory<>("ErstatningsBeloep")
+        );
 
     }
 
     private void assignAllColumns(){
-
-        fornavn.setCellValueFactory(
-                new PropertyValueFactory<mdClients, String>("firstName")
-        );
-
-        etternavn.setCellValueFactory(
-                new PropertyValueFactory<mdClients, String>("lastName")
-        );
-
-        forsikringsNR.setCellValueFactory(
-                new PropertyValueFactory<mdClients, String>("forsikringsNR")
-        );
-
-        eier.setCellValueFactory(
-                new PropertyValueFactory<BoatInsurance, String>("eier")
-        );
-
-        forsikringsPremie.setCellValueFactory(
-                new PropertyValueFactory<BoatInsurance, Double>("insurancePrice")
-        );
-
+        assignKunderColumns();
+        assignBoatInsuranceColumns();
+        //assignHouseholdColumns();
+        assignSkademldColumns();
     }
 
     @FXML
@@ -94,7 +246,7 @@ public class FXMLController {
 
     @FXML
     private void deleteButton(ActionEvent event){
-        KunderTable.getSelectionModel().getSelectedItem().setFirstName("tulling");
+        KunderTable.getSelectionModel().getSelectedItem();
     }
 
     @FXML

@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class TravelingInsurance extends Insurances {
     private SimpleStringProperty insuranceArea;
-    private SimpleDoubleProperty sumOfInsurance;
+    private SimpleStringProperty sumOfInsurance;
 
-    TravelingInsurance(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions,
-                       String insuranceArea, double sumOfInsurance) {
+    TravelingInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
+                       String insuranceArea, String sumOfInsurance) {
         super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions);
         this.insuranceArea = new SimpleStringProperty(insuranceArea);
-        this.sumOfInsurance = new SimpleDoubleProperty(sumOfInsurance);
+        this.sumOfInsurance = new SimpleStringProperty(sumOfInsurance);
     }
 }

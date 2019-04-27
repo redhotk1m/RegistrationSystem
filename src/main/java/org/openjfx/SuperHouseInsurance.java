@@ -1,33 +1,40 @@
 package org.openjfx;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
-import java.util.Date;
 
 public class SuperHouseInsurance extends Insurances{
     private SimpleStringProperty adress;
-    private SimpleIntegerProperty constructionYear;
+    private SimpleStringProperty constructionYear;
     private SimpleStringProperty residentialType;
     private SimpleStringProperty materials;
     private SimpleStringProperty standard; // - hva er det??
-    private SimpleDoubleProperty SqMeters;
-    private SimpleDoubleProperty buildingInsuranceAmount;
-    private SimpleDoubleProperty housingInsuranceAmount;
+    private SimpleStringProperty SqMeters;
+    private SimpleStringProperty buildingInsuranceAmount;
+    private SimpleStringProperty contentInsuranceAmount;
 
-    SuperHouseInsurance(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions,
-                        String adress, int constructionYear, String residentialType, String materials, String standard,
-                        double SqMeters, double buildingInsuranceAmount, double housingInsuranceAmount) {
+    public SuperHouseInsurance() {
+        this.adress = new SimpleStringProperty();
+        this.constructionYear = new SimpleStringProperty();
+        this.residentialType = new SimpleStringProperty();
+        this.materials = new SimpleStringProperty();
+        this.standard = new SimpleStringProperty();
+        this.SqMeters = new SimpleStringProperty();
+        this.buildingInsuranceAmount = new SimpleStringProperty();
+        this.contentInsuranceAmount = new SimpleStringProperty();
+    }
+
+    SuperHouseInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
+                        String adress, String constructionYear, String residentialType, String materials, String standard,
+                        String SqMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
         super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions);
         this.adress = new SimpleStringProperty(adress);
-        this.constructionYear = new SimpleIntegerProperty(constructionYear);
+        this.constructionYear = new SimpleStringProperty(constructionYear);
         this.residentialType = new SimpleStringProperty(residentialType);
         this.materials = new SimpleStringProperty(materials);
         this.standard = new SimpleStringProperty(standard);
-        this.SqMeters = new SimpleDoubleProperty(SqMeters);
-        this.buildingInsuranceAmount = new SimpleDoubleProperty(buildingInsuranceAmount);
-        this.housingInsuranceAmount = new SimpleDoubleProperty(housingInsuranceAmount);
+        this.SqMeters = new SimpleStringProperty(SqMeters);
+        this.buildingInsuranceAmount = new SimpleStringProperty(buildingInsuranceAmount);
+        this.contentInsuranceAmount = new SimpleStringProperty(contentInsuranceAmount);
     }
 
     public String getAdress() {
@@ -42,15 +49,15 @@ public class SuperHouseInsurance extends Insurances{
         this.adress.set(adress);
     }
 
-    public int getConstructionYear() {
+    public String getConstructionYear() {
         return constructionYear.get();
     }
 
-    public SimpleIntegerProperty constructionYearProperty() {
+    public SimpleStringProperty constructionYearProperty() {
         return constructionYear;
     }
 
-    public void setConstructionYear(int constructionYear) {
+    public void setConstructionYear(String constructionYear) {
         this.constructionYear.set(constructionYear);
     }
 
@@ -90,39 +97,39 @@ public class SuperHouseInsurance extends Insurances{
         this.standard.set(standard);
     }
 
-    public double getSqMeters() {
+    public String getSqMeters() {
         return SqMeters.get();
     }
 
-    public SimpleDoubleProperty sqMetersProperty() {
+    public SimpleStringProperty sqMetersProperty() {
         return SqMeters;
     }
 
-    public void setSqMeters(double sqMeters) {
+    public void setSqMeters(String sqMeters) {
         this.SqMeters.set(sqMeters);
     }
 
-    public double getBuildingInsuranceAmount() {
+    public String getBuildingInsuranceAmount() {
         return buildingInsuranceAmount.get();
     }
 
-    public SimpleDoubleProperty buildingInsuranceAmountProperty() {
+    public SimpleStringProperty buildingInsuranceAmountProperty() {
         return buildingInsuranceAmount;
     }
 
-    public void setBuildingInsuranceAmount(double buildingInsuranceAmount) {
+    public void setBuildingInsuranceAmount(String buildingInsuranceAmount) {
         this.buildingInsuranceAmount.set(buildingInsuranceAmount);
     }
 
-    public double getHousingInsuranceAmount() {
-        return housingInsuranceAmount.get();
+    public String getContentInsuranceAmount() {
+        return contentInsuranceAmount.get();
     }
 
-    public SimpleDoubleProperty housingInsuranceAmountProperty() {
-        return housingInsuranceAmount;
+    public SimpleStringProperty housingInsuranceAmountProperty() {
+        return contentInsuranceAmount;
     }
 
-    public void setHousingInsuranceAmount(double housingInsuranceAmount) {
-        this.housingInsuranceAmount.set(housingInsuranceAmount);
+    public void setContentInsuranceAmount(String housingInsuranceAmount) {
+        this.contentInsuranceAmount.set(housingInsuranceAmount);
     }
 }

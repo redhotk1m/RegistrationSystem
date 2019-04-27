@@ -1,30 +1,37 @@
 package org.openjfx;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
-import java.util.Date;
 
 public class BoatInsurance extends Insurances {
     private SimpleStringProperty Owner;
     private SimpleStringProperty RegNr;
     private SimpleStringProperty TypeModel;
-    private SimpleDoubleProperty length;
-    private SimpleIntegerProperty year;
+    private SimpleStringProperty length;
+    private SimpleStringProperty year;
     private SimpleStringProperty motorType;
-    private SimpleDoubleProperty motorStrength;
+    private SimpleStringProperty motorStrength;
 
-    BoatInsurance(int insurancePrice, Date dateCreated, int insuranceAmount, String insuranceConditions, String Owner,
-                  String RegNr, String TypeModel, double length, int year, String motorType, double motorStrength) {
+    public BoatInsurance() {
+        this.Owner = new SimpleStringProperty();
+        this.RegNr = new SimpleStringProperty();
+        this.TypeModel = new SimpleStringProperty();
+        this.length = new SimpleStringProperty();
+        this.year = new SimpleStringProperty();
+        this.motorType = new SimpleStringProperty();
+        this.motorStrength = new SimpleStringProperty();
+    }
+
+    BoatInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
+                  String Owner, String RegNr, String TypeModel, String length, String year, String motorType,
+                  String motorStrength) {
         super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions);
         this.Owner = new SimpleStringProperty(Owner);
         this.RegNr = new SimpleStringProperty(RegNr);
         this.TypeModel = new SimpleStringProperty(TypeModel);
-        this.length = new SimpleDoubleProperty(length);
-        this.year = new SimpleIntegerProperty(year);
+        this.length = new SimpleStringProperty(length);
+        this.year = new SimpleStringProperty(year);
         this.motorType = new SimpleStringProperty(motorType);
-        this.motorStrength = new SimpleDoubleProperty(motorStrength);
+        this.motorStrength = new SimpleStringProperty(motorStrength);
     }
 
     public String getOwner() {
@@ -63,27 +70,27 @@ public class BoatInsurance extends Insurances {
         this.TypeModel.set(typeModel);
     }
 
-    public double getLength() {
+    public String getLength() {
         return length.get();
     }
 
-    public SimpleDoubleProperty lengthProperty() {
+    public SimpleStringProperty lengthProperty() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(String length) {
         this.length.set(length);
     }
 
-    public int getYear() {
+    public String getYear() {
         return year.get();
     }
 
-    public SimpleIntegerProperty yearProperty() {
+    public SimpleStringProperty yearProperty() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear (String year) {
         this.year.set(year);
     }
 
@@ -99,15 +106,15 @@ public class BoatInsurance extends Insurances {
         this.motorType.set(motorType);
     }
 
-    public double getMotorStrength() {
+    public String getMotorStrength() {
         return motorStrength.get();
     }
 
-    public SimpleDoubleProperty motorStrengthProperty() {
+    public SimpleStringProperty motorStrengthProperty() {
         return motorStrength;
     }
 
-    public void setMotorStrength(double motorStrength) {
+    public void setMotorStrength(String motorStrength) {
         this.motorStrength.set(motorStrength);
     }
 }
