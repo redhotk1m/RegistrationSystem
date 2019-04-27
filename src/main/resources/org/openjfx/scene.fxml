@@ -13,21 +13,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
+      <ProgressIndicator fx:id="progressBar" layoutX="818.0" layoutY="37.0" progress="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
         <tabs>
-          <Tab text="Kunder">
+          <Tab fx:id="clientTab" text="Kunder">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="212.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                              <TableColumn fx:id="clientDateCreated" prefWidth="75.0" text="Opprettet" />
+                              <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Opprettet" />
                             <TableColumn fx:id="fornavn" onEditCommit="#onEdit" prefWidth="65.0" text="Fornavn" />
-                            <TableColumn fx:id="etternavn" prefWidth="71.0" text="Etternavn" />
-                              <TableColumn fx:id="adress" prefWidth="73.0" text="Adresse" />
-                              <TableColumn fx:id="forsikringsNR" prefWidth="91.0" text="ForsikringsNR" />
+                            <TableColumn fx:id="etternavn" onEditCommit="#onEdit" prefWidth="71.0" text="Etternavn" />
+                              <TableColumn fx:id="adress" onEditCommit="#onEdit" prefWidth="73.0" text="Adresse" />
+                              <TableColumn fx:id="forsikringsNR" onEditCommit="#onEdit" prefWidth="91.0" text="ForsikringsNR" />
                               <TableColumn fx:id="insurances" prefWidth="82.0" text="Forsikringer" />
                               <TableColumn fx:id="skademeldinger" prefWidth="106.0" text="Skademeldinger" />
                               <TableColumn fx:id="unpaid" prefWidth="126.0" text="Ubetalte erstatninger" />
@@ -40,7 +41,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Båtforsikring">
+          <Tab fx:id="boatTab" text="Båtforsikring">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
@@ -64,7 +65,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Hus- og innboforsikring">
+            <Tab fx:id="houseHoldTab" text="Hus- og innboforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
@@ -89,7 +90,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Fritidsboligforsikring">
+            <Tab fx:id="homeTab" text="Fritidsboligforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
@@ -114,7 +115,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Reiseforsikring">
+            <Tab fx:id="travelingTab" text="Reiseforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
@@ -133,7 +134,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Skademelding">
+            <Tab fx:id="skadeTab" text="Skademelding">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
@@ -172,7 +173,6 @@
             <Image url="@e935ce39-324a-424b-b552-1e9aff436c96.png" />
          </image>
       </ImageView>
-      <ProgressIndicator layoutX="818.0" layoutY="37.0" progress="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
         <Button id="Knapp" layoutX="32.0" layoutY="188.0" text="Click Me!" />
         <Label fx:id="label" layoutX="30.0" layoutY="222.0" minHeight="16" minWidth="69" />
     </children>

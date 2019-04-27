@@ -13,13 +13,10 @@ import java.util.Arrays;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mCSVReader extends FileHandler{
+public class mCSVReader extends FileHandler {
 
     private String absolutePath = new File("").getAbsolutePath();
     private String CSVFileFolder = absolutePath + "/src/main/resources/org/openjfx/";
-    private String ClientsCSV = CSVFileFolder + "Clients.csv";
-    private String BåtCSV = CSVFileFolder + "boatInsurance.csv";
-    private String SkademeldingCSV = CSVFileFolder + "Skademelding.csv";
     private ObservableList data = observableArrayList();
     private String line;
     private TableView tableView;

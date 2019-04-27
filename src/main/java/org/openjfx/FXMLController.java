@@ -1,10 +1,10 @@
 package org.openjfx;
 
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -12,8 +12,11 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class FXMLController {
+    @FXML
+    private Tab clientTab, boatTab, houseHoldTab, homeTab, travelingTab, skadeTab;
 
     @FXML
     private TableView KunderTable, SkadeMldTable, BoatTable;
@@ -21,6 +24,9 @@ public class FXMLController {
     @FXML
     private TableColumn<mdClients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
                                             insurances, unpaid;
+
+    @FXML
+    ProgressIndicator progressBar;
 
     @FXML
     private TextField testFelt;
@@ -46,23 +52,17 @@ public class FXMLController {
                                                     houseMaterials, houseStandard, houseSqMeters,
                                                     houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
 
+    FileHandler reader;
+    ObservableList data;
     @FXML
     private void loadClients (ActionEvent event) throws IOException {
-        FileHandler reader = loadFile();
-        KunderTable.setItems(reader.getData());
-        KunderTable.setEditable(true);
+        loadFile(KunderTable);
     }
 
     @FXML
     private void loadBoat(ActionEvent event) throws IOException {
-        FileHandler reader = loadFile();
-        BoatTable.setItems(reader.getData());
-        BoatTable.setEditable(true);
+        loadFile(BoatTable);
 
-        /*fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
-        etternavn.setCellFactory(TextFieldTableCell.forTableColumn());
-        forsikringsNR.setCellFactory(TextFieldTableCell.forTableColumn());
-        */
 
         testFelt.setVisible(true);
         testFelt.setDisable(false);
@@ -71,27 +71,31 @@ public class FXMLController {
     @FXML
     private void loadSkademld(ActionEvent event) throws IOException {
         // TODO få dette til å funke
-        FileHandler reader = loadFile();
-        SkadeMldTable.setItems(reader.getData());
-        SkadeMldTable.setEditable(true);
-
+        loadFile(SkadeMldTable);
     }
 
-    private FileHandler loadFile() throws IOException {
-        FileHandler reader;
+    private void loadFile(TableView tableView) throws IOException {
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         //CheckFileType checkFileType = new CheckFileType(file);
+        readDataThread readDataThread = new readDataThread();
+        readDataThread.setFile(file);
         if (file.getName().contains(".csv")){//TODO Bruk annen måte, fordi filen kan hete kim.csv.exe, da skal det ikke funke
-            reader = new mCSVReader();
-            reader.addFromFile(file);
-            return reader;
+            new Thread (() -> {
+                reader = new mCSVReader();
+                try {
+                    reader.addFromFile(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                this.setData(reader.getData());
+                tableView.setItems(data);
+                tableView.setEditable(true);
+            }).start();
         }else if (file.getName().contains(".jobj")){
             //TODO Lage jobj reader/writer
             reader = new mJOBJReader();
-            return reader;
         }else {
             //TODO Throw invalid FileType exception
-            return null;
         }
 
     }
@@ -174,7 +178,7 @@ public class FXMLController {
         );
     }
 
-    /*private void assignHouseholdColumns() {
+    private void assignHouseholdColumns() {
         houseAdress.setCellValueFactory(
                 new PropertyValueFactory<>("adress")
         );
@@ -200,7 +204,7 @@ public class FXMLController {
         );
 
 
-    }*/
+    }
 
     private void assignSkademldColumns() {
         smDato.setCellValueFactory(
@@ -242,37 +246,99 @@ public class FXMLController {
 
     @FXML
     private void saveFile(){
-        mCSVWriter mCSVWriter = new mCSVWriter();
-        mCSVWriter.saveFile(KunderTable.getItems());
-    }
-
-    @FXML
-    private void deleteButton(ActionEvent event){
-        KunderTable.getSelectionModel().getSelectedItem();
-    }
-
-    @FXML
-    private void testButton(ActionEvent event){
-        System.out.println("trykker");
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open stuff");
-        File file = fileChooser.showOpenDialog(mainFrame.getScene().getWindow());
-
-        if (file != null){
-            System.out.println(file.getName());
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(".csv", "*.csv");
+        FileChooser.ExtensionFilter extensionFilter1 = new FileChooser.ExtensionFilter(".jobj","*.jobj");
+        fileChooser.getExtensionFilters().addAll(extensionFilter, extensionFilter1);
+        File destination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
+        if (destination.getName().endsWith(".csv")){
+            mCSVWriter mCSVWriter = new mCSVWriter();
+            mCSVWriter.saveFile(destination, KunderTable.getItems());
+            System.out.println("CSV");
+        }else if (destination.getName().endsWith(".jobj")){
+            System.out.println("JOBJ");
         }
     }
 
     @FXML
-    private void onEdit(TableColumn.CellEditEvent<mdClients,String> editEvent){
-        //mdClients mdClients = getKunderTable().getSelectionModel().getSelectedItem(); KANSKJE ikke helt? Sjekk om alt lagres, og hvor, lagres det i klassen, bare CSV, hva skjer?
+    private void deleteButton(ActionEvent event){
+        TableView tableView = null;
+
+        if(clientTab.isSelected()) {
+            tableView = KunderTable;
+        }
+        else if(boatTab.isSelected()) {
+            tableView = BoatTable;
+        }
+        else if(skadeTab.isSelected()) {
+            tableView = SkadeMldTable;
+        }
+
+        System.out.println(tableView.getId());
+        tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems());
+
+    }
+
+    @FXML
+    private void testButton(ActionEvent event){
+        //TODO Popup med verdier, fyll dem, trykk på knappen, verdiene sendes inn i metoden her, valideres, også lages hele objektet.
+        mdClients clients = new mdClients();
+        clients.setDateCreated("1");
+        clients.setFirstName("2");
+        clients.setLastName("3");
+        clients.setAdress("4");
+        clients.setForsikringsNR("5");
+        clients.setForsikringer("6");
+        clients.setSkademeldinger("7");
+        clients.setUbetalt("8");
+        data.add(clients);
+    }
+
+    @FXML
+    private void onEdit(TableColumn.CellEditEvent editEvent){
+        mdClients mdClients = getKunderTable().getSelectionModel().getSelectedItem();
         //mdClients.setFirstName(editEvent.getNewValue());
-        editEvent.getTableColumn().getText();
+        String Column = editEvent.getTableColumn().getText();
+        String Value = editEvent.getNewValue().toString();
+        switch (Column){
+            case "Opprettet":
+                mdClients.setDateCreated(Value);
+                break;
+            case "Fornavn":
+                mdClients.setFirstName(Value);
+                break;
+            case "Etternavn":
+                mdClients.setLastName(Value);
+                break;
+        }
     }
 
     public void initialize() {
         // TODO
         assignAllColumns();
+        setEditableColumns();
+    }
+
+    private void setEditableColumns(){
+        clientDateCreated.setCellFactory(TextFieldTableCell.forTableColumn());
+        fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
+        etternavn.setCellFactory(TextFieldTableCell.forTableColumn());
+        forsikringsNR.setCellFactory(TextFieldTableCell.forTableColumn());
+        adress.setCellFactory(TextFieldTableCell.forTableColumn());
+        skademeldinger.setCellFactory(TextFieldTableCell.forTableColumn());
+        insurances.setCellFactory(TextFieldTableCell.forTableColumn());
+        unpaid.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
+        smDato.setCellFactory(TextFieldTableCell.forTableColumn());
+        skadeNr.setCellFactory(TextFieldTableCell.forTableColumn());
+        skadeType.setCellFactory(TextFieldTableCell.forTableColumn());
+        skadeBeskrivelse.setCellFactory(TextFieldTableCell.forTableColumn());
+        vitneKontaktInfo.setCellFactory(TextFieldTableCell.forTableColumn());
+        takseringsBeløp.setCellFactory(TextFieldTableCell.forTableColumn());
+        erstatningsBeløp.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        //TODO Fyll ut denne lille satanen
     }
 
 
@@ -316,5 +382,13 @@ public class FXMLController {
 
     public void setForsikringsNR(TableColumn<mdClients, String> forsikringsNR) {
         this.forsikringsNR = forsikringsNR;
+    }
+
+    public ObservableList getData() {
+        return data;
+    }
+
+    public void setData(ObservableList data) {
+        this.data = data;
     }
 }
