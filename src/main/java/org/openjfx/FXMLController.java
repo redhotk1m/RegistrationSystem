@@ -79,7 +79,7 @@ public class FXMLController {
         //CheckFileType checkFileType = new CheckFileType(file);
         readDataThread readDataThread = new readDataThread();
         readDataThread.setFile(file);
-        if (file.getName().contains(".csv")){//TODO Bruk annen måte, fordi filen kan hete kim.csv.exe, da skal det ikke funke
+        if (file.getName().endsWith(".csv")){
             new Thread (() -> {
                 reader = new mCSVReader();
                 try {
@@ -91,7 +91,7 @@ public class FXMLController {
                 tableView.setItems(data);
                 tableView.setEditable(true);
             }).start();
-        }else if (file.getName().contains(".jobj")){
+        }else if (file.getName().endsWith(".jobj")){
             //TODO Lage jobj reader/writer
             reader = new mJOBJReader();
         }else {

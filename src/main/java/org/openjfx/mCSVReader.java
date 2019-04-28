@@ -36,19 +36,36 @@ public class mCSVReader extends FileHandler {
         }
         String fileType = br.readLine();
         createArray();
+        checkArguments inputCheck = new checkArguments();
         switch (fileType){
             case "Clients":
                 System.out.println(allValues.size());
                 for (int i = 0; i<allValues.size(); i+=8) {
                     mdClients clients = new mdClients();
-                    clients.setDateCreated(allValues.get(i));
-                    clients.setFirstName(allValues.get(i + 1));
-                    clients.setLastName(allValues.get(i + 2));
-                    clients.setAdress(allValues.get(i + 3));
-                    clients.setForsikringsNR(allValues.get(i + 4));
-                    clients.setForsikringer(allValues.get(i + 5));
-                    clients.setSkademeldinger(allValues.get(i + 6));
-                    clients.setUbetalt(allValues.get(i + 7));
+
+                    if(inputCheck.dateTest(allValues.get(i)))
+                        clients.setDateCreated(allValues.get(i));
+
+                    if(inputCheck.stringTest(allValues.get(i + 1)))
+                        clients.setFirstName(allValues.get(i + 1));
+
+                    if(inputCheck.stringTest(allValues.get(i + 2)))
+                        clients.setLastName(allValues.get(i + 2));
+
+                    if(inputCheck.streetTest(allValues.get(i + 3)))
+                        clients.setAdress(allValues.get(i + 3));
+
+                    if(inputCheck.numberTest(allValues.get(i + 4)))
+                        clients.setForsikringsNR(allValues.get(i + 4));
+
+                    if(inputCheck.numberTest(allValues.get(i + 5)))
+                        clients.setForsikringer(allValues.get(i + 5));
+
+                    if(inputCheck.numberTest(allValues.get(i + 6)))
+                        clients.setSkademeldinger(allValues.get(i + 6));
+
+                    if(inputCheck.numberTest(allValues.get(i+7)))
+                        clients.setUbetalt(allValues.get(i + 7));
                     data.add(clients);
                 }
                 break;
