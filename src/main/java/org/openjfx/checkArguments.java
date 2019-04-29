@@ -13,6 +13,7 @@ public class checkArguments {
 
 
     public boolean stringTest(String s) {
+        checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
@@ -24,6 +25,7 @@ public class checkArguments {
 
 
     public boolean streetTest(String s) {
+        checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c) && !Character.isDigit(c)) {
@@ -35,7 +37,8 @@ public class checkArguments {
 
 
     public boolean dateTest(String s) {
-        DateFormat format = new SimpleDateFormat("dd-MM-yy");
+        checkIfNull(s);
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         format.setLenient(false);
 
         try {
@@ -48,8 +51,16 @@ public class checkArguments {
 
 
     public boolean numberTest(String s){
+        checkIfNull(s);
         if(s.matches("[0-9]*$"))
             return true;
         return false;
+    }
+
+    public void checkIfNull(String s){
+        if (s == null || s.length() < 1){
+            //throw new NullPointerException("Strengen eksisterer ikke");
+            //TODO Fiks dette, sånn at objekter uten felter ikke blir laget, eller feilmelding gis
+        }
     }
 }

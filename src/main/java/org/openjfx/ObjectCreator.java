@@ -13,6 +13,7 @@ public class ObjectCreator {
 
     private void createClient(String[] valuesOfObject){
             mdClients clients = new mdClients();
+        System.out.println(valuesOfObject[0]);
             if(inputCheck.dateTest(valuesOfObject[0]))
                 clients.setDateCreated(valuesOfObject[0]);
 

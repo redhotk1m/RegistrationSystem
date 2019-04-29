@@ -72,10 +72,13 @@ public class FXMLController {
 
     @FXML
     private void loadFile() throws IOException {
+        //TableView tableView = chooseTable();
         //Innlesing av filen her, tar lang tid, innlastingen av all dataen er på en ny thread. Kanskje hive den på ny thread? Ikke nødvendig
-        TableView tableView = chooseTable();
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         readDataThread readDataThread = new readDataThread(file);
+        TableView tableView = setCorrectTable(readDataThread.typeOfObject);
+
+        //chooseTable(readDataThread.typeOfObject);
         try {
             //readDataThread.call();
             progressBar.progressProperty().bind(readDataThread.progressProperty());
@@ -107,6 +110,17 @@ public class FXMLController {
             //TODO Throw invalid FileType exception
         }*/
 
+    }
+
+    private TableView setCorrectTable(String typeOfObject) {
+        switch (typeOfObject){
+            case "Clients":
+                return KunderTable;
+            case "Boat":
+                return BoatTable;
+            default:
+                return null;
+        }
     }
 
     private void noe(){

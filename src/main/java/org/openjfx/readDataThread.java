@@ -33,8 +33,6 @@ public class readDataThread extends Task<Integer> {
 
     @Override
     protected Integer call() {
-        System.out.println("Starter call!");
-
         ObjectCreator objectCreator = new ObjectCreator();
         for (int i = 0; i < amountOfRows; i++){
             String objectValues [] = new String[0];
