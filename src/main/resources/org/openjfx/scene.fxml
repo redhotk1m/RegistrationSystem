@@ -36,7 +36,7 @@
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />
                         <Button layoutX="358.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Lagre kunder" />
-                        <Button fx:id="loadClients" layoutX="163.0" layoutY="234.0" mnemonicParsing="false" onAction="#loadClients" prefHeight="32.0" prefWidth="125.0" text="Hent Kunder" />
+                        <Button fx:id="loadClients" layoutX="163.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" text="Hent Kunder" />
                      </children>
                   </AnchorPane>
             </content>
@@ -61,7 +61,7 @@
                           </columns>
                         </TableView>
                         <Button layoutX="383.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Lagre båtforsikring" />
-                        <Button fx:id="loadBoat" layoutX="145.0" layoutY="227.0" mnemonicParsing="false" onAction="#loadBoat" prefHeight="32.0" prefWidth="129.0" text="Hent Båtforsikring" />
+                        <Button fx:id="loadBoat" layoutX="145.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Hent Båtforsikring" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -150,7 +150,7 @@
                            </columns>
                         </TableView>
                         <Button layoutX="382.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="145.0" text="Lagre skademelding" />
-                        <Button fx:id="loadSkademld" layoutX="140.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadSkademld" prefHeight="33.0" prefWidth="146.0" text="Hent Skademelding" />
+                        <Button fx:id="loadSkademld" layoutX="140.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="146.0" text="Hent Skademelding" />
                      </children>
                   </AnchorPane>
                </content>
@@ -164,7 +164,7 @@
             <Button mnemonicParsing="false" text="Edit" />
             <Button mnemonicParsing="false" onAction="#testButton" text="Open File" />
             <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />
-            <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" text="Load File" />
+            <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadFile" text="Load File" />
             <Button fx:id="delete" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
         </items>
       </ToolBar>

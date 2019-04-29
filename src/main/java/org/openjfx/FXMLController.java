@@ -13,6 +13,7 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class FXMLController {
     @FXML
@@ -54,34 +55,42 @@ public class FXMLController {
 
     FileHandler reader;
     ObservableList data;
+
     @FXML
-    private void loadClients (ActionEvent event) throws IOException {
-        loadFile(KunderTable);
+    private TableView chooseTable() {
+        if (clientTab.isSelected()) {
+            return KunderTable;
+        }
+        if(boatTab.isSelected()) {
+            return BoatTable;
+        }
+        if(skadeTab.isSelected()) {
+            return SkadeMldTable;
+        }
+        return null;
     }
 
     @FXML
-    private void loadBoat(ActionEvent event) throws IOException {
-        loadFile(BoatTable);
-
-
-        testFelt.setVisible(true);
-        testFelt.setDisable(false);
-    }
-
-    @FXML
-    private void loadSkademld(ActionEvent event) throws IOException {
-        // TODO få dette til å funke
-        loadFile(SkadeMldTable);
-    }
-
-    private void loadFile(TableView tableView) throws IOException {
+    private void loadFile() throws IOException {
+        //Innlesing av filen her, tar lang tid, innlastingen av all dataen er på en ny thread. Kanskje hive den på ny thread? Ikke nødvendig
+        TableView tableView = chooseTable();
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
-        //CheckFileType checkFileType = new CheckFileType(file);
-        readDataThread readDataThread = new readDataThread();
-        readDataThread.setFile(file);
-        if (file.getName().endsWith(".csv")){
+        readDataThread readDataThread = new readDataThread(file);
+        try {
+            //readDataThread.call();
+            progressBar.progressProperty().bind(readDataThread.progressProperty());
+            new Thread(readDataThread).start();
+            tableView.setItems(readDataThread.getDataObjects());
+            tableView.setEditable(true); //TODO Fjernes, fordi den skal settes til editable i initialize
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*if (file.getName().endsWith(".csv")){
             new Thread (() -> {
                 reader = new mCSVReader();
+                CreateObjectThread a = new CreateObjectThread();
+                progressBar.progressProperty().bind(a.progressProperty());
                 try {
                     reader.addFromFile(file);
                 } catch (IOException e) {
@@ -96,7 +105,11 @@ public class FXMLController {
             reader = new mJOBJReader();
         }else {
             //TODO Throw invalid FileType exception
-        }
+        }*/
+
+    }
+
+    private void noe(){
 
     }
     private void assignKunderColumns() {
@@ -262,17 +275,7 @@ public class FXMLController {
 
     @FXML
     private void deleteButton(ActionEvent event){
-        TableView tableView = null;
-
-        if(clientTab.isSelected()) {
-            tableView = KunderTable;
-        }
-        else if(boatTab.isSelected()) {
-            tableView = BoatTable;
-        }
-        else if(skadeTab.isSelected()) {
-            tableView = SkadeMldTable;
-        }
+        TableView tableView = chooseTable();
 
         System.out.println(tableView.getId());
         tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems());
