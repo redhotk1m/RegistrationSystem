@@ -208,7 +208,7 @@ public class mCSVReader extends FileHandler {
     public void setAmountOfRows(int amountOfRows) {
         this.amountOfRows = amountOfRows;
     }
-    
+
 
     @Override
     public ObservableList getData() {

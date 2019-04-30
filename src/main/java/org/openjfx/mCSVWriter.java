@@ -11,14 +11,32 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class mCSVWriter extends FileHandler{
 
+    FileWriter fileWriter;
     @Override
-    public void saveFile(File file, ObservableList<mdClients> data, String tableClassType) {
+    public void saveFile(File file, ObservableList data, String tableClassType) {
         try {
-            FileWriter fileWriter =  new FileWriter(file);
+            fileWriter =  new FileWriter(file);
             String typeOfObject = tableClassType;
             fileWriter.write(tableClassType + ";");
             fileWriter.write(data.size() +";" + "\n");
-            for (mdClients datum : data) {
+            switch (tableClassType){
+                case "Clients":
+                    saveClient(data);
+                    break;
+                default:
+                    throw new NullPointerException("noe");
+            }
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveClient(ObservableList data) {
+        ObservableList<mdClients> a = data;
+        for (mdClients datum : a) {
+            try {
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getFirstName() + ";");
                 fileWriter.write(datum.getLastName() + ";");
@@ -27,11 +45,9 @@ public class mCSVWriter extends FileHandler{
                 fileWriter.write(datum.getForsikringer() + ";");
                 fileWriter.write(datum.getSkademeldinger() + ";");
                 fileWriter.write(datum.getUbetalt() + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            fileWriter.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
