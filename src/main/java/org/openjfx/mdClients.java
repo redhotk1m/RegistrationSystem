@@ -3,19 +3,53 @@ package org.openjfx;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class mdClients implements Serializable {
-    private SimpleStringProperty dateCreated;
-    private SimpleStringProperty firstName;
-    private SimpleStringProperty lastName;
-    private SimpleStringProperty adress;
-    private SimpleStringProperty forsikringsNR;
-    private SimpleStringProperty skademeldinger;
-    private SimpleStringProperty forsikringer;
-    private SimpleStringProperty ubetalt;
+    transient private SimpleStringProperty dateCreated;
+    transient private SimpleStringProperty firstName;
+    transient private SimpleStringProperty lastName;
+    transient private SimpleStringProperty adress;
+    transient private SimpleStringProperty forsikringsNR;
+    transient private SimpleStringProperty skademeldinger;
+    transient private SimpleStringProperty forsikringer;
+    transient private SimpleStringProperty ubetalt;
 
     public mdClients() {
+        initProperties();
+    }
+
+    mdClients(String firstName, String lastName, String forsikringsNR){
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+        s.writeUTF(dateCreated.getValueSafe());
+        s.writeUTF(firstName.getValueSafe());
+        s.writeUTF(lastName.getValueSafe());
+        s.writeUTF(adress.getValueSafe());
+        s.writeUTF(forsikringsNR.getValueSafe());
+        s.writeUTF(skademeldinger.getValueSafe());
+        s.writeUTF(forsikringer.getValueSafe());
+        s.writeUTF(ubetalt.getValueSafe());
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException{
+        initProperties();
+        dateCreated.set(s.readUTF());
+        firstName.set(s.readUTF());
+        lastName.set(s.readUTF());
+        adress.set(s.readUTF());
+        forsikringsNR.set(s.readUTF());
+        skademeldinger.set(s.readUTF());
+        forsikringer.set(s.readUTF());
+        ubetalt.set(s.readUTF());
+    }
+
+    private void initProperties(){
         this.dateCreated = new SimpleStringProperty();
         this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
@@ -24,13 +58,6 @@ public class mdClients implements Serializable {
         this.skademeldinger = new SimpleStringProperty();
         this.forsikringer = new SimpleStringProperty();
         this.ubetalt = new SimpleStringProperty();
-
-    }
-
-    mdClients(String firstName, String lastName, String forsikringsNR){
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
     }
 
 

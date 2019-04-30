@@ -1,6 +1,5 @@
 package org.openjfx;
 
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
@@ -15,26 +14,35 @@ public class readDataThread extends Task<Integer> {
     String typeOfObject;
     int amountOfRows;
     ObservableList dataObjects = observableArrayList();
+    File file;
 
     readDataThread(File file){
-        if (file.getName().endsWith(".jobj")){
-            //DO THIS
-        }else if (file.getName().endsWith(".csv")){
-            try {
-                fileHandler = new mCSVReader(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            this.typeOfObject = fileHandler.getTypeOfObject();
-            this.amountOfRows = fileHandler.getAmountOfRows();
-        }
+        this.file = file;
     }
+
 
     @Override
     protected Integer call() {
+        if (file.getName().endsWith(".jobj")){
+            fileHandler = new mJOBJReader(file);
+            setDataObjects(fileHandler.getData());
+        }else if (file.getName().endsWith(".csv")){
+            try {
+                fileHandler = new mCSVReader(file);
+                this.typeOfObject = fileHandler.getTypeOfObject();
+                this.amountOfRows = fileHandler.getAmountOfRows();
+                createAllObjects();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return amountOfRows;
+    }
+
+    private void createAllObjects(){
         ObjectCreator objectCreator = new ObjectCreator();
-        for (int i = 0; i < amountOfRows; i++){
-            String objectValues [] = new String[0];
+        for (int i = 0; i < amountOfRows; i++) {
+            String objectValues[] = new String[0];
             try {
                 objectValues = fileHandler.getNextLine();
             } catch (IOException e) {
@@ -42,11 +50,9 @@ public class readDataThread extends Task<Integer> {
             }
             objectCreator.createObject(typeOfObject, objectValues);
             dataObjects.add(objectCreator.getObject());
-            updateProgress(i, amountOfRows);
+            updateProgress(i, amountOfRows-1);
         }
-        return amountOfRows;
     }
-
 
     public ObservableList getDataObjects() {
         return dataObjects;

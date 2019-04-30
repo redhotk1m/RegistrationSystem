@@ -86,21 +86,24 @@ public class FXMLController {
     @FXML
     private void loadFile() throws IOException {
         //TableView tableView = chooseTable();
-        //Innlesing av filen her, tar lang tid, innlastingen av all dataen er på en ny thread. Kanskje hive den på ny thread? Ikke nødvendig
+        //TableView tableView = KunderTable;
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         readDataThread readDataThread = new readDataThread(file);
-        TableView tableView = setCorrectTable(readDataThread.typeOfObject);
-
+        progressBar.progressProperty().bind(readDataThread.progressProperty());
         //chooseTable(readDataThread.typeOfObject);
+
         try {
-            //readDataThread.call();
-            progressBar.progressProperty().bind(readDataThread.progressProperty());
-            new Thread(readDataThread).start();
-            tableView.setItems(readDataThread.getDataObjects());
-            tableView.setEditable(true); //TODO Fjernes, fordi den skal settes til editable i initialize
+            new Thread(() ->{
+                readDataThread.call();
+                setCorrectTable(readDataThread.getDataObjects().get(0).getClass().getName()).setItems(readDataThread.getDataObjects());
+            }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //String classType = readDataThread.getDataObjects().get(0).getClass().getName();
+        //setCorrectTable(classType).setItems(readDataThread.getDataObjects());
+        //currentTableView.setItems(readDataThread.getDataObjects());
 
         /*if (file.getName().endsWith(".csv")){
             new Thread (() -> {
@@ -126,14 +129,12 @@ public class FXMLController {
     }
 
     private TableView setCorrectTable(String typeOfObject) {
-        switch (typeOfObject){
-            case "Clients":
-                return KunderTable;
-            case "Skademelding":
-                return SkadeMldTable;
-            default:
-                return null;
+        if (typeOfObject.endsWith("Clients")){
+            return KunderTable;
+        }else if (typeOfObject.endsWith("Skademelding")){
+            return SkadeMldTable;
         }
+        else return null;
     }
 
     private void noe(){
@@ -287,18 +288,22 @@ public class FXMLController {
     @FXML
     private void saveFile(){
         FileChooser fileChooser = new FileChooser();
+        setExtentionFilters(fileChooser);
+        File saveDestination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
+        TableView currentTableview = chooseTable();
+        FileHandler fileHandler = null;
+        if (saveDestination.getName().endsWith(".csv")){
+            fileHandler = new mCSVWriter();
+        }else if (saveDestination.getName().endsWith(".jobj")){
+            fileHandler = new mJOBJWriter();
+        }
+        fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
+    }
+
+    private void setExtentionFilters(FileChooser fileChooser){
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(".csv", "*.csv");
         FileChooser.ExtensionFilter extensionFilter1 = new FileChooser.ExtensionFilter(".jobj","*.jobj");
         fileChooser.getExtensionFilters().addAll(extensionFilter, extensionFilter1);
-        File destination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
-        if (destination.getName().endsWith(".csv")){
-            FileHandler fileHandler = new mCSVWriter();
-            System.out.println(KunderTable.getItems());
-            fileHandler.saveFile(destination, KunderTable.getItems(), getChosenTable());
-            System.out.println("CSV");
-        }else if (destination.getName().endsWith(".jobj")){
-            System.out.println("JOBJ");
-        }
     }
 
     @FXML
