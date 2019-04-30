@@ -13,7 +13,7 @@ public class readDataThread extends Task<Integer> {
 
     FileHandler fileHandler;
     String typeOfObject;
-    int amountOfRows, amountOfColumns;
+    int amountOfRows;
     ObservableList dataObjects = observableArrayList();
 
     readDataThread(File file){
@@ -27,7 +27,6 @@ public class readDataThread extends Task<Integer> {
             }
             this.typeOfObject = fileHandler.getTypeOfObject();
             this.amountOfRows = fileHandler.getAmountOfRows();
-            this.amountOfColumns = fileHandler.getAmountOfColumns();
         }
     }
 
@@ -41,7 +40,7 @@ public class readDataThread extends Task<Integer> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            objectCreator.createObject(typeOfObject, amountOfColumns, objectValues);
+            objectCreator.createObject(typeOfObject, objectValues);
             dataObjects.add(objectCreator.getObject());
             updateProgress(i, amountOfRows);
         }

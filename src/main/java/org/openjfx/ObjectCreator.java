@@ -13,7 +13,6 @@ public class ObjectCreator {
 
     private void createClient(String[] valuesOfObject){
             mdClients clients = new mdClients();
-        System.out.println(valuesOfObject[0]);
             if(inputCheck.dateTest(valuesOfObject[0]))
                 clients.setDateCreated(valuesOfObject[0]);
 
@@ -41,7 +40,7 @@ public class ObjectCreator {
             setObject(clients);
     }
 
-    public void createObject(String typeOfObject, int numberOfColumns, String[] valuesOfObject){
+    public void createObject(String typeOfObject, String[] valuesOfObject){
         switch (typeOfObject){
             case "Clients":
                 createClient(valuesOfObject);

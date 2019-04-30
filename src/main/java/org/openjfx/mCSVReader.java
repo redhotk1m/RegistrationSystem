@@ -19,7 +19,7 @@ public class mCSVReader extends FileHandler {
     private String line;
     private TableView tableView;
     private String typeOfObject;
-    private int amountOfRows, amountOfColumns;
+    private int amountOfRows;
     //BufferedReader br = new BufferedReader(new FileReader(FILECHOOSER))
     BufferedReader br;
     ArrayList<String> allValues = new ArrayList<>();
@@ -35,7 +35,6 @@ public class mCSVReader extends FileHandler {
         String[] infoAboutFileSize = getNextLine();
         this.typeOfObject = infoAboutFileSize[0];
         this.amountOfRows = Integer.parseInt(infoAboutFileSize[1]);
-        this.amountOfColumns = Integer.parseInt(infoAboutFileSize[2]);
     }
 
 
@@ -209,14 +208,7 @@ public class mCSVReader extends FileHandler {
     public void setAmountOfRows(int amountOfRows) {
         this.amountOfRows = amountOfRows;
     }
-    @Override
-    public int getAmountOfColumns() {
-        return amountOfColumns;
-    }
-    @Override
-    public void setAmountOfColumns(int amountOfColumns) {
-        this.amountOfColumns = amountOfColumns;
-    }
+    
 
     @Override
     public ObservableList getData() {

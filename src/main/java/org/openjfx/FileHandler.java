@@ -49,4 +49,8 @@ public abstract class FileHandler {
         throw new InvalidParameterException("");
     }
 
+    public void saveFile(File file, ObservableList<mdClients> data, String tableClassType){
+
+    }
+
 }

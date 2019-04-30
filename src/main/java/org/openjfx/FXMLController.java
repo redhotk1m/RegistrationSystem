@@ -70,6 +70,19 @@ public class FXMLController {
         return null;
     }
 
+    private String getChosenTable(){
+        if (clientTab.isSelected()) {
+            return "Clients";
+        }
+        if(boatTab.isSelected()) {
+            return "Båtfaen";
+        }
+        if(skadeTab.isSelected()) {
+            return "Skademelding";
+        }
+        return null;
+    }
+
     @FXML
     private void loadFile() throws IOException {
         //TableView tableView = chooseTable();
@@ -279,8 +292,9 @@ public class FXMLController {
         fileChooser.getExtensionFilters().addAll(extensionFilter, extensionFilter1);
         File destination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
         if (destination.getName().endsWith(".csv")){
-            mCSVWriter mCSVWriter = new mCSVWriter();
-            mCSVWriter.saveFile(destination, KunderTable.getItems());
+            FileHandler fileHandler = new mCSVWriter();
+            System.out.println(KunderTable.getItems());
+            fileHandler.saveFile(destination, KunderTable.getItems(), getChosenTable());
             System.out.println("CSV");
         }else if (destination.getName().endsWith(".jobj")){
             System.out.println("JOBJ");

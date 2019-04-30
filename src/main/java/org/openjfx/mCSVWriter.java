@@ -9,16 +9,24 @@ import java.io.IOException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mCSVWriter {
+public class mCSVWriter extends FileHandler{
 
-    public void saveFile(File file, ObservableList<mdClients> data) {
+    @Override
+    public void saveFile(File file, ObservableList<mdClients> data, String tableClassType) {
         try {
-            String absolutePath = new File("").getAbsolutePath();
             FileWriter fileWriter =  new FileWriter(file);
+            String typeOfObject = tableClassType;
+            fileWriter.write(tableClassType + ";");
+            fileWriter.write(data.size() +";" + "\n");
             for (mdClients datum : data) {
+                fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getFirstName() + ";");
                 fileWriter.write(datum.getLastName() + ";");
-                fileWriter.write(datum.getForsikringsNR() + "\n");
+                fileWriter.write(datum.getAdress() + ";");
+                fileWriter.write(datum.getForsikringsNR() + ";");
+                fileWriter.write(datum.getForsikringer() + ";");
+                fileWriter.write(datum.getSkademeldinger() + ";");
+                fileWriter.write(datum.getUbetalt() + "\n");
             }
             fileWriter.close();
 
