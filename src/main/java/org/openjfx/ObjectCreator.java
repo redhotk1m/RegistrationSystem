@@ -50,11 +50,24 @@ public class ObjectCreator {
                 //createBoatInsurance();
                 break;
             case "Skademelding":
-                //createSkademelding();
+                createSkademelding(valuesOfObject);
                 break;
             default:
                 throw new InvalidParameterException("Feil ved innlasting");
         }
+    }
+
+    private void createSkademelding(String[] valuesOfObject) {
+        mdSkademelding mdSkademelding = new mdSkademelding();
+        mdSkademelding.setSMDato(valuesOfObject[0]);
+        mdSkademelding.setSkadeNR(valuesOfObject[1]);
+        mdSkademelding.setSkadeType(valuesOfObject[2]);
+        mdSkademelding.setSkadeBeskrivelse(valuesOfObject[3]);
+        mdSkademelding.setVitneKontaktInfo(valuesOfObject[4]);
+        mdSkademelding.setTakseringsBeloep(valuesOfObject[5]);
+        mdSkademelding.setErstatningsBeloep(valuesOfObject[6]);
+
+        setObject(mdSkademelding);
     }
 
     public Object getObject() {

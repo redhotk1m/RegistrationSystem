@@ -49,11 +49,6 @@ public class readDataThread extends Task<Integer> {
     }
 
 
-    @Override
-    protected void updateProgress(long l, long l1) {
-        super.updateProgress(l, l1);
-    }
-
     public ObservableList getDataObjects() {
         return dataObjects;
     }

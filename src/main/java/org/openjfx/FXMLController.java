@@ -116,8 +116,8 @@ public class FXMLController {
         switch (typeOfObject){
             case "Clients":
                 return KunderTable;
-            case "Boat":
-                return BoatTable;
+            case "Skademelding":
+                return SkadeMldTable;
             default:
                 return null;
         }
