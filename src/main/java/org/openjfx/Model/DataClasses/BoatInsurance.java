@@ -1,17 +1,26 @@
-package org.openjfx;
+package org.openjfx.Model.DataClasses;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class BoatInsurance extends Insurances {
-    private SimpleStringProperty Owner;
-    private SimpleStringProperty RegNr;
-    private SimpleStringProperty TypeModel;
-    private SimpleStringProperty length;
-    private SimpleStringProperty year;
-    private SimpleStringProperty motorType;
-    private SimpleStringProperty motorStrength;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-    public BoatInsurance() {
+public class BoatInsurance extends Insurances implements Serializable {
+    private transient SimpleStringProperty Owner;
+    private transient SimpleStringProperty RegNr;
+    private transient SimpleStringProperty TypeModel;
+    private transient SimpleStringProperty length;
+    private transient SimpleStringProperty year;
+    private transient SimpleStringProperty motorType;
+    private transient SimpleStringProperty motorStrength;
+
+    public BoatInsurance(){
+        initProperties();
+    }
+
+    public void initProperties(){
         this.Owner = new SimpleStringProperty();
         this.RegNr = new SimpleStringProperty();
         this.TypeModel = new SimpleStringProperty();
@@ -21,18 +30,27 @@ public class BoatInsurance extends Insurances {
         this.motorStrength = new SimpleStringProperty();
     }
 
-    BoatInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
-                  String Owner, String RegNr, String TypeModel, String length, String year, String motorType,
-                  String motorStrength) {
-        super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions);
-        this.Owner = new SimpleStringProperty(Owner);
-        this.RegNr = new SimpleStringProperty(RegNr);
-        this.TypeModel = new SimpleStringProperty(TypeModel);
-        this.length = new SimpleStringProperty(length);
-        this.year = new SimpleStringProperty(year);
-        this.motorType = new SimpleStringProperty(motorType);
-        this.motorStrength = new SimpleStringProperty(motorStrength);
+    private void writeObject(ObjectOutputStream s) throws IOException{
+        s.writeUTF(Owner.getValueSafe());
+        s.writeUTF(RegNr.getValueSafe());
+        s.writeUTF(TypeModel.getValueSafe());
+        s.writeUTF(length.getValueSafe());
+        s.writeUTF(year.getValueSafe());
+        s.writeUTF(motorType.getValueSafe());
+        s.writeUTF(motorStrength.getValueSafe());
     }
+
+    private void readObject(ObjectInputStream s) throws IOException{
+        initProperties();
+        Owner.set(s.readUTF());
+        RegNr.set(s.readUTF());
+        TypeModel.set(s.readUTF());
+        length.set(s.readUTF());
+        year.set(s.readUTF());
+        motorType.set(s.readUTF());
+        motorStrength.set(s.readUTF());
+    }
+
 
     public String getOwner() {
         return Owner.get();
@@ -90,7 +108,7 @@ public class BoatInsurance extends Insurances {
         return year;
     }
 
-    public void setYear (String year) {
+    public void setYear(String year) {
         this.year.set(year);
     }
 

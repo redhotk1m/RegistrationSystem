@@ -1,14 +1,8 @@
-package org.openjfx;
+package org.openjfx.Model.ReadAndWrite;
 
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.InvalidObjectException;
 import java.security.InvalidParameterException;
 
 public abstract class FileHandler {
@@ -49,7 +43,7 @@ public abstract class FileHandler {
         throw new InvalidParameterException("");
     }
 
-    public void saveFile(File file, ObservableList<mdClients> data, String tableClassType){
+    public void saveFile(File file, ObservableList data, String tableClassType){
 
     }
 

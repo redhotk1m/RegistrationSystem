@@ -1,28 +1,23 @@
-package org.openjfx;
+package org.openjfx.Model.DataClasses;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.*;
 
-public class mdClients implements Serializable {
-    transient private SimpleStringProperty dateCreated;
-    transient private SimpleStringProperty firstName;
-    transient private SimpleStringProperty lastName;
-    transient private SimpleStringProperty adress;
-    transient private SimpleStringProperty forsikringsNR;
-    transient private SimpleStringProperty skademeldinger;
-    transient private SimpleStringProperty forsikringer;
-    transient private SimpleStringProperty ubetalt;
+public class Clients implements Serializable {
+    transient private SimpleStringProperty
+            dateCreated,
+            firstName,
+            lastName,
+            adress,
+            forsikringsNR,
+            skademeldinger,
+            forsikringer,
+            ubetalt;
 
-    public mdClients() {
+    public Clients() {
         initProperties();
-    }
-
-    mdClients(String firstName, String lastName, String forsikringsNR){
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {

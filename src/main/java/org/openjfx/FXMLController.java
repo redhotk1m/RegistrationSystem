@@ -1,7 +1,6 @@
 package org.openjfx;
 
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,11 +8,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import org.openjfx.Model.*;
+import org.openjfx.Model.DataClasses.BoatInsurance;
+import org.openjfx.Model.DataClasses.Clients;
+import org.openjfx.Model.DataClasses.SecondaryHouseInsurance;
+import org.openjfx.Model.DataClasses.Skademelding;
+import org.openjfx.Model.ReadAndWrite.CSVWriter;
+import org.openjfx.Model.ReadAndWrite.FileHandler;
+import org.openjfx.Model.ReadAndWrite.JOBJWriter;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Objects;
 
 public class FXMLController {
     @FXML
@@ -23,7 +28,7 @@ public class FXMLController {
     private TableView KunderTable, SkadeMldTable, BoatTable, houseHoldTable;
 
     @FXML
-    private TableColumn<mdClients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
+    private TableColumn<Clients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
                                             insurances, unpaid;
 
     @FXML
@@ -37,7 +42,7 @@ public class FXMLController {
 
 
     @FXML
-    private TableColumn<mdSkademelding, String> smDato, skadeNr, skadeType, skadeBeskrivelse, vitneKontaktInfo,
+    private TableColumn<Skademelding, String> smDato, skadeNr, skadeType, skadeBeskrivelse, vitneKontaktInfo,
                                                 takseringsBeløp, erstatningsBeløp;
 
     @FXML
@@ -45,10 +50,10 @@ public class FXMLController {
                                                 boatInsuranceConditions, typeModel, regNr, length, yearModel, motorType,
                                                 motorStrength;
     @FXML
-    private TableView<HouseholdInsurance> Householdtable;
+    private TableView<SecondaryHouseInsurance> Householdtable;
 
     @FXML
-    private TableColumn<HouseholdInsurance, String> houseAdress, houseInsurancePrice, houseDate, houseInsuranceAmount,
+    private TableColumn<SecondaryHouseInsurance, String> houseAdress, houseInsurancePrice, houseDate, houseInsuranceAmount,
                                                     houseInsuranceConditions, houseConstructionYear, houseResidentalType,
                                                     houseMaterials, houseStandard, houseSqMeters,
                                                     houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
@@ -67,15 +72,7 @@ public class FXMLController {
         if(skadeTab.isSelected()) {
             return SkadeMldTable;
         }
-        /*if(houseHoldTab.isSelected()) {
-            return Householdtable;
-        }
-        */
-       /*
-        if(homeTab.isSelected()){
-            return
-        }
-        */
+
         return null;
     }
 
@@ -89,56 +86,28 @@ public class FXMLController {
         if(skadeTab.isSelected()) {
             return "Skademelding";
         }
-        /*if(houseHoldTab.isSelected()){
-            return "HouseholdInsurance";
-        }
-        */
         return null;
     }
 
     @FXML
     private void loadFile() throws IOException {
-        //TableView tableView = chooseTable();
-        //TableView tableView = KunderTable;
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
-        readDataThread readDataThread = new readDataThread(file);
-        progressBar.progressProperty().bind(readDataThread.progressProperty());
-        //chooseTable(readDataThread.typeOfObject);
-
+        ReadDataTask readDataTask = new ReadDataTask(file);
+        progressBar.progressProperty().bind(readDataTask.progressProperty());
+        if (file == null){
+            return;
+        }
         try {
             new Thread(() ->{
-                readDataThread.call();
-                setCorrectTable(readDataThread.getDataObjects().get(0).getClass().getName()).setItems(readDataThread.getDataObjects());
+                progressBar.setVisible(true);
+                readDataTask.call();
+                setData(readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
+                setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName()).setItems(data);
+                progressBar.setVisible(false);
             }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //String classType = readDataThread.getDataObjects().get(0).getClass().getName();
-        //setCorrectTable(classType).setItems(readDataThread.getDataObjects());
-        //currentTableView.setItems(readDataThread.getDataObjects());
-
-        /*if (file.getName().endsWith(".csv")){
-            new Thread (() -> {
-                reader = new mCSVReader();
-                CreateObjectThread a = new CreateObjectThread();
-                progressBar.progressProperty().bind(a.progressProperty());
-                try {
-                    reader.addFromFile(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.setData(reader.getData());
-                tableView.setItems(data);
-                tableView.setEditable(true);
-            }).start();
-        }else if (file.getName().endsWith(".jobj")){
-            //TODO Lage jobj reader/writer
-            reader = new mJOBJReader();
-        }else {
-            //TODO Throw invalid FileType exception
-        }*/
-
     }
 
     private TableView setCorrectTable(String typeOfObject) {
@@ -148,16 +117,10 @@ public class FXMLController {
             return SkadeMldTable;
         } else if (typeOfObject.endsWith("BoatInsurance")) {
             return BoatTable;
-        } /*else if (typeOfObject.endsWith("HouseholdInsurance")) {
-            return Householdtable;
         }
-        */
        return null;
     }
 
-    private void noe(){
-
-    }
     private void assignKunderColumns() {
         clientDateCreated.setCellValueFactory(
                 new PropertyValueFactory<>("dateCreated")
@@ -239,7 +202,7 @@ public class FXMLController {
 
 
 
-    /*private void assignHouseholdColumns() {
+    private void assignHouseholdColumns() {
         houseAdress.setCellValueFactory(
                 new PropertyValueFactory<>("adress")
         );
@@ -284,11 +247,7 @@ public class FXMLController {
                 new PropertyValueFactory<>("residentalType")
         );
 
-
-
-
     }
-*/
     private void assignSkademldColumns() {
         smDato.setCellValueFactory(
                 new PropertyValueFactory<>("SMDato")
@@ -333,13 +292,16 @@ public class FXMLController {
         setExtentionFilters(fileChooser);
         File saveDestination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
         TableView currentTableview = chooseTable();
-        FileHandler fileHandler = null;
-        if (saveDestination.getName().endsWith(".csv")){
-            fileHandler = new mCSVWriter();
-        }else if (saveDestination.getName().endsWith(".jobj")){
-            fileHandler = new mJOBJWriter();
-        }
-        fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
+        new Thread(() -> {
+            //TODO Ny thread inne i en annen klasse?
+            FileHandler fileHandler = null;
+            if (saveDestination.getName().endsWith(".csv")){
+                fileHandler = new CSVWriter();
+            } else if (saveDestination.getName().endsWith(".jobj")){
+                fileHandler = new JOBJWriter();
+            }
+            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
+        }).start();
     }
 
     private void setExtentionFilters(FileChooser fileChooser){
@@ -351,16 +313,13 @@ public class FXMLController {
     @FXML
     private void deleteButton(ActionEvent event){
         TableView tableView = chooseTable();
-
-        System.out.println(tableView.getId());
         tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems());
-
     }
 
     @FXML
     private void testButton(ActionEvent event){
         //TODO Popup med verdier, fyll dem, trykk på knappen, verdiene sendes inn i metoden her, valideres, også lages hele objektet.
-        mdClients clients = new mdClients();
+        Clients clients = new Clients();
         clients.setDateCreated("1");
         clients.setFirstName("2");
         clients.setLastName("3");
@@ -374,25 +333,25 @@ public class FXMLController {
 
     @FXML
     private void onEdit(TableColumn.CellEditEvent editEvent){
-        mdClients mdClients = getKunderTable().getSelectionModel().getSelectedItem();
-        //mdClients.setFirstName(editEvent.getNewValue());
+        getKunderTable().getSelectionModel().getSelectedItem();
+        Clients Clients = getKunderTable().getSelectionModel().getSelectedItem();
+        //Clients.setFirstName(editEvent.getNewValue());
         String Column = editEvent.getTableColumn().getText();
         String Value = editEvent.getNewValue().toString();
         switch (Column){
             case "Opprettet":
-                mdClients.setDateCreated(Value);
+                Clients.setDateCreated(Value);
                 break;
             case "Fornavn":
-                mdClients.setFirstName(Value);
+                Clients.setFirstName(Value);
                 break;
             case "Etternavn":
-                mdClients.setLastName(Value);
+                Clients.setLastName(Value);
                 break;
         }
     }
 
     public void initialize() {
-        // TODO
         assignAllColumns();
         setEditableColumns();
     }
@@ -422,27 +381,31 @@ public class FXMLController {
 
     //Setter and getter
 
-    public TableView<mdClients> getKunderTable() {
+    public TableView<BoatInsurance> getBoatTable(){
+        return BoatTable;
+    }
+
+    public TableView<Clients> getKunderTable() {
         return KunderTable;
     }
 
-    public void setKunderTable(TableView<mdClients> kunderTable) {
+    public void setKunderTable(TableView<Clients> kunderTable) {
         KunderTable = kunderTable;
     }
 
-    public TableColumn<mdClients, String> getFornavn() {
+    public TableColumn<Clients, String> getFornavn() {
         return fornavn;
     }
 
-    public void setFornavn(TableColumn<mdClients, String> fornavn) {
+    public void setFornavn(TableColumn<Clients, String> fornavn) {
         this.fornavn = fornavn;
     }
 
-    public TableColumn<mdClients, String> getEtternavn() {
+    public TableColumn<Clients, String> getEtternavn() {
         return etternavn;
     }
 
-    public void setEtternavn(TableColumn<mdClients, String> etternavn) {
+    public void setEtternavn(TableColumn<Clients, String> etternavn) {
         this.etternavn = etternavn;
     }
 
@@ -454,11 +417,11 @@ public class FXMLController {
         this.testFelt = testFelt;
     }
 
-    public TableColumn<mdClients, String> getForsikringsNR() {
+    public TableColumn<Clients, String> getForsikringsNR() {
         return forsikringsNR;
     }
 
-    public void setForsikringsNR(TableColumn<mdClients, String> forsikringsNR) {
+    public void setForsikringsNR(TableColumn<Clients, String> forsikringsNR) {
         this.forsikringsNR = forsikringsNR;
     }
 

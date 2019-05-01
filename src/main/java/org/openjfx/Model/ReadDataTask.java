@@ -1,14 +1,17 @@
-package org.openjfx;
+package org.openjfx.Model;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import org.openjfx.Model.ReadAndWrite.CSVReader;
+import org.openjfx.Model.ReadAndWrite.FileHandler;
+import org.openjfx.Model.ReadAndWrite.JOBJReader;
 
 import java.io.File;
 import java.io.IOException;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class readDataThread extends Task<Integer> {
+public class ReadDataTask extends Task<Integer> {
 
     FileHandler fileHandler;
     String typeOfObject;
@@ -16,22 +19,22 @@ public class readDataThread extends Task<Integer> {
     ObservableList dataObjects = observableArrayList();
     File file;
 
-    readDataThread(File file){
+    public ReadDataTask(File file){
         this.file = file;
     }
 
 
     @Override
-    protected Integer call() {
+    public Integer call() {
         if (file.getName().endsWith(".jobj")){
-            fileHandler = new mJOBJReader(file);
+            fileHandler = new JOBJReader(file);
             setDataObjects(fileHandler.getData());
         }else if (file.getName().endsWith(".csv")){
             try {
-                fileHandler = new mCSVReader(file);
+                fileHandler = new CSVReader(file);
                 this.typeOfObject = fileHandler.getTypeOfObject();
                 this.amountOfRows = fileHandler.getAmountOfRows();
-                createAllObjects();
+                createAllObjectsFromCSV();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -39,7 +42,7 @@ public class readDataThread extends Task<Integer> {
         return amountOfRows;
     }
 
-    private void createAllObjects(){
+    private void createAllObjectsFromCSV(){
         ObjectCreator objectCreator = new ObjectCreator();
         for (int i = 0; i < amountOfRows; i++) {
             String objectValues[] = new String[0];

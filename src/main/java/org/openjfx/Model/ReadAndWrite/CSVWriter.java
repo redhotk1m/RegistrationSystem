@@ -1,6 +1,8 @@
-package org.openjfx;
+package org.openjfx.Model.ReadAndWrite;
 
 import javafx.collections.ObservableList;
+import org.openjfx.Model.DataClasses.*;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +10,7 @@ import java.io.IOException;
 
 
 
-public class mCSVWriter extends FileHandler{
+public class CSVWriter extends FileHandler{
 
     FileWriter fileWriter;
     @Override
@@ -28,11 +30,11 @@ public class mCSVWriter extends FileHandler{
                 case "BoatInsurance":
                     saveBoatInsurance(data);
                     break;
-                case "HouseholdInsurance":
+                case "SecondaryHouseInsurance":
                     saveHouseholdInsurance(data);
                     break;
                 case "ExtraHouse":
-                    saveExtraHouse(data);
+                    saveHouseholdInsurance(data); //TODO Fiks navn til bare hus
                     break;
                 case "TravelingInsurance":
                     saveTravelInsurance(data);
@@ -49,8 +51,8 @@ public class mCSVWriter extends FileHandler{
     }
 
     private void saveClient(ObservableList data) {
-        ObservableList<mdClients> a = data;
-        for (mdClients datum : a) {
+        ObservableList<Clients> a = data;
+        for (Clients datum : a) {
             try {
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getFirstName() + ";");
@@ -67,8 +69,8 @@ public class mCSVWriter extends FileHandler{
     }
 
     private void saveSkademelding(ObservableList data) {
-        ObservableList<mdSkademelding> a = data;
-        for (mdSkademelding datum : a) {
+        ObservableList<Skademelding> a = data;
+        for (Skademelding datum : a) {
             try {
                 fileWriter.write(datum.getSMDato() + ";");
                 fileWriter.write(datum.getSkadeNR() + ";");
@@ -104,38 +106,12 @@ public class mCSVWriter extends FileHandler{
         }
     }
 
-
-
-
     private void saveHouseholdInsurance(ObservableList data) {
-        ObservableList<HouseholdInsurance> a = data;
-        for (HouseholdInsurance datum : a) {
+        ObservableList<SecondaryHouseInsurance> a = data;
+        for (SecondaryHouseInsurance datum : a) {
             try {
                 fileWriter.write(datum.getAdress() + ";");
                 fileWriter.write(datum.getInsurancePrice() + ";");
-                fileWriter.write(datum.getDateCreated() + ";");
-                fileWriter.write(datum.getInsuranceAmount() + ";");
-                fileWriter.write(datum.getInsuranceConditions() + ";");
-                fileWriter.write(datum.getConstructionYear() + ";");
-                fileWriter.write(datum.getResidentialType() + ";");
-                fileWriter.write(datum.getMaterials() + ";");
-                fileWriter.write(datum.getStandard() + ";");
-                fileWriter.write(datum.getSqMeters() + ";");
-                fileWriter.write(datum.getBuildingInsuranceAmount() + ";");
-                fileWriter.write(datum.getContentInsuranceAmount() + "\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void saveExtraHouse(ObservableList data) {
-        ObservableList<SuperHouseInsurance> a = data;
-        for (SuperHouseInsurance datum : a) {
-            try {
-                fileWriter.write(datum.getAdress() + ";");
-                fileWriter.write(datum.insurancePriceProperty() + ";");
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getInsuranceAmount() + ";");
                 fileWriter.write(datum.getInsuranceConditions() + ";");

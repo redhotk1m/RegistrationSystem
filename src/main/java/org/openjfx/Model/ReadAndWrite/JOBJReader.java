@@ -1,6 +1,5 @@
-package org.openjfx;
+package org.openjfx.Model.ReadAndWrite;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
@@ -8,10 +7,10 @@ import java.util.List;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class mJOBJReader extends FileHandler {
+public class JOBJReader extends FileHandler {
 
     ObservableList data;
-    mJOBJReader(File file){
+    public JOBJReader(File file){
         data = observableArrayList();
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))){
             List list = (List) in.readObject();
