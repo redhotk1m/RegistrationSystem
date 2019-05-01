@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class HouseholdInsurance extends SuperHouseInsurance {
 
+
+
     public HouseholdInsurance() {
 
     }
@@ -14,5 +16,12 @@ public class HouseholdInsurance extends SuperHouseInsurance {
         super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions, adress, constructionYear,
                 residentalType, materials, standard, SqMeters, buildingInsuranceAmount, contentInsuranceAmount);
     }
+
+
+
+
+
+
+
 }
 

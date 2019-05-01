@@ -45,12 +45,19 @@ public class ObjectCreator {
             case "Clients":
                 createClient(valuesOfObject);
                 break;
-            case "Boatforsikring":
-                //createBoatInsurance();
+            case "BoatInsurance":
+                createBoatInsurance(valuesOfObject);
                 break;
             case "Skademelding":
                 createSkademelding(valuesOfObject);
                 break;
+            case "HouseholdInsurance":
+                createHouseholdInsurance(valuesOfObject);
+                break;
+            case "SuperHouseInsurance":
+                createSuperHouseInsurance(valuesOfObject);
+
+
             default:
                 throw new InvalidParameterException("Feil ved innlasting");
         }
@@ -68,6 +75,73 @@ public class ObjectCreator {
 
         setObject(mdSkademelding);
     }
+
+
+    private void createBoatInsurance(String[] valuesOfObject) {
+        BoatInsurance boatInsurance = new BoatInsurance();
+        boatInsurance.setDateCreated(valuesOfObject[0]);
+        boatInsurance.setOwner(valuesOfObject[1]);
+        boatInsurance.setInsurancePrice(valuesOfObject[2]);
+        boatInsurance.setInsuranceAmount(valuesOfObject[3]);
+        boatInsurance.setInsuranceConditions(valuesOfObject[4]);
+        boatInsurance.setRegNr(valuesOfObject[5]);
+        boatInsurance.setTypeModel(valuesOfObject[6]);
+        boatInsurance.setLength(valuesOfObject[7]);
+        boatInsurance.setYear(valuesOfObject[8]);
+        boatInsurance.setMotorType(valuesOfObject[9]);
+        boatInsurance.setMotorStrength(valuesOfObject[10]);
+        setObject(boatInsurance);
+    }
+
+
+
+
+    private void createHouseholdInsurance(String[] valuesOfObject) {
+        HouseholdInsurance householdInsurance = new HouseholdInsurance();
+        householdInsurance.setAdress(valuesOfObject[0]);
+        householdInsurance.setInsurancePrice(valuesOfObject[1]);
+        householdInsurance.setDateCreated(valuesOfObject[2]);
+        householdInsurance.setInsuranceAmount(valuesOfObject[3]);
+        householdInsurance.setInsuranceConditions(valuesOfObject[4]);
+        householdInsurance.setConstructionYear(valuesOfObject[5]);
+        householdInsurance.setResidentialType(valuesOfObject[6]);
+        householdInsurance.setMaterials(valuesOfObject[7]);
+        householdInsurance.setStandard(valuesOfObject[8]);
+        householdInsurance.setSqMeters(valuesOfObject[9]);
+        householdInsurance.setBuildingInsuranceAmount(valuesOfObject[10]);
+        householdInsurance.setContentInsuranceAmount(valuesOfObject[11]);
+
+
+
+        setObject(householdInsurance);
+    }
+
+
+    private void createSuperHouseInsurance(String[] valuesOfObject) {
+        SuperHouseInsurance superHouseInsurance = new SuperHouseInsurance();
+        superHouseInsurance.setAdress(valuesOfObject[0]);
+        superHouseInsurance.setInsurancePrice(valuesOfObject[1]);
+        superHouseInsurance.setDateCreated(valuesOfObject[2]);
+        superHouseInsurance.setInsuranceAmount(valuesOfObject[3]);
+        superHouseInsurance.setInsuranceConditions(valuesOfObject[4]);
+        superHouseInsurance.setConstructionYear(valuesOfObject[5]);
+        superHouseInsurance.setResidentialType(valuesOfObject[6]);
+        superHouseInsurance.setMaterials(valuesOfObject[7]);
+        superHouseInsurance.setStandard(valuesOfObject[8]);
+        superHouseInsurance.setSqMeters(valuesOfObject[9]);
+        superHouseInsurance.setBuildingInsuranceAmount(valuesOfObject[10]);
+        superHouseInsurance.setContentInsuranceAmount(valuesOfObject[11]);
+
+
+
+        setObject(superHouseInsurance);
+    }
+
+
+
+
+
+
 
     public Object getObject() {
         return object;

@@ -37,6 +37,7 @@ public class SuperHouseInsurance extends Insurances{
         this.contentInsuranceAmount = new SimpleStringProperty(contentInsuranceAmount);
     }
 
+
     public String getAdress() {
         return adress.get();
     }

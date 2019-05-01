@@ -20,7 +20,7 @@ public class FXMLController {
     private Tab clientTab, boatTab, houseHoldTab, homeTab, travelingTab, skadeTab;
 
     @FXML
-    private TableView KunderTable, SkadeMldTable, BoatTable;
+    private TableView KunderTable, SkadeMldTable, BoatTable, houseHoldTable;
 
     @FXML
     private TableColumn<mdClients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
@@ -67,6 +67,15 @@ public class FXMLController {
         if(skadeTab.isSelected()) {
             return SkadeMldTable;
         }
+        /*if(houseHoldTab.isSelected()) {
+            return Householdtable;
+        }
+        */
+       /*
+        if(homeTab.isSelected()){
+            return
+        }
+        */
         return null;
     }
 
@@ -75,11 +84,15 @@ public class FXMLController {
             return "Clients";
         }
         if(boatTab.isSelected()) {
-            return "Båtfaen";
+            return "BoatInsurance";
         }
         if(skadeTab.isSelected()) {
             return "Skademelding";
         }
+        /*if(houseHoldTab.isSelected()){
+            return "HouseholdInsurance";
+        }
+        */
         return null;
     }
 
@@ -131,10 +144,15 @@ public class FXMLController {
     private TableView setCorrectTable(String typeOfObject) {
         if (typeOfObject.endsWith("Clients")){
             return KunderTable;
-        }else if (typeOfObject.endsWith("Skademelding")){
+        } else if (typeOfObject.endsWith("Skademelding")){
             return SkadeMldTable;
+        } else if (typeOfObject.endsWith("BoatInsurance")) {
+            return BoatTable;
+        } /*else if (typeOfObject.endsWith("HouseholdInsurance")) {
+            return Householdtable;
         }
-        else return null;
+        */
+       return null;
     }
 
     private void noe(){
@@ -195,11 +213,11 @@ public class FXMLController {
         );
 
         regNr.setCellValueFactory(
-                new PropertyValueFactory<>("RegNr")
+                new PropertyValueFactory<>("regNr")
         );
 
         typeModel.setCellValueFactory(
-                new PropertyValueFactory<>("TypeModel")
+                new PropertyValueFactory<>("typeModel")
         );
 
         length.setCellValueFactory(
@@ -219,7 +237,9 @@ public class FXMLController {
         );
     }
 
-    private void assignHouseholdColumns() {
+
+
+    /*private void assignHouseholdColumns() {
         houseAdress.setCellValueFactory(
                 new PropertyValueFactory<>("adress")
         );
@@ -244,9 +264,31 @@ public class FXMLController {
                 new PropertyValueFactory<>("residentalType")
         );
 
+        houseMaterials.setCellValueFactory(
+                new PropertyValueFactory<>("materials")
+        );
+
+        houseStandard.setCellValueFactory(
+                new PropertyValueFactory<>("standard")
+        );
+
+        houseSqMeters.setCellValueFactory(
+                new PropertyValueFactory<>("sqMeters")
+        );
+
+        houseBuildingInsuranceAmount.setCellValueFactory(
+                new PropertyValueFactory<>("buildingInsuranceAmount")
+        );
+
+        HouseHousingInsuranceAmount.setCellValueFactory(
+                new PropertyValueFactory<>("residentalType")
+        );
+
+
+
 
     }
-
+*/
     private void assignSkademldColumns() {
         smDato.setCellValueFactory(
                 new PropertyValueFactory<>("SMDato")
