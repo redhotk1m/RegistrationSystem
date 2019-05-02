@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="dateCreated" layoutX="207.0" layoutY="71.0" prefHeight="34.0" prefWidth="257.0" promptText="Dato Opprettet" />
+      <TextField fx:id="firstname" layoutX="207.0" layoutY="128.0" prefHeight="34.0" prefWidth="257.0" promptText="Fornavn" />
+      <TextField fx:id="lastname" layoutX="207.0" layoutY="189.0" prefHeight="34.0" prefWidth="257.0" promptText="Etternavn" />
+      <TextField fx:id="adress" layoutX="207.0" layoutY="254.0" prefHeight="34.0" prefWidth="257.0" promptText="Adresse" />
+      <TextField fx:id="insuranceNumber" layoutX="207.0" layoutY="315.0" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringsnummer" />
+      <TextField fx:id="insurances" layoutX="207.0" layoutY="382.0" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringer" />
+      <TextField fx:id="damageReport" layoutX="207.0" layoutY="449.0" prefHeight="34.0" prefWidth="257.0" promptText="Skademeldinger" />
+      <TextField fx:id="unpaid" layoutX="207.0" layoutY="510.0" prefHeight="34.0" prefWidth="257.0" promptText="Ubetalte erstatninger" />
+      <Label layoutX="77.0" layoutY="78.0" prefHeight="20.0" prefWidth="103.0" text="Dato opprettet:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="92.0" layoutY="135.0" text="Fornavn:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="196.0" text="Etternavn:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="92.0" layoutY="261.0" text="Adresse:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="322.0" text="Forsikringsnummer:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="389.0" text="Forsikringer:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="68.0" layoutY="456.0" text="Skademeldinger:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="517.0" text="Ubetalte erstatninger:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="162.0" layoutY="27.0" prefHeight="27.0" prefWidth="192.0" text="Informasjon om Kunde">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="197.0" layoutY="570.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
+   </children>
+</AnchorPane>
