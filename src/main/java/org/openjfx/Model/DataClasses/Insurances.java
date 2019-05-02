@@ -9,14 +9,21 @@ import java.io.Serializable;
 
 public class Insurances implements Serializable {
 
-    private transient SimpleStringProperty insurancePrice;
-    private transient SimpleStringProperty dateCreated;
-    private transient SimpleStringProperty insuranceAmount;
-    private transient SimpleStringProperty insuranceConditions;
+    private transient SimpleStringProperty  insurancePrice,
+                                            dateCreated,
+                                            insuranceAmount,
+                                            insuranceConditions;
 
 
     public Insurances() {
         initInsuranceProperties();
+    }
+
+    public Insurances(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions) {
+        this.insurancePrice = new SimpleStringProperty(insurancePrice);
+        this.dateCreated = new SimpleStringProperty(dateCreated);
+        this.insuranceAmount = new SimpleStringProperty(insuranceAmount);
+        this.insuranceConditions = new SimpleStringProperty(insuranceConditions);
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
