@@ -61,7 +61,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createClientButton" layoutX="197.0" layoutY="570.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
+      <Button fx:id="createClientButton" layoutX="275.0" layoutY="563.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
       <Label fx:id="fornavnLabel" layoutX="487.0" layoutY="137.0" textFill="RED">
          <font>
             <Font size="14.0" />
