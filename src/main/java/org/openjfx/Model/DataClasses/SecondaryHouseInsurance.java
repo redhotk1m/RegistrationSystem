@@ -8,8 +8,12 @@ public class SecondaryHouseInsurance extends HouseInsurance {
         initSecondaryHouseInsurance();
     }
 
-    public SecondaryHouseInsurance(String address, String constructionYear, String residentialType, String materials, String SqMeters, String buildingInsuranceAmount, String contentInsuranceAmount){
-        super(address,constructionYear,residentialType,materials,SqMeters,buildingInsuranceAmount,contentInsuranceAmount);
+    public SecondaryHouseInsurance(String insurancePrice, String dateCreated, String insuranceAmount,
+                                   String insuranceConditions, String address, String constructionYear,
+                                   String residentialType, String materials, String standard, String SqMeters,
+                                   String buildingInsuranceAmount, String contentInsuranceAmount){
+        super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions, address,constructionYear,
+                residentialType,materials, standard, SqMeters,buildingInsuranceAmount,contentInsuranceAmount);
     }
 
     private void initSecondaryHouseInsurance(){
