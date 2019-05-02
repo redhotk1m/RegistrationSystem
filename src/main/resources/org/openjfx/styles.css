@@ -3,7 +3,6 @@
 }
 
 .table-view {
-    -fx-size: 40 px;
     -fx-background-color: #CDCDCD;
     -fx-border-radius: 20px, 20px, 20px, 20px;
 }

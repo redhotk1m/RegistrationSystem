@@ -35,8 +35,6 @@
                           </columns>
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />
-                        <Button layoutX="358.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Lagre kunder" />
-                        <Button fx:id="loadClients" layoutX="163.0" layoutY="234.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" text="Hent Kunder" />
                      </children>
                   </AnchorPane>
             </content>
@@ -157,7 +155,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <ToolBar layoutX="121.0" layoutY="37.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="37.0">
+      <ToolBar layoutX="119.0" layoutY="48.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="48.0">
         <items>
           <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
             <Button mnemonicParsing="false" text="Edit" />
@@ -174,6 +172,6 @@
       </ImageView>
         <Button id="Knapp" layoutX="32.0" layoutY="188.0" text="Click Me!" />
         <Label fx:id="label" layoutX="30.0" layoutY="222.0" minHeight="16" minWidth="69" />
-      <TextField fx:id="searchField" layoutX="375.0" layoutY="400.0" onMouseClicked="#tableSearch" prefHeight="32.0" prefWidth="149.0" promptText="Søk" />
+      <TextField fx:id="searchField" layoutX="375.0" layoutY="400.0" maxHeight="35.0" maxWidth="200.0" minHeight="28.0" minWidth="100.0" onMouseClicked="#tableSearch" prefHeight="32.0" prefWidth="150.0" promptText="Søk" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="376.0" />
     </children>
 </AnchorPane>
