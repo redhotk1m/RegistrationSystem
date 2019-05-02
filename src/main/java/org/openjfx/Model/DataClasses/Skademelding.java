@@ -11,14 +11,13 @@ import java.util.Date;
 
 public class Skademelding implements Serializable {
 
-    private transient SimpleStringProperty
-            SMDato,
-            SkadeNR,
-            SkadeType,
-            SkadeBeskrivelse,
-            VitneKontaktInfo,
-            TakseringsBeloep,
-            ErstatningsBeloep;
+    private transient SimpleStringProperty  SMDato,
+                                            SkadeNR,
+                                            SkadeType,
+                                            SkadeBeskrivelse,
+                                            VitneKontaktInfo,
+                                            TakseringsBeloep,
+                                            ErstatningsBeloep;
 
     public Skademelding() {
         initProperties();

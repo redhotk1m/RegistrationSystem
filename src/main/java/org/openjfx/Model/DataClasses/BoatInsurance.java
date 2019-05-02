@@ -8,13 +8,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class BoatInsurance extends Insurances implements Serializable {
-    private transient SimpleStringProperty Owner;
-    private transient SimpleStringProperty RegNr;
-    private transient SimpleStringProperty TypeModel;
-    private transient SimpleStringProperty length;
-    private transient SimpleStringProperty year;
-    private transient SimpleStringProperty motorType;
-    private transient SimpleStringProperty motorStrength;
+    private transient SimpleStringProperty  Owner,
+                                            RegNr,
+                                            TypeModel,
+                                            length,
+                                            year,
+                                            motorType,
+                                            motorStrength;
 
     public BoatInsurance(){
         initProperties();

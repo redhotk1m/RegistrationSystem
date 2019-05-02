@@ -9,22 +9,31 @@ import java.io.Serializable;
 
 public class HouseInsurance extends Insurances implements Serializable {
 
-    private transient SimpleStringProperty
-            adress,
-            constructionYear,
-            residentialType,
-            materials,
-            standard,
-            SqMeters,
-            buildingInsuranceAmount,
-            contentInsuranceAmount;
+    private transient SimpleStringProperty  adress,
+                                            constructionYear,
+                                            residentialType,
+                                            materials,
+                                            standard,
+                                            SqMeters,
+                                            buildingInsuranceAmount,
+                                            contentInsuranceAmount;
 
 
     public HouseInsurance() {
-        InitSuperHouseInsurace();
+        InitHouseInsurance();
     }
 
-    private void InitSuperHouseInsurace(){
+    public HouseInsurance(String address, String constructionYear, String residentialType, String materials, String SqMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
+        this.adress = new SimpleStringProperty(address);
+        this.constructionYear = new SimpleStringProperty(constructionYear);
+        this.residentialType = new SimpleStringProperty(residentialType);
+        this.materials = new SimpleStringProperty(materials);
+        this.SqMeters = new SimpleStringProperty(SqMeters);
+        this.buildingInsuranceAmount = new SimpleStringProperty(buildingInsuranceAmount);
+        this.contentInsuranceAmount = new SimpleStringProperty(contentInsuranceAmount);
+    }
+
+    private void InitHouseInsurance(){
         this.adress = new SimpleStringProperty();
         this.constructionYear = new SimpleStringProperty();
         this.residentialType = new SimpleStringProperty();
@@ -36,10 +45,26 @@ public class HouseInsurance extends Insurances implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
-
+        s.defaultWriteObject();
+        s.writeUTF(adress.getValueSafe());
+        s.writeUTF(constructionYear.getValueSafe());
+        s.writeUTF(residentialType.getValueSafe());
+        s.writeUTF(materials.getValueSafe());
+        s.writeUTF(standard.getValueSafe());
+        s.writeUTF(SqMeters.getValueSafe());
+        s.writeUTF(buildingInsuranceAmount.getValueSafe());
+        s.writeUTF(contentInsuranceAmount.getValueSafe());
     }
     private void readObject(ObjectInputStream s) throws IOException{
-        InitSuperHouseInsurace();
+        InitHouseInsurance();
+        adress.set(s.readUTF());
+        constructionYear.set(s.readUTF());
+        residentialType.set(s.readUTF());
+        materials.set(s.readUTF());
+        standard.set(s.readUTF());
+        SqMeters.set(s.readUTF());
+        buildingInsuranceAmount.set(s.readUTF());
+        contentInsuranceAmount.set(s.readUTF());
     }
 
 

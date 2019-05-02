@@ -6,15 +6,15 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.*;
 
 public class Clients implements Serializable {
-    transient private SimpleStringProperty
-            dateCreated,
-            firstName,
-            lastName,
-            adress,
-            forsikringsNR,
-            skademeldinger,
-            forsikringer,
-            ubetalt;
+    transient private SimpleStringProperty  dateCreated,
+                                            firstName,
+                                            lastName,
+                                            adress,
+                                            forsikringsNR,
+                                            skademeldinger,
+                                            forsikringer,
+                                            ubetalt;
+
 
     public Clients() {
         initProperties();
