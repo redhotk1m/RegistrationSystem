@@ -18,7 +18,7 @@ public class TravelInsurance extends Insurances implements Serializable {
         this.insuredFor = new SimpleStringProperty(insuredFor);
     }
 
-    TravelInsurance(){
+    public TravelInsurance(){
         initTravelingInsurance();
     }
 
