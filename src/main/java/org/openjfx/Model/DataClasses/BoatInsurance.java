@@ -20,6 +20,19 @@ public class BoatInsurance extends Insurances implements Serializable {
         initProperties();
     }
 
+    public BoatInsurance (String dateCreated, String insurancePrice, String insuranceAmount, String insuranceConditions,
+                          String Owner, String RegNr, String TypeModel, String length, String year, String motorType,
+                          String motorStrength) {
+        super(dateCreated, insurancePrice, insuranceAmount, insuranceConditions);
+        this.Owner = new SimpleStringProperty();
+        this.RegNr = new SimpleStringProperty();
+        this.TypeModel = new SimpleStringProperty();
+        this.length = new SimpleStringProperty();
+        this.year = new SimpleStringProperty();
+        this.motorType = new SimpleStringProperty();
+        this.motorStrength = new SimpleStringProperty();
+    }
+
     public void initProperties(){
         this.Owner = new SimpleStringProperty();
         this.RegNr = new SimpleStringProperty();
