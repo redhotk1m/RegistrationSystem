@@ -140,7 +140,7 @@ public class BoatController {
     }
 
     @FXML
-    private void checkLicencePlate() {
+    private void checkLicenceNumber() {
         try {
             checkIntegerAndString(licencePlate.getText());
         } catch (EmptyTableException e) {
@@ -195,7 +195,7 @@ public class BoatController {
     }
 
     @FXML
-    private void chechMotorStrength() {
+    private void checkMotorStrength() {
         try {
             checkNumber(motorStrength.getText());
         } catch (EmptyTableException e) {
