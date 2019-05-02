@@ -8,8 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,20 +31,18 @@ public class ErrorMessage {
         stage.setOnCloseRequest(windowEvent -> windowEvent.consume());
         stage.setAlwaysOnTop(true);
         stage.initStyle(StageStyle.UNDECORATED);
-        Button button = new Button(exception);
-        Label label = new Label("Error message");
-        label.setTranslateX(0);
-        label.setTranslateY(-50);
+        Button button = new Button("ok");
+        button.setTranslateX(100);
+        button.setPrefSize(100,50);
+        Label label = new Label(exception);
 
-        button.setMinSize(20,20);
 
-        VBox vBox = new VBox(button);
-        vBox.setMinHeight(5);
-        vBox.setTranslateX(100);
-        vBox.setTranslateY(80);
-        StackPane root = new StackPane();
+        HBox hBox = new HBox(button);
+        HBox spacing = new HBox();
+        spacing.setPrefSize(50,50);
+        HBox hBox1 = new HBox(label);
+        VBox root = new VBox(hBox1,spacing, hBox);
 
-        root.getChildren().addAll(vBox,label);
         Scene scene = new Scene(root, 300, 200);
 
 
