@@ -125,7 +125,7 @@ public class FXMLController {
             return "SecondaryHouseInsurance";
         }
         if (travelTab.isSelected()){
-            return "TravelingInsurance";
+            return "TravelInsurance";
         }
         if (skadeTab.isSelected()) {
             return "Skademelding";
@@ -175,7 +175,7 @@ public class FXMLController {
             return primaryHouseTable;
         } else if (typeOfObject.endsWith("SecondaryHouseInsurance")){
             return secondaryHouseTable;
-        } else if (typeOfObject.endsWith("TravelingInsurance")){
+        } else if (typeOfObject.endsWith("TravelInsurance")){
             return travelTable;
         } else if (typeOfObject.endsWith("Skademelding")){
             return SkadeMldTable;
@@ -480,9 +480,7 @@ public class FXMLController {
 
 
     private void clientSearch() {
-        System.out.println("noe");
         FilteredList<Clients> filteredClients;
-        System.out.println(clientData.size());
         filteredClients = new FilteredList<>(clientData, b -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
                 filteredClients.setPredicate((Clients clients) -> {
