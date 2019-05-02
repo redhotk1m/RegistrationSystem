@@ -21,26 +21,26 @@ public class ClientController {
     private Label dateLabel, fornavnLabel, lastNameLabel, adressLabel, insuranceNrLabel, insurancesLabel,
                     damageReportLabel, unpaidCompLabel;
 
-    checkArguments a = new checkArguments();
+    checkArguments check = new checkArguments();
 
     public ClientController(ObservableList clientData){
         this.clientData = clientData;
     }
 
     private void checkString(String string) throws EmptyTableException{
-        a.stringTest(string);
+        check.stringTest(string);
     }
 
     private void checkDate(String string) throws EmptyTableException{
-        a.dateTest(string);
+        check.dateTest(string);
     }
 
     private void checkIntegerAndString(String string) throws EmptyTableException{
-        a.streetTest(string);
+        check.streetTest(string);
     }
 
     private void checkNumber(String string) throws EmptyTableException{
-        a.numberTest(string);
+        check.numberTest(string);
     }
 
     @FXML
@@ -62,7 +62,7 @@ public class ClientController {
     }
 
     @FXML
-    TextField
+    private TextField
             dateCreated,
             firstName,
             lastName,
