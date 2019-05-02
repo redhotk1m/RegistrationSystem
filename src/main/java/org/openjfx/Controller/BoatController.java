@@ -72,6 +72,7 @@ public class BoatController {
     }
 
     @FXML
+
     private void createBoat() {
         if (checkAllFields()) {
             boatData.add(new BoatInsurance(dateCreated.getText(), owner.getText(), insurancePrice.getText(),
