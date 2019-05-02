@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="136.0" layoutY="35.0" text="Add to traveling insurance">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="address" layoutX="136.0" layoutY="84.0" onKeyReleased="#checkAddress" prefHeight="30.0" prefWidth="216.0" promptText="Area" />
+        <TextField fx:id="premium" layoutX="136.0" layoutY="141.0" onKeyReleased="#checkPremium" prefHeight="30.0" prefWidth="216.0" promptText="Premium" />
+        <TextField fx:id="date" layoutX="136.0" layoutY="198.0" onKeyReleased="#checkDateCreated" prefHeight="30.0" prefWidth="216.0" promptText="Date" />
+        <TextField fx:id="price" layoutX="136.0" layoutY="254.0" onKeyReleased="#checkPrice" prefHeight="30.0" prefWidth="216.0" promptText="Price" />
+        <TextField fx:id="conditions" layoutX="136.0" layoutY="314.0" onKeyReleased="#checkConditions" prefHeight="30.0" prefWidth="216.0" promptText="Conditions" />
+        <TextField fx:id="year" layoutX="136.0" layoutY="365.0" onKeyReleased="#checkYear" prefHeight="30.0" prefWidth="216.0" promptText="Construction year" />
+        <Label layoutX="50.0" layoutY="89.0" text="Area: ">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="39.0" layoutY="146.0" text="Premium:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="52.0" layoutY="203.0" text="Date:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="52.0" layoutY="259.0" text="Price:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="33.0" layoutY="319.0" text="Conditions:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="33.0" layoutY="370.0" text="Insured for:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="travelingButton" layoutX="196.0" layoutY="423.0" mnemonicParsing="false" onAction="#addToTraveling" text="Add to table">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <Label fx:id="addressLabel" layoutX="445.0" layoutY="93.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="premiumLabel" layoutX="445.0" layoutY="148.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="dateLabel" layoutX="445.0" layoutY="205.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="priceLabel" layoutX="445.0" layoutY="261.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="conditionLabel" layoutX="445.0" layoutY="319.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="insuredLabel" layoutX="445.0" layoutY="372.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

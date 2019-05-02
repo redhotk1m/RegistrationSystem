@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="803.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="148.0" layoutY="36.0" text="Add to secondary house insurance">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="address" layoutX="211.0" layoutY="84.0" onKeyReleased="#checkAddress" prefHeight="30.0" prefWidth="216.0" promptText="Address" />
+        <TextField fx:id="premium" layoutX="211.0" layoutY="141.0" onKeyReleased="#checkPremium" prefHeight="30.0" prefWidth="216.0" promptText="Premium" />
+        <TextField fx:id="date" layoutX="211.0" layoutY="198.0" onKeyReleased="#checkDateCreated" prefHeight="30.0" prefWidth="216.0" promptText="Date" />
+        <TextField fx:id="price" layoutX="211.0" layoutY="254.0" onKeyReleased="#checkPrice" prefHeight="30.0" prefWidth="216.0" promptText="Price" />
+        <TextField fx:id="conditions" layoutX="211.0" layoutY="312.0" onKeyReleased="#checkConditions" prefHeight="30.0" prefWidth="216.0" promptText="Conditions" />
+        <TextField fx:id="year" layoutX="211.0" layoutY="365.0" onKeyReleased="#checkYear" prefHeight="30.0" prefWidth="216.0" promptText="Construction year" />
+        <TextField fx:id="residentialType" layoutX="211.0" layoutY="423.0" onKeyReleased="#checkResidentialType" prefHeight="30.0" prefWidth="216.0" promptText="Residential type" />
+        <TextField fx:id="materials" layoutX="211.0" layoutY="478.0" onKeyReleased="#checkMaterials" prefHeight="30.0" prefWidth="216.0" promptText="Buildingmaterial" />
+        <TextField fx:id="standard" layoutX="211.0" layoutY="533.0" onKeyReleased="#checkStandard" prefHeight="30.0" prefWidth="216.0" promptText="Standard" />
+        <TextField fx:id="sqMeters" layoutX="211.0" layoutY="587.0" onKeyReleased="#checkSqMeters" prefHeight="30.0" prefWidth="216.0" promptText="Square meters" />
+        <TextField fx:id="insured" layoutX="211.0" layoutY="644.0" onKeyReleased="#checkInsured" prefHeight="30.0" prefWidth="216.0" promptText="Insured for" />
+        <TextField fx:id="content" layoutX="211.0" layoutY="701.0" onKeyReleased="#checkContent" prefHeight="30.0" prefWidth="216.0" promptText="Content insured for" />
+        <Label layoutX="110.0" layoutY="91.0" text="Address:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="107.0" layoutY="146.0" text="Premium:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="120.0" layoutY="203.0" text="Date:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="120.0" layoutY="259.0" text="Price:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="102.0" layoutY="317.0" text="Conditions:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="83.0" layoutY="370.0" text="Construction year:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="90.0" layoutY="428.0" text="Residential type:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="86.0" layoutY="483.0" text="Buildingmaterial:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="109.0" layoutY="538.0" text="Standard:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="90.0" layoutY="592.0" text="Square meters:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="106.0" layoutY="649.0" text="Insured for:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="80.0" layoutY="706.0" text="Content insured for:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="addSecondaryButton" layoutX="252.0" layoutY="751.0" mnemonicParsing="false" onAction="#addToSecondary" text="Add to table">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <Label fx:id="addressLabel" layoutX="445.0" layoutY="93.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="premiumLabel" layoutX="445.0" layoutY="148.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="dateLabel" layoutX="445.0" layoutY="205.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="priceLabel" layoutX="445.0" layoutY="261.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="conditionLabel" layoutX="445.0" layoutY="319.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="constructionLabel" layoutX="445.0" layoutY="372.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="residentialLabel" layoutX="445.0" layoutY="430.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="materialLabel" layoutX="445.0" layoutY="485.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="standardLabel" layoutX="445.0" layoutY="540.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="sqMeterLabel" layoutX="445.0" layoutY="594.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="insuredLabel" layoutX="445.0" layoutY="651.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="contentLabel" layoutX="445.0" layoutY="708.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
