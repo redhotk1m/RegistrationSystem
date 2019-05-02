@@ -7,24 +7,24 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="141.0" layoutY="37.0" prefHeight="27.0" prefWidth="238.0" text="Informasjon om båtforsikring">
+      <Label layoutX="230.0" layoutY="36.0" prefHeight="27.0" prefWidth="238.0" text="Informasjon om båtforsikring">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="dateCreated" layoutX="215.0" layoutY="87.0" prefHeight="34.0" prefWidth="267.0" promptText="Dato opprettet" />
-      <TextField fx:id="owner" layoutX="215.0" layoutY="135.0" prefHeight="34.0" prefWidth="267.0" promptText="Eier" />
-      <TextField fx:id="insurancePrice" layoutX="216.0" layoutY="187.0" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringspremie" />
-      <TextField fx:id="insuranceAmount" layoutX="216.0" layoutY="242.0" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringspris" />
-      <TextField fx:id="insuranceConditions" layoutX="216.0" layoutY="294.0" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringsbetingelser" />
-      <TextField fx:id="licencePlate" layoutX="216.0" layoutY="346.0" prefHeight="34.0" prefWidth="267.0" promptText="Registreringsnummer" />
-      <TextField fx:id="typeModel" layoutX="215.0" layoutY="399.0" prefHeight="34.0" prefWidth="267.0" promptText="Type og modell" />
-      <TextField fx:id="feetLength" layoutX="215.0" layoutY="451.0" prefHeight="34.0" prefWidth="267.0" promptText="Lengde i fot" />
-      <TextField fx:id="yearModel" layoutX="215.0" layoutY="504.0" prefHeight="34.0" prefWidth="267.0" promptText="Årsmodell" />
-      <TextField fx:id="motorType" layoutX="216.0" layoutY="553.0" prefHeight="34.0" prefWidth="267.0" promptText="Motortype" />
-      <TextField fx:id="motorStrength" layoutX="216.0" layoutY="604.0" prefHeight="34.0" prefWidth="267.0" promptText="Motorstyrke" />
+      <TextField fx:id="dateCreated" layoutX="215.0" layoutY="87.0" onKeyReleased="#checkDateCreated" prefHeight="34.0" prefWidth="267.0" promptText="Dato opprettet" />
+      <TextField fx:id="owner" layoutX="215.0" layoutY="135.0" onKeyReleased="#checkOwner" prefHeight="34.0" prefWidth="267.0" promptText="Eier" />
+      <TextField fx:id="insurancePrice" layoutX="216.0" layoutY="187.0" onKeyReleased="#checkInsurancePrice" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringspremie" />
+      <TextField fx:id="insuranceAmount" layoutX="216.0" layoutY="242.0" onKeyReleased="#checkInsuranceAmount" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringspris" />
+      <TextField fx:id="insuranceConditions" layoutX="216.0" layoutY="294.0" onKeyReleased="#checkInsuranceConditions" prefHeight="34.0" prefWidth="267.0" promptText="Forsikringsbetingelser" />
+      <TextField fx:id="licencePlate" layoutX="216.0" layoutY="346.0" onKeyReleased="#checkLicenceNumber" prefHeight="34.0" prefWidth="267.0" promptText="Registreringsnummer" />
+      <TextField fx:id="typeModel" layoutX="215.0" layoutY="399.0" onKeyReleased="#checkTypeModel" prefHeight="34.0" prefWidth="267.0" promptText="Type og modell" />
+      <TextField fx:id="feetLength" layoutX="215.0" layoutY="451.0" onKeyReleased="#checkLength" prefHeight="34.0" prefWidth="267.0" promptText="Lengde i fot" />
+      <TextField fx:id="yearModel" layoutX="215.0" layoutY="504.0" onKeyReleased="#checkYear" prefHeight="34.0" prefWidth="267.0" promptText="Årsmodell" />
+      <TextField fx:id="motorType" layoutX="216.0" layoutY="553.0" onKeyReleased="#checkMotorType" prefHeight="34.0" prefWidth="267.0" promptText="Motortype" />
+      <TextField fx:id="motorStrength" layoutX="216.0" layoutY="604.0" onKeyReleased="#checkMotorStrength" prefHeight="34.0" prefWidth="267.0" promptText="Motorstyrke" />
       <Label layoutX="69.0" layoutY="96.0" text="Dato opprettet:">
          <font>
             <Font size="14.0" />
@@ -80,10 +80,65 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="203.0" layoutY="671.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="113.0" text="Legg til">
+      <Button fx:id="createBoatButton" layoutX="292.0" layoutY="671.0" mnemonicParsing="false" onAction="#createBoat" prefHeight="34.0" prefWidth="113.0" text="Legg til">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Label fx:id="dateLabel" layoutX="494.0" layoutY="94.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="ownerLabel" layoutX="494.0" layoutY="144.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="insurancePriceLabel" layoutX="494.0" layoutY="196.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="insuranceAmountLabel" layoutX="494.0" layoutY="251.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="insuranceCondLabel" layoutX="494.0" layoutY="303.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="licenceNrLabel" layoutX="494.0" layoutY="355.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="typeModelLabel" layoutX="494.0" layoutY="408.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lengthLabel" layoutX="494.0" layoutY="460.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="yearLabel" layoutX="494.0" layoutY="513.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="motorTypeLabel" layoutX="494.0" layoutY="562.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="motorStrengthLabel" layoutX="494.0" layoutY="613.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -15,13 +15,13 @@
     -fx-background-color: #b3cce6;
     -fx-font-family: "Verdana", SansSerif;
     -fx-text-fill: black;
+    -fx-font-weight: bold;
 
 }
 
 .button:hover {
     -fx-background-color: #204060;
     -fx-text-fill: #f0f0f5;
-    -fx-font-weight: bold;
 }
 
 .root {
@@ -34,7 +34,6 @@
 
 #clientTab, #boatTab, #skadeTab, #homeTab, #houseHoldTab, #travelingTab {
     -fx-background-color: #CDCDCD;
-    -fx-text-fill: #F7F5E6;
     -fx-border-color: #88BBD6;
     -fx-border-radius: 5px, 5px, 5px, 5px;
 }
