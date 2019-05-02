@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -70,6 +71,14 @@ public class FXMLController {
     FileHandler reader;
     ObservableList data,clientData,boatData,damageReportData;
 
+    private static void run() {
+        try {
+            new ErrorMessage("Hei Even");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private TableView chooseTable() {
         if (clientTab.isSelected()) {
@@ -109,7 +118,13 @@ public class FXMLController {
         try {
             new Thread(() ->{
                 progressBar.setVisible(true);
-                readDataTask.call();
+                try {
+                    readDataTask.call();
+                } catch (EmptyTableException e) {
+                    e.showErrorGUI();
+                    progressBar.setVisible(false);
+                    return;
+                }
                 data = (readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
                 if (data.get(0).getClass().getName().endsWith("Clients"))
                     clientData = data;

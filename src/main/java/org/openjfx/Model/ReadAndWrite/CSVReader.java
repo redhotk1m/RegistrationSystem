@@ -14,13 +14,14 @@ public class CSVReader extends FileHandler {
     BufferedReader br;
 
     public CSVReader(File file) throws IOException {
-        Platform.runLater(() -> {
+        /*Platform.runLater(() -> {
             try {
                 new ErrorMessage("Hei Even");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+        */
         try {
             br = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {

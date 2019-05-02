@@ -2,6 +2,7 @@ package org.openjfx.Model;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import org.openjfx.EmptyTableException;
 import org.openjfx.Model.ReadAndWrite.CSVReader;
 import org.openjfx.Model.ReadAndWrite.FileHandler;
 import org.openjfx.Model.ReadAndWrite.JOBJReader;
@@ -25,7 +26,7 @@ public class ReadDataTask extends Task<Integer> {
 
 
     @Override
-    public Integer call() {
+    public Integer call() throws EmptyTableException {
         if (file.getName().endsWith(".jobj")){
             fileHandler = new JOBJReader(file);
             setDataObjects(fileHandler.getData());
@@ -42,7 +43,7 @@ public class ReadDataTask extends Task<Integer> {
         return amountOfRows;
     }
 
-    private void createAllObjectsFromCSV(){
+    private void createAllObjectsFromCSV() throws EmptyTableException {
         ObjectCreator objectCreator = new ObjectCreator();
         for (int i = 0; i < amountOfRows; i++) {
             String objectValues[] = new String[0];
@@ -51,6 +52,7 @@ public class ReadDataTask extends Task<Integer> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             objectCreator.createObject(typeOfObject, objectValues);
             dataObjects.add(objectCreator.getObject());
             updateProgress(i, amountOfRows-1);

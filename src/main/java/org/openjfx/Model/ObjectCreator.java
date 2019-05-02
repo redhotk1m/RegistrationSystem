@@ -2,8 +2,11 @@ package org.openjfx.Model;
 
 
 
+import javafx.application.Platform;
+import org.openjfx.EmptyTableException;
 import org.openjfx.Model.DataClasses.*;
 
+import java.io.IOException;
 import java.security.InvalidParameterException;
 
 public class ObjectCreator {
@@ -13,38 +16,40 @@ public class ObjectCreator {
     ObjectCreator(){
 
     }
+    checkArguments checker = new checkArguments();
 
 
-    private void createClient(String[] valuesOfObject){
+    private void createClient(String[] valuesOfObject) throws EmptyTableException {
             Clients clients = new Clients();
-            if(inputCheck.dateTest(valuesOfObject[0]))
-                clients.setDateCreated(valuesOfObject[0]);
 
-            if(inputCheck.stringTest(valuesOfObject[1]))
-                clients.setFirstName(valuesOfObject[1]);
+            checker.dateTest(valuesOfObject[0]);
+            clients.setDateCreated(valuesOfObject[0]);
 
-            if(inputCheck.stringTest(valuesOfObject[2]))
-                clients.setLastName(valuesOfObject[2]);
+            checker.stringTest(valuesOfObject[1]);
+            clients.setFirstName(valuesOfObject[1]);
 
-            if(inputCheck.streetTest(valuesOfObject[3]))
-                clients.setAdress(valuesOfObject[3]);
+            checker.stringTest(valuesOfObject[2]);
+            clients.setLastName(valuesOfObject[2]);
 
-            if(inputCheck.numberTest(valuesOfObject[4]))
-                clients.setForsikringsNR(valuesOfObject[4]);
+            checker.streetTest(valuesOfObject[3]);
+            clients.setAdress(valuesOfObject[3]);
 
-            if(inputCheck.numberTest(valuesOfObject[5]))
-                clients.setForsikringer(valuesOfObject[5]);
+            checker.numberTest(valuesOfObject[4]);
+            clients.setForsikringsNR(valuesOfObject[4]);
 
-            if(inputCheck.numberTest(valuesOfObject[6]))
-                clients.setSkademeldinger(valuesOfObject[6]);
+            checker.numberTest(valuesOfObject[5]);
+            clients.setForsikringer(valuesOfObject[5]);
 
-            if(inputCheck.numberTest(valuesOfObject[7]))
-                clients.setUbetalt(valuesOfObject[7]);
+            checker.numberTest(valuesOfObject[6]);
+            clients.setSkademeldinger(valuesOfObject[6]);
+
+            checker.numberTest(valuesOfObject[7]);
+            clients.setUbetalt(valuesOfObject[7]);
 
             setObject(clients);
     }
 
-    public void createObject(String typeOfObject, String[] valuesOfObject){
+    public void createObject(String typeOfObject, String[] valuesOfObject) throws EmptyTableException {
         switch (typeOfObject){
             case "Clients":
                 createClient(valuesOfObject);
@@ -67,32 +72,66 @@ public class ObjectCreator {
         }
     }
 
-    private void createSkademelding(String[] valuesOfObject) {
+    private void createSkademelding(String[] valuesOfObject) throws EmptyTableException {
         Skademelding skademelding = new Skademelding();
+        checker.dateTest(valuesOfObject[0]);
         skademelding.setSMDato(valuesOfObject[0]);
+
+        checker.numberTest(valuesOfObject[1]);
         skademelding.setSkadeNR(valuesOfObject[1]);
+
+        checker.stringTest(valuesOfObject[2]);
         skademelding.setSkadeType(valuesOfObject[2]);
+
+        checker.stringTest(valuesOfObject[3]);
         skademelding.setSkadeBeskrivelse(valuesOfObject[3]);
+
+        checker.stringTest(valuesOfObject[4]);
         skademelding.setVitneKontaktInfo(valuesOfObject[4]);
+
+        checker.numberTest(valuesOfObject[5]);
         skademelding.setTakseringsBeloep(valuesOfObject[5]);
+
+        checker.numberTest(valuesOfObject[6]);
         skademelding.setErstatningsBeloep(valuesOfObject[6]);
 
         setObject(skademelding);
     }
 
 
-    private void createBoatInsurance(String[] valuesOfObject) {
+    private void createBoatInsurance(String[] valuesOfObject) throws EmptyTableException {
         BoatInsurance boatInsurance = new BoatInsurance();
+        checker.dateTest(valuesOfObject[0]);
         boatInsurance.setDateCreated(valuesOfObject[0]);
+
+        checker.stringTest(valuesOfObject[1]);
         boatInsurance.setOwner(valuesOfObject[1]);
+
+        checker.numberTest(valuesOfObject[2]);
         boatInsurance.setInsurancePrice(valuesOfObject[2]);
+
+        checker.numberTest(valuesOfObject[3]);
         boatInsurance.setInsuranceAmount(valuesOfObject[3]);
+
+        checker.stringTest(valuesOfObject[4]);
         boatInsurance.setInsuranceConditions(valuesOfObject[4]);
+
+        checker.numberTest(valuesOfObject[5]);
         boatInsurance.setRegNr(valuesOfObject[5]);
+
+        checker.stringTest(valuesOfObject[6]);
         boatInsurance.setTypeModel(valuesOfObject[6]);
+
+        checker.numberTest(valuesOfObject[7]);
         boatInsurance.setLength(valuesOfObject[7]);
+
+        checker.numberTest(valuesOfObject[8]);
         boatInsurance.setYear(valuesOfObject[8]);
+
+        checker.stringTest(valuesOfObject[9]);
         boatInsurance.setMotorType(valuesOfObject[9]);
+
+        checker.numberTest(valuesOfObject[10]);
         boatInsurance.setMotorStrength(valuesOfObject[10]);
 
         setObject(boatInsurance);
@@ -118,11 +157,6 @@ public class ObjectCreator {
 
         setObject(houseInsurance);
     }
-
-
-
-
-
 
 
 

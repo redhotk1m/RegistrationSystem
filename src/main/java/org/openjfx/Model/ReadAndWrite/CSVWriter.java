@@ -68,6 +68,8 @@ public class CSVWriter extends FileHandler{
         }
     }
 
+
+
     private void saveSkademelding(ObservableList data) {
         ObservableList<Skademelding> a = data;
         for (Skademelding datum : a) {

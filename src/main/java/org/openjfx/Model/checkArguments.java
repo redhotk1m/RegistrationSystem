@@ -1,5 +1,9 @@
 package org.openjfx.Model;
 
+import javafx.application.Platform;
+import org.openjfx.EmptyTableException;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,50 +15,44 @@ public class checkArguments {
     public checkArguments() {
     }
 
-
-    public boolean stringTest(String s) {
+    public void stringTest(String s) throws EmptyTableException {
         checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-                return false;
+                throw new EmptyTableException("Feil i StringTest");
+
             }
         }
-        return true;
     }
 
 
-    public boolean streetTest(String s) {
+    public void streetTest(String s) throws  EmptyTableException {
         checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c) && !Character.isDigit(c)) {
-                return false;
+                throw new EmptyTableException("Gateadresse er feil");
             }
         }
-        return true;
     }
 
 
-    public boolean dateTest(String s) {
+    public void dateTest(String s) throws EmptyTableException {
         checkIfNull(s);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        format.setLenient(false);
-
+        DateFormat format = new SimpleDateFormat("dd.MM.yy");
         try {
             format.parse(s);
-            return true;
         } catch (ParseException e) {
-            return false;
+            throw new EmptyTableException("Date test");
         }
     }
 
 
-    public boolean numberTest(String s){
+    public void numberTest(String s) throws EmptyTableException{
         checkIfNull(s);
-        if(s.matches("[0-9]*$"))
-            return true;
-        return false;
+        if(!s.matches("[0-9]*$"))
+            throw new EmptyTableException("Nummertest feilet");
     }
 
     public void checkIfNull(String s){
