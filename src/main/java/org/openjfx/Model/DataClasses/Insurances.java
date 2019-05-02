@@ -1,18 +1,40 @@
-package org.openjfx;
+package org.openjfx.Model.DataClasses;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.Date;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Insurances {
-    private SimpleStringProperty insurancePrice;
-    private SimpleStringProperty dateCreated;
-    private SimpleStringProperty insuranceAmount;
-    private SimpleStringProperty insuranceConditions;
+public class Insurances implements Serializable {
+
+    private transient SimpleStringProperty insurancePrice;
+    private transient SimpleStringProperty dateCreated;
+    private transient SimpleStringProperty insuranceAmount;
+    private transient SimpleStringProperty insuranceConditions;
 
 
     public Insurances() {
+        initInsuranceProperties();
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException{
+        s.writeUTF(insurancePrice.getValueSafe());
+        s.writeUTF(dateCreated.getValueSafe());
+        s.writeUTF(insuranceAmount.getValueSafe());
+        s.writeUTF(insuranceConditions.getValueSafe());
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException{
+        initInsuranceProperties();
+        insurancePrice.set(s.readUTF());
+        dateCreated.set(s.readUTF());
+        insuranceAmount.set(s.readUTF());
+        insuranceConditions.set(s.readUTF());
+    }
+
+    public void initInsuranceProperties(){
         this.insurancePrice = new SimpleStringProperty();
         this.dateCreated = new SimpleStringProperty();
         this.insuranceAmount = new SimpleStringProperty();
@@ -20,15 +42,7 @@ public class Insurances {
     }
 
 
-    Insurances(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions) {
-        this.insurancePrice = new SimpleStringProperty(insurancePrice);
-        this.dateCreated = new SimpleStringProperty(dateCreated);
-        this.insuranceAmount = new SimpleStringProperty(insuranceAmount);
-        this.insuranceConditions = new SimpleStringProperty(insuranceConditions);
-    }
-
     //getters and setters ?
-
 
     public String getInsurancePrice() {
         return insurancePrice.get();
@@ -46,7 +60,11 @@ public class Insurances {
         return dateCreated.get();
     }
 
-    public void setDateCreated (String dateCreated) {
+    public SimpleStringProperty dateCreatedProperty() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
         this.dateCreated.set(dateCreated);
     }
 

@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
-      <ProgressIndicator fx:id="progressBar" layoutX="818.0" layoutY="37.0" progress="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <ProgressIndicator fx:id="progressBar" layoutX="818.0" layoutY="37.0" progress="0.0" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
         <tabs>
           <Tab fx:id="clientTab" text="Kunder">
@@ -160,7 +160,6 @@
       <ToolBar layoutX="121.0" layoutY="37.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="37.0">
         <items>
           <Button mnemonicParsing="false" text="Insert" />
-            <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
             <Button mnemonicParsing="false" text="Edit" />
             <Button mnemonicParsing="false" onAction="#testButton" text="Open File" />
             <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />

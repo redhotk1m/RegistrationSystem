@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.openjfx.Model;
 
 public class TODO {
 
@@ -24,6 +24,7 @@ public class TODO {
     *   Om mulig, fjern mest mulig duplikat kode
     *   Rengjør kode
     *   Passe på at ved innlasting av kode, kan man ikke redigere felter/legge til objekter
+    *   SØK!!!!
     *
     *
     *

@@ -1,18 +1,30 @@
-package org.openjfx;
+package org.openjfx.Model.DataClasses;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class SuperHouseInsurance extends Insurances{
-    private SimpleStringProperty adress;
-    private SimpleStringProperty constructionYear;
-    private SimpleStringProperty residentialType;
-    private SimpleStringProperty materials;
-    private SimpleStringProperty standard; // - hva er det??
-    private SimpleStringProperty SqMeters;
-    private SimpleStringProperty buildingInsuranceAmount;
-    private SimpleStringProperty contentInsuranceAmount;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-    public SuperHouseInsurance() {
+public class HouseInsurance extends Insurances implements Serializable {
+
+    private transient SimpleStringProperty
+            adress,
+            constructionYear,
+            residentialType,
+            materials,
+            standard,
+            SqMeters,
+            buildingInsuranceAmount,
+            contentInsuranceAmount;
+
+
+    public HouseInsurance() {
+        InitSuperHouseInsurace();
+    }
+
+    private void InitSuperHouseInsurace(){
         this.adress = new SimpleStringProperty();
         this.constructionYear = new SimpleStringProperty();
         this.residentialType = new SimpleStringProperty();
@@ -23,19 +35,13 @@ public class SuperHouseInsurance extends Insurances{
         this.contentInsuranceAmount = new SimpleStringProperty();
     }
 
-    SuperHouseInsurance(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions,
-                        String adress, String constructionYear, String residentialType, String materials, String standard,
-                        String SqMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
-        super(insurancePrice, dateCreated, insuranceAmount, insuranceConditions);
-        this.adress = new SimpleStringProperty(adress);
-        this.constructionYear = new SimpleStringProperty(constructionYear);
-        this.residentialType = new SimpleStringProperty(residentialType);
-        this.materials = new SimpleStringProperty(materials);
-        this.standard = new SimpleStringProperty(standard);
-        this.SqMeters = new SimpleStringProperty(SqMeters);
-        this.buildingInsuranceAmount = new SimpleStringProperty(buildingInsuranceAmount);
-        this.contentInsuranceAmount = new SimpleStringProperty(contentInsuranceAmount);
+    private void writeObject(ObjectOutputStream s) throws IOException{
+
     }
+    private void readObject(ObjectInputStream s) throws IOException{
+        InitSuperHouseInsurace();
+    }
+
 
 
     public String getAdress() {

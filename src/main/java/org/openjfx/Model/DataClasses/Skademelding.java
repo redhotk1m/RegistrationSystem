@@ -1,21 +1,30 @@
-package org.openjfx;
+package org.openjfx.Model.DataClasses;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Date;
 
-public class mdSkademelding {
+public class Skademelding implements Serializable {
 
-    private SimpleStringProperty SMDato;
-    private SimpleStringProperty SkadeNR;
-    private SimpleStringProperty SkadeType; //????
-    private SimpleStringProperty SkadeBeskrivelse;
-    private SimpleStringProperty VitneKontaktInfo; // Egen klasse?
-    private SimpleStringProperty TakseringsBeloep;
-    private SimpleStringProperty ErstatningsBeloep;
+    private transient SimpleStringProperty
+            SMDato,
+            SkadeNR,
+            SkadeType,
+            SkadeBeskrivelse,
+            VitneKontaktInfo,
+            TakseringsBeloep,
+            ErstatningsBeloep;
 
-    public mdSkademelding() {
+    public Skademelding() {
+        initProperties();
+    }
+
+    private void initProperties(){
         this.SMDato = new SimpleStringProperty();
         this.SkadeNR = new SimpleStringProperty();
         this.SkadeType = new SimpleStringProperty();
@@ -25,17 +34,27 @@ public class mdSkademelding {
         this.ErstatningsBeloep = new SimpleStringProperty();
     }
 
-
-    public mdSkademelding(String SMDato, String skadeNR, String skadeType, String skadeBeskrivelse,
-                          String vitneKontaktInfo, String takseringsBeloep, String erstatningsBeloep) {
-        this.SMDato = new SimpleStringProperty();
-        SkadeNR =  new SimpleStringProperty(skadeNR);
-        SkadeType = new SimpleStringProperty(skadeType);
-        SkadeBeskrivelse = new SimpleStringProperty(skadeBeskrivelse);
-        VitneKontaktInfo = new SimpleStringProperty(vitneKontaktInfo);
-        TakseringsBeloep = new SimpleStringProperty(takseringsBeloep);
-        ErstatningsBeloep = new SimpleStringProperty(erstatningsBeloep);
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.writeUTF(SMDato.getValueSafe());
+        s.writeUTF(SkadeNR.getValueSafe());
+        s.writeUTF(SkadeType.getValueSafe());
+        s.writeUTF(SkadeBeskrivelse.getValueSafe());
+        s.writeUTF(VitneKontaktInfo.getValueSafe());
+        s.writeUTF(TakseringsBeloep.getValueSafe());
+        s.writeUTF(ErstatningsBeloep.getValueSafe());
     }
+
+    private void readObject(ObjectInputStream s) throws IOException{
+        initProperties();
+        SMDato.set(s.readUTF());
+        SkadeNR.set(s.readUTF());
+        SkadeType.set(s.readUTF());
+        SkadeBeskrivelse.set(s.readUTF());
+        VitneKontaktInfo.set(s.readUTF());
+        TakseringsBeloep.set(s.readUTF());
+        ErstatningsBeloep.set(s.readUTF());
+    }
+
 
     // Gettere og settere
 
