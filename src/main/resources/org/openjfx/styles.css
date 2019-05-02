@@ -1,3 +1,44 @@
 #Knapp {
     -fx-font-weight: bold;
 }
+
+.table-view {
+    -fx-background-color: #CDCDCD;
+    -fx-border-radius: 20px, 20px, 20px, 20px;
+}
+.column {
+    -fx-background-color: #f0f0f5;
+    -fx-border-color: #b3cce6;
+}
+
+.button {
+    -fx-background-color: #b3cce6;
+    -fx-font-family: "Verdana", SansSerif;
+    -fx-text-fill: black;
+
+}
+
+.button:hover {
+    -fx-background-color: #204060;
+    -fx-text-fill: #f0f0f5;
+    -fx-font-weight: bold;
+}
+
+.root {
+    -fx-background-color: #f0f0f5;
+}
+
+.tool-bar {
+    -fx-background-color: #f0f0f5;
+}
+
+#clientTab, #boatTab, #skadeTab, #homeTab, #houseHoldTab, #travelingTab {
+    -fx-background-color: #CDCDCD;
+    -fx-text-fill: #F7F5E6;
+    -fx-border-color: #88BBD6;
+    -fx-border-radius: 5px, 5px, 5px, 5px;
+}
+#clientTab:selected, #boatTab:selected, #skadeTab:selected, #homeTab:selected, #houseHoldTab:selected,
+#travelingTab:selected {
+    -fx-background-color: #b3cce6;
+}

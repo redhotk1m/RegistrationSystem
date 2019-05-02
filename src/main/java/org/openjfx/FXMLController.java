@@ -14,6 +14,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.openjfx.Controller.ClientController;
 import org.openjfx.Model.*;
 import org.openjfx.Model.DataClasses.BoatInsurance;
 import org.openjfx.Model.DataClasses.Clients;
@@ -27,6 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class FXMLController {
     @FXML
@@ -69,7 +72,10 @@ public class FXMLController {
     private TextField searchField;
 
     FileHandler reader;
-    ObservableList data,clientData,boatData,damageReportData;
+    ObservableList data =  observableArrayList();
+    ObservableList boatData = observableArrayList();
+    ObservableList clientData = observableArrayList();
+    ObservableList damageReportData = observableArrayList();
 
     private static void run() {
         try {
@@ -389,6 +395,28 @@ public class FXMLController {
     public void initialize() {
         assignAllColumns();
         setEditableColumns();
+        setItemsAllTableViews();
+    }
+
+    private void setItemsAllTableViews(){
+        KunderTable.setItems(clientData);
+        BoatTable.setItems(boatData);
+    }
+
+    @FXML
+    private void insert() throws IOException {
+        FXMLLoader loader = null;
+        Stage stage = new Stage();
+
+        if (chooseTable().equals(KunderTable)){
+            loader = new FXMLLoader(getClass().getResource("addKunde.fxml"));
+            loader.setController(new ClientController(clientData));
+            KunderTable.setItems(clientData);
+            KunderTable.setEditable(true);
+        }
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void setEditableColumns(){
@@ -415,7 +443,9 @@ public class FXMLController {
 
 
     private void clientSearch() {
+        System.out.println("noe");
         FilteredList<Clients> filteredClients;
+        System.out.println(clientData.size());
         filteredClients = new FilteredList<>(clientData, b -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
                 filteredClients.setPredicate((Clients clients) -> {
@@ -459,6 +489,7 @@ public class FXMLController {
                     return false;
                 })
         );
+        System.out.println(filteredClients.size());
         KunderTable.setItems(filteredClients);
     }
 
@@ -572,11 +603,8 @@ public class FXMLController {
 
     @FXML
     private void tableSearch() {
-        if (data == null || data.isEmpty()) {
-            return;
-        }
 
-        if (chooseTable().equals(KunderTable)) {
+        if (chooseTable().equals(KunderTable) && clientData != null && !clientData.isEmpty()) {
           clientSearch();
         }
 
