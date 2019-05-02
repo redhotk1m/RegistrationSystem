@@ -159,7 +159,7 @@
       </TabPane>
       <ToolBar layoutX="121.0" layoutY="37.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="37.0">
         <items>
-          <Button mnemonicParsing="false" text="Insert" />
+          <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
             <Button mnemonicParsing="false" text="Edit" />
             <Button mnemonicParsing="false" onAction="#testButton" text="Open File" />
             <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />

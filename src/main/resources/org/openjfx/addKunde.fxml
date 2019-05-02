@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="dateCreated" layoutX="207.0" layoutY="71.0" prefHeight="34.0" prefWidth="257.0" promptText="Dato Opprettet" />
-      <TextField fx:id="firstname" layoutX="207.0" layoutY="128.0" prefHeight="34.0" prefWidth="257.0" promptText="Fornavn" />
-      <TextField fx:id="lastname" layoutX="207.0" layoutY="189.0" prefHeight="34.0" prefWidth="257.0" promptText="Etternavn" />
+      <TextField fx:id="firstName" layoutX="207.0" layoutY="128.0" onKeyReleased="#checkFirstName" prefHeight="34.0" prefWidth="257.0" promptText="Fornavn" />
+      <TextField fx:id="lastName" layoutX="207.0" layoutY="189.0" prefHeight="34.0" prefWidth="257.0" promptText="Etternavn" />
       <TextField fx:id="adress" layoutX="207.0" layoutY="254.0" prefHeight="34.0" prefWidth="257.0" promptText="Adresse" />
       <TextField fx:id="insuranceNumber" layoutX="207.0" layoutY="315.0" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringsnummer" />
       <TextField fx:id="insurances" layoutX="207.0" layoutY="382.0" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringer" />
@@ -61,6 +61,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="197.0" layoutY="570.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
+      <Button fx:id="createClientButton" layoutX="197.0" layoutY="570.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
+      <Label fx:id="fornavnLabel" layoutX="487.0" layoutY="137.0" />
    </children>
 </AnchorPane>

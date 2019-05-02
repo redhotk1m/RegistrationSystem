@@ -1,5 +1,7 @@
 package org.openjfx.Model;
 
+import org.openjfx.EmptyTableException;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,40 +14,38 @@ public class checkArguments {
     }
 
 
-    public boolean stringTest(String s) {
+    public void stringTest(String s) throws EmptyTableException {
         checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-                return false;
+                throw new EmptyTableException("Noe galt med string");
             }
         }
-        return true;
     }
 
 
-    public boolean streetTest(String s) {
+    public void streetTest(String s) throws EmptyTableException {
         checkIfNull(s);
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c) && !Character.isDigit(c)) {
-                return false;
+                throw new EmptyTableException("Noe galt med Street");
             }
         }
-        return true;
     }
 
 
-    public boolean dateTest(String s) {
+    public void dateTest(String s) throws EmptyTableException {
         checkIfNull(s);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        format.setLenient(false);
+        DateFormat format = new SimpleDateFormat("dd.MM.yy");
+
 
         try {
             format.parse(s);
-            return true;
+
         } catch (ParseException e) {
-            return false;
+            throw new EmptyTableException("Noe galt med dato");
         }
     }
 

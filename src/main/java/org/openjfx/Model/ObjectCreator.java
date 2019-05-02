@@ -2,6 +2,7 @@ package org.openjfx.Model;
 
 
 
+import org.openjfx.EmptyTableException;
 import org.openjfx.Model.DataClasses.*;
 
 import java.security.InvalidParameterException;
@@ -9,42 +10,45 @@ import java.security.InvalidParameterException;
 public class ObjectCreator {
     Object object;
     checkArguments inputCheck = new checkArguments();
+    checkArguments cheker = new checkArguments();
+
 
     ObjectCreator(){
 
     }
 
 
-    private void createClient(String[] valuesOfObject){
+    private void createClient(String[] valuesOfObject) throws EmptyTableException {
             Clients clients = new Clients();
-            if(inputCheck.dateTest(valuesOfObject[0]))
-                clients.setDateCreated(valuesOfObject[0]);
 
-            if(inputCheck.stringTest(valuesOfObject[1]))
-                clients.setFirstName(valuesOfObject[1]);
+            inputCheck.dateTest(valuesOfObject[0]);
+            clients.setDateCreated(valuesOfObject[0]);
 
-            if(inputCheck.stringTest(valuesOfObject[2]))
-                clients.setLastName(valuesOfObject[2]);
+            inputCheck.stringTest(valuesOfObject[1]);
+            clients.setFirstName(valuesOfObject[1]);
 
-            if(inputCheck.streetTest(valuesOfObject[3]))
-                clients.setAdress(valuesOfObject[3]);
+            inputCheck.stringTest(valuesOfObject[2]);
+            clients.setLastName(valuesOfObject[2]);
 
-            if(inputCheck.numberTest(valuesOfObject[4]))
-                clients.setForsikringsNR(valuesOfObject[4]);
+            inputCheck.streetTest(valuesOfObject[3]);
+            clients.setAdress(valuesOfObject[3]);
 
-            if(inputCheck.numberTest(valuesOfObject[5]))
-                clients.setForsikringer(valuesOfObject[5]);
+            inputCheck.numberTest(valuesOfObject[4]);
+            clients.setForsikringsNR(valuesOfObject[4]);
 
-            if(inputCheck.numberTest(valuesOfObject[6]))
-                clients.setSkademeldinger(valuesOfObject[6]);
+            inputCheck.numberTest(valuesOfObject[5]);
+            clients.setForsikringer(valuesOfObject[5]);
 
-            if(inputCheck.numberTest(valuesOfObject[7]))
-                clients.setUbetalt(valuesOfObject[7]);
+            inputCheck.numberTest(valuesOfObject[6]);
+            clients.setSkademeldinger(valuesOfObject[6]);
+
+            inputCheck.numberTest(valuesOfObject[7]);
+            clients.setUbetalt(valuesOfObject[7]);
 
             setObject(clients);
     }
 
-    public void createObject(String typeOfObject, String[] valuesOfObject){
+    public void createObject(String typeOfObject, String[] valuesOfObject) throws EmptyTableException {
         switch (typeOfObject){
             case "Clients":
                 createClient(valuesOfObject);
@@ -59,7 +63,6 @@ public class ObjectCreator {
                 createHouseInsurance(valuesOfObject);
                 break;
             case "PrimaryHouseInsurance":
-                System.out.println("gjør noe her");
                 break;
 
             default:
