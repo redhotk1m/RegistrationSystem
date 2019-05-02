@@ -1,6 +1,5 @@
 package org.openjfx;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -27,16 +26,15 @@ import org.openjfx.Model.ReadAndWrite.JOBJWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class FXMLController {
     @FXML
-    private Tab clientTab, boatTab, houseHoldTab, homeTab, travelingTab, skadeTab;
+    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
 
     @FXML
-    private TableView KunderTable, SkadeMldTable, BoatTable, houseHoldTable;
+    private TableView KunderTable, SkadeMldTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
 
     @FXML
     private TableColumn<Clients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
@@ -64,7 +62,7 @@ public class FXMLController {
     private TableView<SecondaryHouseInsurance> Householdtable;
 
     @FXML
-    private TableColumn<SecondaryHouseInsurance, String> houseAdress, houseInsurancePrice, houseDate, houseInsuranceAmount,
+    private TableColumn<SecondaryHouseInsurance, String> houseAddress, houseInsurancePrice, houseDate, houseInsuranceAmount,
                                                     houseInsuranceConditions, houseConstructionYear, houseResidentalType,
                                                     houseMaterials, houseStandard, houseSqMeters,
                                                     houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
@@ -75,7 +73,11 @@ public class FXMLController {
     ObservableList data =  observableArrayList();
     ObservableList boatData = observableArrayList();
     ObservableList clientData = observableArrayList();
+    ObservableList primaryHouseData = observableArrayList();
+    ObservableList secondaryHouseData = observableArrayList();
+    ObservableList travelInsuranceData = observableArrayList();
     ObservableList damageReportData = observableArrayList();
+
 
     private static void run() {
         try {
@@ -93,6 +95,15 @@ public class FXMLController {
         if(boatTab.isSelected()) {
             return BoatTable;
         }
+        if (primaryHouseTab.isSelected()){
+            return primaryHouseTable;
+        }
+        if (secondaryHouseTab.isSelected()){
+            return secondaryHouseTable;
+        }
+        if (travelTab.isSelected()){
+            return travelTable;
+        }
         if(skadeTab.isSelected()) {
             return SkadeMldTable;
         }
@@ -104,13 +115,22 @@ public class FXMLController {
         if (clientTab.isSelected()) {
             return "Clients";
         }
-        if(boatTab.isSelected()) {
+        if (boatTab.isSelected()) {
             return "BoatInsurance";
         }
-        if(skadeTab.isSelected()) {
+        if (primaryHouseTab.isSelected()){
+            return "PrimaryHouseInsurance";
+        }
+        if (secondaryHouseTab.isSelected()){
+            return "SecondaryHouseInsurance";
+        }
+        if (travelTab.isSelected()){
+            return "TravelingInsurance";
+        }
+        if (skadeTab.isSelected()) {
             return "Skademelding";
         }
-        return null;
+        return null; //TODO Throw noSuchTabSelected?
     }
 
     @FXML
@@ -149,12 +169,18 @@ public class FXMLController {
     private TableView setCorrectTable(String typeOfObject) {
         if (typeOfObject.endsWith("Clients")){
             return KunderTable;
-        } else if (typeOfObject.endsWith("Skademelding")){
-            return SkadeMldTable;
         } else if (typeOfObject.endsWith("BoatInsurance")) {
             return BoatTable;
+        } else if (typeOfObject.endsWith("PrimaryHouseInsurance")){
+            return primaryHouseTable;
+        } else if (typeOfObject.endsWith("SecondaryHouseInsurance")){
+            return secondaryHouseTable;
+        } else if (typeOfObject.endsWith("TravelingInsurance")){
+            return travelTable;
+        } else if (typeOfObject.endsWith("Skademelding")){
+            return SkadeMldTable;
         }
-       return null;
+       throw new NullPointerException("No valid stuffs"); //TODO Fikse her
     }
 
     private void assignKunderColumns() {
@@ -238,8 +264,8 @@ public class FXMLController {
 
 
 
-    private void assignHouseholdColumns() {
-        houseAdress.setCellValueFactory(
+    private void assignPrimaryHouseColumns() {
+        houseAddress.setCellValueFactory(
                 new PropertyValueFactory<>("adress")
         );
 
@@ -318,7 +344,7 @@ public class FXMLController {
     private void assignAllColumns(){
         assignKunderColumns();
         assignBoatInsuranceColumns();
-        //assignHouseholdColumns();
+        assignPrimaryHouseColumns();
         assignSkademldColumns();
     }
 
@@ -354,7 +380,14 @@ public class FXMLController {
             clientData.removeAll(objectToRemove);
         if (tableView == BoatTable)
             boatData.removeAll(objectToRemove);
-        //tableView.getItems().removeAll(a);
+        if (tableView == primaryHouseTable)
+            primaryHouseData.removeAll(objectToRemove);
+        if (tableView == secondaryHouseTable)
+            secondaryHouseData.removeAll(objectToRemove); //TODO Denne kan forenkles LETT!
+        if (tableView == travelTable)
+            travelInsuranceData.removeAll(objectToRemove);
+        if (tableView == SkadeMldTable)
+            damageReportData.removeAll(objectToRemove);
     }
 
     @FXML
@@ -401,6 +434,10 @@ public class FXMLController {
     private void setItemsAllTableViews(){
         KunderTable.setItems(clientData);
         BoatTable.setItems(boatData);
+        primaryHouseTable.setItems(primaryHouseData);
+        secondaryHouseTable.setItems(secondaryHouseData);
+        travelTable.setItems(travelInsuranceData);
+        SkadeMldTable.setItems(damageReportData);
     }
 
     @FXML

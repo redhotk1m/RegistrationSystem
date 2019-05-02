@@ -63,24 +63,24 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="houseHoldTab" text="Hus- og innboforsikring">
+            <Tab fx:id="primaryHouseTab" text="Hus- og innboforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="houseHoldTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="primaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
                            <columns>
-                              <TableColumn prefWidth="37.0" text="Adresse" />
-                              <TableColumn prefWidth="52.0" text="Forsikringspremie" />
-                              <TableColumn prefWidth="46.0" text="Dato" />
-                              <TableColumn prefWidth="47.0" text="Forsikringsbeløp" />
-                              <TableColumn prefWidth="75.0" text="Forsikringsbetingelser" />
-                              <TableColumn prefWidth="48.0" text="Byggeår" />
-                              <TableColumn prefWidth="45.0" text="Boligtype" />
-                              <TableColumn prefWidth="64.0" text="Byggemateriale" />
-                              <TableColumn prefWidth="74.0" text="Standard" />
-                              <TableColumn prefWidth="63.0" text="Antall kvadratmeter" />
-                              <TableColumn prefWidth="88.0" text="Forsikringsbeløp for bygning" />
-                              <TableColumn prefWidth="138.0" text="Forsikringsbeløp for innbo" />
+                              <TableColumn fx:id="houseAddress" prefWidth="37.0" text="Adresse" />
+                              <TableColumn fx:id="houseInsurancePrice" prefWidth="52.0" text="Forsikringspremie" />
+                              <TableColumn fx:id="houseDate" prefWidth="46.0" text="Dato" />
+                              <TableColumn fx:id="houseInsuranceAmount" prefWidth="60.0" text="Forsikringsbeløp" />
+                              <TableColumn fx:id="houseInsuranceConditions" minWidth="0.0" prefWidth="62.0" text="Forsikringsbetingelser" />
+                              <TableColumn fx:id="houseConstructionYear" prefWidth="48.0" text="Byggeår" />
+                              <TableColumn fx:id="houseResidentalType" prefWidth="45.0" text="Boligtype" />
+                              <TableColumn fx:id="houseMaterials" prefWidth="89.0" text="Byggemateriale" />
+                              <TableColumn fx:id="houseStandard" prefWidth="49.0" text="Standard" />
+                              <TableColumn fx:id="houseSqMeters" prefWidth="63.0" text="Antall kvadratmeter" />
+                              <TableColumn fx:id="houseBuildingInsuranceAmount" prefWidth="88.0" text="Forsikringsbeløp for bygning" />
+                              <TableColumn fx:id="HouseHousingInsuranceAmount" prefWidth="138.0" text="Forsikringsbeløp for innbo" />
                            </columns>
                         </TableView>
                         <Button layoutX="253.0" layoutY="222.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="197.0" text="Lagre hus- og innboforsikring" />
@@ -88,11 +88,11 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="homeTab" text="Fritidsboligforsikring">
+            <Tab fx:id="secondaryHouseTab" text="Fritidsboligforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="secondaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
                            <columns>
                               <TableColumn prefWidth="51.0" text="Adresse" />
                               <TableColumn prefWidth="51.0" text="Forsikringspremie" />
@@ -113,11 +113,11 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="travelingTab" text="Reiseforsikring">
+            <Tab fx:id="travelTab" text="Reiseforsikring">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="travelTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
                            <columns>
                               <TableColumn prefWidth="136.0" text="Forsikringsområde" />
                               <TableColumn prefWidth="111.0" text="Forsikringspremie" />
