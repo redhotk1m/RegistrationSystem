@@ -83,7 +83,7 @@ public class PrimaryHouseController {
     }
 
     @FXML
-    private void checkAdress() {
+    private void checkAddress() {
         try {
             checkIntegerAndString(address.getText());
         } catch (EmptyTableException e) {
@@ -160,7 +160,7 @@ public class PrimaryHouseController {
     }
 
     @FXML
-    private void checMaterials() {
+    private void checkMaterials() {
         try {
             checkString(materials.getText());
         } catch (EmptyTableException e) {
@@ -171,7 +171,7 @@ public class PrimaryHouseController {
     }
 
     @FXML
-    private void checStandard() {
+    private void checkStandard() {
         try {
             checkString(standard.getText());
         } catch (EmptyTableException e) {
