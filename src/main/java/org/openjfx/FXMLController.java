@@ -13,7 +13,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.openjfx.Controller.BoatController;
 import org.openjfx.Controller.ClientController;
+import org.openjfx.Controller.PrimaryHouseController;
 import org.openjfx.Model.*;
 import org.openjfx.Model.DataClasses.*;
 import org.openjfx.Model.ReadAndWrite.CSVWriter;
@@ -361,6 +363,22 @@ public class FXMLController {
             KunderTable.setItems(clientData);
             KunderTable.setEditable(true);
         }
+
+        if (chooseTable().equals(BoatTable)){
+            System.out.println("Her skjer det noe");
+            loader = new FXMLLoader(getClass().getResource("addBoat.fxml"));
+            loader.setController(new BoatController(boatData));
+            BoatTable.setItems(boatData);
+            BoatTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(primaryHouseTable)){
+            loader = new FXMLLoader(getClass().getResource("addPrimaryHouse.fxml"));
+            loader.setController(new PrimaryHouseController(primaryHouseData));
+            primaryHouseTable.setItems(primaryHouseData);
+            primaryHouseTable.setEditable(true);
+        }
+
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();
