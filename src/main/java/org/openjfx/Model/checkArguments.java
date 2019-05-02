@@ -55,9 +55,9 @@ public class checkArguments {
             throw new EmptyTableException("Nummertest feilet");
     }
 
-    public void checkIfNull(String s){
+    public void checkIfNull(String s) throws EmptyTableException {
         if (s == null || s.length() < 1){
-            System.out.println("FEILMELDING");
+            throw new EmptyTableException("Field cannot be empty");
             //throw new NullPointerException("Strengen eksisterer ikke");
             //Thrower ikke fordi den aldri får nullpointer?
             //TODO Fiks dette, sånn at objekter uten felter ikke blir laget, eller feilmelding gis

@@ -9,9 +9,9 @@ import java.io.Serializable;
 
 public class Insurances implements Serializable {
 
-    private transient SimpleStringProperty  insurancePrice,
+    private transient SimpleStringProperty  insurancePremium,
                                             dateCreated,
-                                            insuranceAmount,
+                                            insurancePrice,
                                             insuranceConditions;
 
 
@@ -19,48 +19,48 @@ public class Insurances implements Serializable {
         initInsuranceProperties();
     }
 
-    public Insurances(String insurancePrice, String dateCreated, String insuranceAmount, String insuranceConditions) {
-        this.insurancePrice = new SimpleStringProperty(insurancePrice);
+    public Insurances(String insurancePremium, String dateCreated, String insurancePrice, String insuranceConditions) {
+        this.insurancePremium = new SimpleStringProperty(insurancePremium);
         this.dateCreated = new SimpleStringProperty(dateCreated);
-        this.insuranceAmount = new SimpleStringProperty(insuranceAmount);
+        this.insurancePrice = new SimpleStringProperty(insurancePrice);
         this.insuranceConditions = new SimpleStringProperty(insuranceConditions);
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
-        s.writeUTF(insurancePrice.getValueSafe());
+        s.writeUTF(insurancePremium.getValueSafe());
         s.writeUTF(dateCreated.getValueSafe());
-        s.writeUTF(insuranceAmount.getValueSafe());
+        s.writeUTF(insurancePrice.getValueSafe());
         s.writeUTF(insuranceConditions.getValueSafe());
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
         initInsuranceProperties();
-        insurancePrice.set(s.readUTF());
+        insurancePremium.set(s.readUTF());
         dateCreated.set(s.readUTF());
-        insuranceAmount.set(s.readUTF());
+        insurancePrice.set(s.readUTF());
         insuranceConditions.set(s.readUTF());
     }
 
     public void initInsuranceProperties(){
-        this.insurancePrice = new SimpleStringProperty();
+        this.insurancePremium = new SimpleStringProperty();
         this.dateCreated = new SimpleStringProperty();
-        this.insuranceAmount = new SimpleStringProperty();
+        this.insurancePrice = new SimpleStringProperty();
         this.insuranceConditions = new SimpleStringProperty();
     }
 
 
     //getters and setters ?
 
-    public String getInsurancePrice() {
+    public String getInsurancePremium() {
         return insurancePrice.get();
     }
 
-    public SimpleStringProperty insurancePriceProperty() {
+    public SimpleStringProperty insurancePremiumProperty() {
         return insurancePrice;
     }
 
-    public void setInsurancePrice(String insurancePrice) {
-        this.insurancePrice.set(insurancePrice);
+    public void setInsurancePremium(String insurancePremium) {
+        this.insurancePrice.set(insurancePremium);
     }
 
     public String getDateCreated() {
@@ -75,16 +75,16 @@ public class Insurances implements Serializable {
         this.dateCreated.set(dateCreated);
     }
 
-    public String getInsuranceAmount() {
-        return insuranceAmount.get();
+    public String getInsurancePrice() {
+        return insurancePrice.get();
     }
 
-    public SimpleStringProperty insuranceAmountProperty() {
-        return insuranceAmount;
+    public SimpleStringProperty insurancePriceProperty() {
+        return insurancePrice;
     }
 
-    public void setInsuranceAmount(String insuranceAmount) {
-        this.insuranceAmount.set(insuranceAmount);
+    public void setInsurancePrice(String insurancePrice) {
+        this.insurancePrice.set(insurancePrice);
     }
 
     public String getInsuranceConditions() {

@@ -9,12 +9,12 @@ import java.io.Serializable;
 
 public class HouseInsurance extends Insurances implements Serializable {
 
-    private transient SimpleStringProperty  adress,
+    private transient SimpleStringProperty  address,
                                             constructionYear,
                                             residentialType,
                                             materials,
                                             standard,
-                                            SqMeters,
+                                            squareMeters,
                                             buildingInsuranceAmount,
                                             contentInsuranceAmount;
 
@@ -23,62 +23,63 @@ public class HouseInsurance extends Insurances implements Serializable {
         InitHouseInsurance();
     }
 
-    public HouseInsurance(String address, String constructionYear, String residentialType, String materials, String SqMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
-        this.adress = new SimpleStringProperty(address);
+    public HouseInsurance(String address, String insurancePremium, String dateCreated, String insurancePrice, String insuranceConditions, String constructionYear, String residentialType, String materials, String squareMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
+        super(insurancePremium, dateCreated, insurancePrice, insuranceConditions);
+        this.address = new SimpleStringProperty(address);
         this.constructionYear = new SimpleStringProperty(constructionYear);
         this.residentialType = new SimpleStringProperty(residentialType);
         this.materials = new SimpleStringProperty(materials);
-        this.SqMeters = new SimpleStringProperty(SqMeters);
+        this.squareMeters = new SimpleStringProperty(squareMeters);
         this.buildingInsuranceAmount = new SimpleStringProperty(buildingInsuranceAmount);
         this.contentInsuranceAmount = new SimpleStringProperty(contentInsuranceAmount);
     }
 
     private void InitHouseInsurance(){
-        this.adress = new SimpleStringProperty();
+        this.address = new SimpleStringProperty();
         this.constructionYear = new SimpleStringProperty();
         this.residentialType = new SimpleStringProperty();
         this.materials = new SimpleStringProperty();
         this.standard = new SimpleStringProperty();
-        this.SqMeters = new SimpleStringProperty();
+        this.squareMeters = new SimpleStringProperty();
         this.buildingInsuranceAmount = new SimpleStringProperty();
         this.contentInsuranceAmount = new SimpleStringProperty();
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
         s.defaultWriteObject();
-        s.writeUTF(adress.getValueSafe());
+        s.writeUTF(address.getValueSafe());
         s.writeUTF(constructionYear.getValueSafe());
         s.writeUTF(residentialType.getValueSafe());
         s.writeUTF(materials.getValueSafe());
         s.writeUTF(standard.getValueSafe());
-        s.writeUTF(SqMeters.getValueSafe());
+        s.writeUTF(squareMeters.getValueSafe());
         s.writeUTF(buildingInsuranceAmount.getValueSafe());
         s.writeUTF(contentInsuranceAmount.getValueSafe());
     }
     private void readObject(ObjectInputStream s) throws IOException{
         InitHouseInsurance();
-        adress.set(s.readUTF());
+        address.set(s.readUTF());
         constructionYear.set(s.readUTF());
         residentialType.set(s.readUTF());
         materials.set(s.readUTF());
         standard.set(s.readUTF());
-        SqMeters.set(s.readUTF());
+        squareMeters.set(s.readUTF());
         buildingInsuranceAmount.set(s.readUTF());
         contentInsuranceAmount.set(s.readUTF());
     }
 
 
 
-    public String getAdress() {
-        return adress.get();
+    public String getAddress() {
+        return address.get();
     }
 
-    public SimpleStringProperty adressProperty() {
-        return adress;
+    public SimpleStringProperty addressProperty() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress.set(adress);
+    public void setAddress(String address) {
+        this.address.set(address);
     }
 
     public String getConstructionYear() {
@@ -129,16 +130,16 @@ public class HouseInsurance extends Insurances implements Serializable {
         this.standard.set(standard);
     }
 
-    public String getSqMeters() {
-        return SqMeters.get();
+    public String getSquareMeters() {
+        return squareMeters.get();
     }
 
-    public SimpleStringProperty sqMetersProperty() {
-        return SqMeters;
+    public SimpleStringProperty squareMetersProperty() {
+        return squareMeters;
     }
 
-    public void setSqMeters(String sqMeters) {
-        this.SqMeters.set(sqMeters);
+    public void setSquareMeters(String squareMeters) {
+        this.squareMeters.set(squareMeters);
     }
 
     public String getBuildingInsuranceAmount() {

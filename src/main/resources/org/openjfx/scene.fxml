@@ -13,25 +13,25 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="476.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
       <ProgressIndicator fx:id="progressBar" layoutX="818.0" layoutY="37.0" progress="0.0" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
         <tabs>
-          <Tab fx:id="clientTab" text="Kunder">
+          <Tab fx:id="clientTab" text="Clients">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="212.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                              <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Opprettet" />
-                            <TableColumn fx:id="fornavn" onEditCommit="#onEdit" prefWidth="65.0" text="Fornavn" />
-                            <TableColumn fx:id="etternavn" onEditCommit="#onEdit" prefWidth="71.0" text="Etternavn" />
-                              <TableColumn fx:id="adress" onEditCommit="#onEdit" prefWidth="73.0" text="Adresse" />
-                              <TableColumn fx:id="forsikringsNR" onEditCommit="#onEdit" prefWidth="91.0" text="ForsikringsNR" />
-                              <TableColumn fx:id="insurances" prefWidth="82.0" text="Forsikringer" />
-                              <TableColumn fx:id="skademeldinger" prefWidth="106.0" text="Skademeldinger" />
-                              <TableColumn fx:id="unpaid" prefWidth="126.0" text="Ubetalte erstatninger" />
+                              <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Date created" />
+                            <TableColumn fx:id="firstName" onEditCommit="#onEdit" prefWidth="65.0" text="Firstname" />
+                            <TableColumn fx:id="lastName" onEditCommit="#onEdit" prefWidth="71.0" text="Lastname" />
+                              <TableColumn fx:id="address" onEditCommit="#onEdit" prefWidth="73.0" text="Address" />
+                              <TableColumn fx:id="insuranceNumber" onEditCommit="#onEdit" prefWidth="91.0" text="Insurance Number" />
+                              <TableColumn fx:id="insurances" prefWidth="82.0" text="Insurances" />
+                              <TableColumn fx:id="damageReports" prefWidth="106.0" text="Damage reports" />
+                              <TableColumn fx:id="unpaid" prefWidth="126.0" text="Unpaid compensations" />
                           </columns>
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />
@@ -39,116 +39,109 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="boatTab" text="Båtforsikring">
+          <Tab fx:id="boatTab" text="Boat Insurance">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="BoatTable" editable="true" layoutY="13.0" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="BoatTable" editable="true" layoutY="13.0" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                              <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Dato Opprettet" />
-                            <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Eier" />
-                            <TableColumn fx:id="boatInsurancePrice" prefWidth="100.0" text="Forsikringspremie" />
-                              <TableColumn fx:id="boatInsuranceAmount" prefWidth="45.0" text="Forsikringspris" />
-                              <TableColumn fx:id="boatInsuranceConditions" prefWidth="75.0" text="Forsikringsbetingelser" />
-                              <TableColumn fx:id="regNr" prefWidth="63.0" text="Registreringsnummer" />
-                              <TableColumn fx:id="typeModel" prefWidth="89.0" text="Type og modell" />
-                              <TableColumn fx:id="length" prefWidth="83.0" text="Lengde i fot" />
-                              <TableColumn fx:id="yearModel" prefWidth="36.0" text="Årsmodell" />
+                              <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Date created" />
+                            <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Owner" />
+                            <TableColumn fx:id="boatInsurancePrice" prefWidth="100.0" text="Insurance premium" />
+                              <TableColumn fx:id="boatInsuranceAmount" prefWidth="56.0" text="Insurance price" />
+                              <TableColumn fx:id="boatInsuranceConditions" prefWidth="73.0" text="Insurance conditions" />
+                              <TableColumn fx:id="licenseNumber" minWidth="0.0" prefWidth="83.0" text="Licence number" />
+                              <TableColumn fx:id="typeModel" prefWidth="60.0" text="Type and model" />
+                              <TableColumn fx:id="length" prefWidth="83.0" text="Length in feet" />
+                              <TableColumn fx:id="yearModel" prefWidth="36.0" text="Model (year)" />
                               <TableColumn fx:id="motorType" prefWidth="86.0" text="Motortype" />
-                              <TableColumn fx:id="motorStrength" prefWidth="33.0" text="Motortype" />
+                              <TableColumn fx:id="motorStrength" prefWidth="33.0" text="Motor strength" />
                           </columns>
                         </TableView>
-                        <Button layoutX="383.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Lagre båtforsikring" />
-                        <Button fx:id="loadBoat" layoutX="145.0" layoutY="227.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Hent Båtforsikring" />
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="primaryHouseTab" text="Hus- og innboforsikring">
+            <Tab fx:id="primaryHouseTab" text="Primary House Insurance">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="primaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="primaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                            <columns>
-                              <TableColumn fx:id="houseAddress" prefWidth="37.0" text="Adresse" />
-                              <TableColumn fx:id="houseInsurancePrice" prefWidth="52.0" text="Forsikringspremie" />
-                              <TableColumn fx:id="houseDate" prefWidth="46.0" text="Dato" />
-                              <TableColumn fx:id="houseInsuranceAmount" prefWidth="60.0" text="Forsikringsbeløp" />
-                              <TableColumn fx:id="houseInsuranceConditions" minWidth="0.0" prefWidth="62.0" text="Forsikringsbetingelser" />
-                              <TableColumn fx:id="houseConstructionYear" prefWidth="48.0" text="Byggeår" />
-                              <TableColumn fx:id="houseResidentalType" prefWidth="45.0" text="Boligtype" />
-                              <TableColumn fx:id="houseMaterials" prefWidth="89.0" text="Byggemateriale" />
-                              <TableColumn fx:id="houseStandard" prefWidth="49.0" text="Standard" />
-                              <TableColumn fx:id="houseSqMeters" prefWidth="63.0" text="Antall kvadratmeter" />
-                              <TableColumn fx:id="houseBuildingInsuranceAmount" prefWidth="88.0" text="Forsikringsbeløp for bygning" />
-                              <TableColumn fx:id="HouseHousingInsuranceAmount" prefWidth="138.0" text="Forsikringsbeløp for innbo" />
+                              <TableColumn fx:id="primaryHouseAddress" prefWidth="47.0" text="Address" />
+                              <TableColumn fx:id="primaryHousePremium" prefWidth="49.0" text="Premium" />
+                              <TableColumn fx:id="primaryHouseDate" minWidth="0.0" prefWidth="39.0" text="Date" />
+                              <TableColumn fx:id="primaryHousePrice" prefWidth="39.0" text="Price" />
+                              <TableColumn fx:id="primaryHouseConditions" minWidth="0.0" prefWidth="66.0" text="Conditions" />
+                              <TableColumn fx:id="primaryHouseConstructionYear" prefWidth="86.0" text="Construction year" />
+                              <TableColumn fx:id="primaryHouseResidentialType" prefWidth="101.0" text="Residential type" />
+                              <TableColumn fx:id="primaryHouseMaterials" prefWidth="100.0" text="Building materials" />
+                              <TableColumn fx:id="primaryHouseStandard" prefWidth="77.0" text="Standard" />
+                              <TableColumn fx:id="primaryHouseSquareMeters" prefWidth="78.0" text="Square meters" />
+                              <TableColumn fx:id="primaryHouseInsuredFor" prefWidth="64.0" text="Insured for" />
+                              <TableColumn fx:id="primaryHouseContentInsuredFor" prefWidth="68.0" text="Content insured for" />
                            </columns>
                         </TableView>
-                        <Button layoutX="253.0" layoutY="222.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="197.0" text="Lagre hus- og innboforsikring" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="secondaryHouseTab" text="Fritidsboligforsikring">
+            <Tab fx:id="secondaryHouseTab" text="Secondary House Insurance">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="secondaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="secondaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="761.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                            <columns>
-                              <TableColumn prefWidth="51.0" text="Adresse" />
-                              <TableColumn prefWidth="51.0" text="Forsikringspremie" />
-                              <TableColumn prefWidth="34.0" text="Dato" />
-                              <TableColumn prefWidth="38.0" text="Forsikringsbeløp" />
-                              <TableColumn prefWidth="75.0" text="Forsikringsbetingelser" />
-                              <TableColumn prefWidth="53.0" text="Byggeår" />
-                              <TableColumn prefWidth="67.0" text="Boligtype" />
-                              <TableColumn prefWidth="89.0" text="Byggemateriale" />
-                              <TableColumn prefWidth="65.0" text="Standard" />
-                              <TableColumn prefWidth="65.0" text="Antall kvadratmeter" />
-                              <TableColumn prefWidth="111.0" text="Forsikringsbeløp for bygning" />
-                              <TableColumn prefWidth="78.0" text="Forsikringsbeløp for innbo" />
+                              <TableColumn fx:id="secondaryHouseAddress" prefWidth="51.0" text="Address" />
+                              <TableColumn fx:id="secondaryHousePremium" prefWidth="51.0" text="Premium" />
+                              <TableColumn fx:id="secondaryHouseDate" prefWidth="34.0" text="Date" />
+                              <TableColumn fx:id="secondaryHousePrice" prefWidth="38.0" text="Price" />
+                              <TableColumn fx:id="secondaryHouseConditions" prefWidth="75.0" text="Conditions" />
+                              <TableColumn fx:id="secondaryHouseConstructionYear" prefWidth="53.0" text="Construction year" />
+                              <TableColumn fx:id="secondaryHouseResidentialType" prefWidth="67.0" text="Residential type" />
+                              <TableColumn fx:id="secondaryHouseMaterials" prefWidth="89.0" text="Building material" />
+                              <TableColumn fx:id="secondaryHouseStandard" prefWidth="65.0" text="Standard" />
+                              <TableColumn fx:id="secondaryHouseSquareMeters" prefWidth="91.0" text="Square meters" />
+                              <TableColumn fx:id="secondaryHouseInsuredFor" prefWidth="54.0" text="Insured for" />
+                              <TableColumn fx:id="secondaryHouseContentInsuredFor" minWidth="0.0" prefWidth="60.0" text="Contents insured for" />
                            </columns>
                         </TableView>
-                        <Button layoutX="253.0" layoutY="220.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="197.0" text="Lagre fritidsboligforsikring" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="travelTab" text="Reiseforsikring">
+            <Tab fx:id="travelTab" text="Travel Insurance">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="travelTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView fx:id="travelTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                            <columns>
-                              <TableColumn prefWidth="136.0" text="Forsikringsområde" />
-                              <TableColumn prefWidth="111.0" text="Forsikringspremie" />
-                              <TableColumn prefWidth="84.0" text="Dato" />
-                              <TableColumn prefWidth="142.0" text="Forsikringsbeløp" />
-                              <TableColumn prefWidth="75.0" text="Forsikringsbetingelser" />
-                              <TableColumn prefWidth="153.0" text="Forsikringssum" />
+                              <TableColumn fx:id="travelInsuranceArea" prefWidth="136.0" text="Area" />
+                              <TableColumn fx:id="travelInsurancePremium" prefWidth="111.0" text="Premium" />
+                              <TableColumn fx:id="travelInsuranceDate" prefWidth="84.0" text="Date" />
+                              <TableColumn fx:id="travelInsurancePrice" prefWidth="142.0" text="Price" />
+                              <TableColumn fx:id="travelInsuranceConditions" prefWidth="75.0" text="Conditions" />
+                              <TableColumn fx:id="travelInsuranceInsuredFor" prefWidth="153.0" text="Insured for" />
                            </columns>
                         </TableView>
-                        <Button layoutX="284.0" layoutY="228.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="136.0" text="Lagre Reiseforsikring" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="skadeTab" text="Skademelding">
+            <Tab fx:id="skadeTab" text="Damage Report">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="SkadeMldTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0">
+                        <TableView fx:id="SkadeMldTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                            <columns>
-                              <TableColumn fx:id="smDato" prefWidth="110.0" text="Dato for skade" />
-                              <TableColumn fx:id="skadeNr" prefWidth="89.0" text="Skadenummer" />
-                              <TableColumn fx:id="skadeType" prefWidth="70.0" text="Type skade" />
-                              <TableColumn fx:id="skadeBeskrivelse" prefWidth="94.0" text="Beskrivelse av skaden" />
-                              <TableColumn fx:id="vitneKontaktInfo" prefWidth="168.0" text="Kontaktinformasjon til eventuelle vitner" />
-                              <TableColumn fx:id="takseringsBeløp" prefWidth="91.0" text="Takseringsbeløp" />
-                              <TableColumn fx:id="erstatningsBeløp" prefWidth="79.0" text="Utbetalt erstatningsbeløp" />
+                              <TableColumn fx:id="dateOfDamage" prefWidth="110.0" text="Date of damage" />
+                              <TableColumn fx:id="damageReportNumber" prefWidth="89.0" text="Damage number" />
+                              <TableColumn fx:id="typeOfDamage" prefWidth="70.0" text="Type of damage" />
+                              <TableColumn fx:id="damageDescription" prefWidth="94.0" text="Description" />
+                              <TableColumn fx:id="witnessContactInfo" prefWidth="168.0" text="Witness contact" />
+                              <TableColumn fx:id="assessmentAmount" prefWidth="91.0" text="Assessment amount" />
+                              <TableColumn fx:id="paidCompensation" prefWidth="79.0" text="Paid compensation" />
                            </columns>
                         </TableView>
-                        <Button layoutX="382.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="145.0" text="Lagre skademelding" />
-                        <Button fx:id="loadSkademld" layoutX="140.0" layoutY="230.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="146.0" text="Hent Skademelding" />
                      </children>
                   </AnchorPane>
                </content>
@@ -170,7 +163,6 @@
             <Image url="@e935ce39-324a-424b-b552-1e9aff436c96.png" />
          </image>
       </ImageView>
-        <Button id="Knapp" layoutX="32.0" layoutY="188.0" text="Click Me!" />
         <Label fx:id="label" layoutX="30.0" layoutY="222.0" minHeight="16" minWidth="69" />
       <TextField fx:id="searchField" layoutX="375.0" layoutY="400.0" maxHeight="35.0" maxWidth="200.0" minHeight="28.0" minWidth="100.0" onMouseClicked="#tableSearch" prefHeight="32.0" prefWidth="150.0" promptText="Søk" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="376.0" />
     </children>

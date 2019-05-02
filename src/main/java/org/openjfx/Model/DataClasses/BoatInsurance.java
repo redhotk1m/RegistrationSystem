@@ -8,11 +8,11 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class BoatInsurance extends Insurances implements Serializable {
-    private transient SimpleStringProperty  Owner,
-                                            RegNr,
-                                            TypeModel,
+    private transient SimpleStringProperty  owner,
+                                            licenseNumber,
+                                            typeModel,
                                             length,
-                                            year,
+                                            yearModel,
                                             motorType,
                                             motorStrength;
 
@@ -21,84 +21,84 @@ public class BoatInsurance extends Insurances implements Serializable {
     }
 
     public BoatInsurance (String dateCreated, String insurancePrice, String insuranceAmount, String insuranceConditions,
-                          String Owner, String RegNr, String TypeModel, String length, String year, String motorType,
+                          String Owner, String licenseNumber, String TypeModel, String length, String yearModel, String motorType,
                           String motorStrength) {
         super(dateCreated, insurancePrice, insuranceAmount, insuranceConditions);
-        this.Owner = new SimpleStringProperty();
-        this.RegNr = new SimpleStringProperty();
-        this.TypeModel = new SimpleStringProperty();
+        this.owner = new SimpleStringProperty();
+        this.licenseNumber = new SimpleStringProperty();
+        this.typeModel = new SimpleStringProperty();
         this.length = new SimpleStringProperty();
-        this.year = new SimpleStringProperty();
+        this.yearModel = new SimpleStringProperty();
         this.motorType = new SimpleStringProperty();
         this.motorStrength = new SimpleStringProperty();
     }
 
     public void initProperties(){
-        this.Owner = new SimpleStringProperty();
-        this.RegNr = new SimpleStringProperty();
-        this.TypeModel = new SimpleStringProperty();
+        this.owner = new SimpleStringProperty();
+        this.licenseNumber = new SimpleStringProperty();
+        this.typeModel = new SimpleStringProperty();
         this.length = new SimpleStringProperty();
-        this.year = new SimpleStringProperty();
+        this.yearModel = new SimpleStringProperty();
         this.motorType = new SimpleStringProperty();
         this.motorStrength = new SimpleStringProperty();
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
-        s.writeUTF(Owner.getValueSafe());
-        s.writeUTF(RegNr.getValueSafe());
-        s.writeUTF(TypeModel.getValueSafe());
+        s.writeUTF(owner.getValueSafe());
+        s.writeUTF(licenseNumber.getValueSafe());
+        s.writeUTF(typeModel.getValueSafe());
         s.writeUTF(length.getValueSafe());
-        s.writeUTF(year.getValueSafe());
+        s.writeUTF(yearModel.getValueSafe());
         s.writeUTF(motorType.getValueSafe());
         s.writeUTF(motorStrength.getValueSafe());
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
         initProperties();
-        Owner.set(s.readUTF());
-        RegNr.set(s.readUTF());
-        TypeModel.set(s.readUTF());
+        owner.set(s.readUTF());
+        licenseNumber.set(s.readUTF());
+        typeModel.set(s.readUTF());
         length.set(s.readUTF());
-        year.set(s.readUTF());
+        yearModel.set(s.readUTF());
         motorType.set(s.readUTF());
         motorStrength.set(s.readUTF());
     }
 
 
     public String getOwner() {
-        return Owner.get();
+        return owner.get();
     }
 
     public SimpleStringProperty ownerProperty() {
-        return Owner;
+        return owner;
     }
 
     public void setOwner(String owner) {
-        this.Owner.set(owner);
+        this.owner.set(owner);
     }
 
-    public String getRegNr() {
-        return RegNr.get();
+    public String getLicenseNumber() {
+        return licenseNumber.get();
     }
 
-    public SimpleStringProperty regNrProperty() {
-        return RegNr;
+    public SimpleStringProperty licenseNumberProperty() {
+        return licenseNumber;
     }
 
-    public void setRegNr(String regNr) {
-        this.RegNr.set(regNr);
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber.set(licenseNumber);
     }
 
     public String getTypeModel() {
-        return TypeModel.get();
+        return typeModel.get();
     }
 
     public SimpleStringProperty typeModelProperty() {
-        return TypeModel;
+        return typeModel;
     }
 
     public void setTypeModel(String typeModel) {
-        this.TypeModel.set(typeModel);
+        this.typeModel.set(typeModel);
     }
 
     public String getLength() {
@@ -113,16 +113,16 @@ public class BoatInsurance extends Insurances implements Serializable {
         this.length.set(length);
     }
 
-    public String getYear() {
-        return year.get();
+    public String getYearModel() {
+        return yearModel.get();
     }
 
-    public SimpleStringProperty yearProperty() {
-        return year;
+    public SimpleStringProperty yearModelProperty() {
+        return yearModel;
     }
 
-    public void setYear(String year) {
-        this.year.set(year);
+    public void setYearModel(String yearModel) {
+        this.yearModel.set(yearModel);
     }
 
     public String getMotorType() {

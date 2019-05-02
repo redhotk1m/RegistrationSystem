@@ -15,10 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.openjfx.Controller.ClientController;
 import org.openjfx.Model.*;
-import org.openjfx.Model.DataClasses.BoatInsurance;
-import org.openjfx.Model.DataClasses.Clients;
-import org.openjfx.Model.DataClasses.SecondaryHouseInsurance;
-import org.openjfx.Model.DataClasses.Skademelding;
+import org.openjfx.Model.DataClasses.*;
 import org.openjfx.Model.ReadAndWrite.CSVWriter;
 import org.openjfx.Model.ReadAndWrite.FileHandler;
 import org.openjfx.Model.ReadAndWrite.JOBJWriter;
@@ -31,16 +28,6 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class FXMLController {
     @FXML
-    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
-
-    @FXML
-    private TableView KunderTable, SkadeMldTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
-
-    @FXML
-    private TableColumn<Clients, String> clientDateCreated, fornavn, etternavn, adress, forsikringsNR, skademeldinger,
-                                            insurances, unpaid;
-
-    @FXML
     ProgressIndicator progressBar;
 
     @FXML
@@ -49,23 +36,36 @@ public class FXMLController {
     @FXML
     private AnchorPane mainFrame;
 
+    @FXML
+    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
 
     @FXML
-    private TableColumn<Skademelding, String> smDato, skadeNr, skadeType, skadeBeskrivelse, vitneKontaktInfo,
-                                                takseringsBeløp, erstatningsBeløp;
+    private TableView KunderTable, SkadeMldTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
 
+    @FXML
+    private TableColumn<Clients, String> clientDateCreated, firstName, lastName, address, insuranceNumber, damageReports,
+            insurances, unpaid;
     @FXML
     private TableColumn<BoatInsurance, String> boatDate, boatOwner, boatInsurancePrice, boatInsuranceAmount,
-                                                boatInsuranceConditions, typeModel, regNr, length, yearModel, motorType,
-                                                motorStrength;
+            boatInsuranceConditions, typeModel, licenseNumber, length, yearModel, motorType,
+            motorStrength;
     @FXML
-    private TableView<SecondaryHouseInsurance> Householdtable;
+    private TableColumn<PrimaryHouseInsurance, String> primaryHouseAddress, primaryHousePremium, primaryHouseDate,
+            primaryHousePrice, primaryHouseConditions, primaryHouseConstructionYear, primaryHouseResidentialType,
+            primaryHouseMaterials, primaryHouseStandard, primaryHouseSquareMeters, primaryHouseInsuredFor,
+            primaryHouseContentInsuredFor;
+    @FXML
+    private TableColumn<SecondaryHouseInsurance, String> secondaryHouseAddress, secondaryHousePremium,
+            secondaryHouseDate, secondaryHousePrice, secondaryHouseConditions, secondaryHouseConstructionYear,
+            secondaryHouseResidentialType, secondaryHouseMaterials, secondaryHouseStandard,
+            secondaryHouseSquareMeters, secondaryHouseInsuredFor, secondaryHouseContentInsuredFor;
+    @FXML
+    private TableColumn<TravelInsurance, String> travelInsuranceArea, travelInsurancePremium, travelInsuranceDate,
+            travelInsurancePrice, travelInsuranceConditions, travelInsuranceInsuredFor;
+    @FXML
+    private TableColumn<DamageReport, String> dateOfDamage, damageReportNumber, typeOfDamage, damageDescription,
+            witnessContactInfo, assessmentAmount, paidCompensation;
 
-    @FXML
-    private TableColumn<SecondaryHouseInsurance, String> houseAddress, houseInsurancePrice, houseDate, houseInsuranceAmount,
-                                                    houseInsuranceConditions, houseConstructionYear, houseResidentalType,
-                                                    houseMaterials, houseStandard, houseSqMeters,
-                                                    houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
     @FXML
     private TextField searchField;
 
@@ -78,36 +78,20 @@ public class FXMLController {
     ObservableList travelInsuranceData = observableArrayList();
     ObservableList damageReportData = observableArrayList();
 
-
-    private static void run() {
-        try {
-            new ErrorMessage("Hei Even");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     private TableView chooseTable() {
-        if (clientTab.isSelected()) {
+        if (clientTab.isSelected())
             return KunderTable;
-        }
-        if(boatTab.isSelected()) {
+        if(boatTab.isSelected())
             return BoatTable;
-        }
-        if (primaryHouseTab.isSelected()){
+        if (primaryHouseTab.isSelected())
             return primaryHouseTable;
-        }
-        if (secondaryHouseTab.isSelected()){
+        if (secondaryHouseTab.isSelected())
             return secondaryHouseTable;
-        }
-        if (travelTab.isSelected()){
+        if (travelTab.isSelected())
             return travelTable;
-        }
-        if(skadeTab.isSelected()) {
+        if(skadeTab.isSelected())
             return SkadeMldTable;
-        }
-
         return null;
     }
 
@@ -128,7 +112,7 @@ public class FXMLController {
             return "TravelInsurance";
         }
         if (skadeTab.isSelected()) {
-            return "Skademelding";
+            return "DamageReport";
         }
         return null; //TODO Throw noSuchTabSelected?
     }
@@ -156,6 +140,14 @@ public class FXMLController {
                     clientData = data;
                 if (data.get(0).getClass().getName().endsWith("BoatInsurance"))
                     boatData = data;
+                if (data.get(0).getClass().getName().endsWith("PrimaryHouseInsurance"))
+                    primaryHouseData = data;
+                if (data.get(0).getClass().getName().endsWith("SecondaryHouseInsurance"))
+                    secondaryHouseData = data;
+                if (data.get(0).getClass().getName().endsWith("TravelInsurance"))
+                    travelInsuranceData = data;
+                if (data.get(0).getClass().getName().endsWith("DamageReport"))
+                    damageReportData = data;
                 TableView tableView = setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName());
                 tableView.setItems(data);
                 tableView.setEditable(true);
@@ -177,175 +169,93 @@ public class FXMLController {
             return secondaryHouseTable;
         } else if (typeOfObject.endsWith("TravelInsurance")){
             return travelTable;
-        } else if (typeOfObject.endsWith("Skademelding")){
+        } else if (typeOfObject.endsWith("DamageReport")){
             return SkadeMldTable;
         }
        throw new NullPointerException("No valid stuffs"); //TODO Fikse her
     }
 
     private void assignKunderColumns() {
-        clientDateCreated.setCellValueFactory(
-                new PropertyValueFactory<>("dateCreated")
-        );
-        fornavn.setCellValueFactory(
-                new PropertyValueFactory<>("firstName")
-        );
-
-        etternavn.setCellValueFactory(
-                new PropertyValueFactory<>("lastName")
-        );
-
-        adress.setCellValueFactory(
-                new PropertyValueFactory<>("adress")
-        );
-
-        forsikringsNR.setCellValueFactory(
-                new PropertyValueFactory<>("forsikringsNR")
-        );
-
-        skademeldinger.setCellValueFactory(
-                new PropertyValueFactory<>("skademeldinger")
-        );
-
-        insurances.setCellValueFactory(
-                new PropertyValueFactory<>("forsikringer")
-        );
-
-        unpaid.setCellValueFactory(
-                new PropertyValueFactory<>("ubetalt")
-        );
+        clientDateCreated.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        insuranceNumber.setCellValueFactory(new PropertyValueFactory<>("insuranceNumber"));
+        damageReports.setCellValueFactory(new PropertyValueFactory<>("damageReports"));
+        insurances.setCellValueFactory(new PropertyValueFactory<>("insurances"));
+        unpaid.setCellValueFactory(new PropertyValueFactory<>("unpaid"));
     }
 
     private void assignBoatInsuranceColumns() {
-        boatOwner.setCellValueFactory(
-                new PropertyValueFactory<>("Owner")
-        );
-
-        boatInsurancePrice.setCellValueFactory(
-                new PropertyValueFactory<>("insurancePrice")
-        );
-
-        boatDate.setCellValueFactory(
-                new PropertyValueFactory<>("dateCreated")
-        );
-
-        boatInsuranceAmount.setCellValueFactory(
-                new PropertyValueFactory<>("insuranceAmount")
-        );
-
-        boatInsuranceConditions.setCellValueFactory(
-                new PropertyValueFactory<>("insuranceConditions")
-        );
-
-        regNr.setCellValueFactory(
-                new PropertyValueFactory<>("regNr")
-        );
-
-        typeModel.setCellValueFactory(
-                new PropertyValueFactory<>("typeModel")
-        );
-
-        length.setCellValueFactory(
-                new PropertyValueFactory<>("length")
-        );
-
-        yearModel.setCellValueFactory(
-                new PropertyValueFactory<>("year")
-        );
-
-        motorType.setCellValueFactory(
-                new PropertyValueFactory<>("motorType")
-        );
-
-        motorStrength.setCellValueFactory(
-                new PropertyValueFactory<>("motorStrength")
-        );
+        boatOwner.setCellValueFactory(new PropertyValueFactory<>("owner"));
+        boatInsurancePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
+        boatDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        boatInsuranceAmount.setCellValueFactory(new PropertyValueFactory<>("insuranceAmount"));
+        boatInsuranceConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
+        licenseNumber.setCellValueFactory(new PropertyValueFactory<>("licenseNumber"));
+        typeModel.setCellValueFactory(new PropertyValueFactory<>("typeModel"));
+        length.setCellValueFactory(new PropertyValueFactory<>("length"));
+        yearModel.setCellValueFactory(new PropertyValueFactory<>("year"));
+        motorType.setCellValueFactory(new PropertyValueFactory<>("motorType"));
+        motorStrength.setCellValueFactory(new PropertyValueFactory<>("motorStrength"));
     }
-
-
 
     private void assignPrimaryHouseColumns() {
-        houseAddress.setCellValueFactory(
-                new PropertyValueFactory<>("adress")
-        );
-
-        houseInsurancePrice.setCellValueFactory(
-                new PropertyValueFactory<>("insurancePrice")
-        );
-
-        houseDate.setCellValueFactory(
-                new PropertyValueFactory<>("dateCreated")
-        );
-
-        houseInsuranceAmount.setCellValueFactory(
-                new PropertyValueFactory<>("insuranceAmount")
-        );
-
-        houseInsuranceConditions.setCellValueFactory(
-                new PropertyValueFactory<>("insuranceConditions")
-        );
-
-        houseResidentalType.setCellValueFactory(
-                new PropertyValueFactory<>("residentalType")
-        );
-
-        houseMaterials.setCellValueFactory(
-                new PropertyValueFactory<>("materials")
-        );
-
-        houseStandard.setCellValueFactory(
-                new PropertyValueFactory<>("standard")
-        );
-
-        houseSqMeters.setCellValueFactory(
-                new PropertyValueFactory<>("sqMeters")
-        );
-
-        houseBuildingInsuranceAmount.setCellValueFactory(
-                new PropertyValueFactory<>("buildingInsuranceAmount")
-        );
-
-        HouseHousingInsuranceAmount.setCellValueFactory(
-                new PropertyValueFactory<>("residentalType")
-        );
-
+        primaryHouseAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        primaryHousePremium.setCellValueFactory(new PropertyValueFactory<>("insurancePremium"));
+        primaryHouseDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        primaryHousePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
+        primaryHouseConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
+        primaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear")); //@@@@@@@@@@@@@@@@@@@@@@@);
+        primaryHouseResidentialType.setCellValueFactory(new PropertyValueFactory<>("residentialType"));
+        primaryHouseMaterials.setCellValueFactory(new PropertyValueFactory<>("materials"));
+        primaryHouseStandard.setCellValueFactory(new PropertyValueFactory<>("standard"));
+        primaryHouseSquareMeters.setCellValueFactory(new PropertyValueFactory<>("squareMeters"));
+        primaryHouseInsuredFor.setCellValueFactory(new PropertyValueFactory<>("buildingInsuranceAmount"));
+        primaryHouseContentInsuredFor.setCellValueFactory(new PropertyValueFactory<>("contentInsuranceAmount"));
     }
+
     private void assignSkademldColumns() {
-        smDato.setCellValueFactory(
-                new PropertyValueFactory<>("SMDato")
-        );
-
-        skadeNr.setCellValueFactory(
-                new PropertyValueFactory<>("SkadeNR")
-        );
-
-        skadeType.setCellValueFactory(
-                new PropertyValueFactory<>("SkadeType")
-        );
-
-        skadeBeskrivelse.setCellValueFactory(
-                new PropertyValueFactory<>("SkadeBeskrivelse")
-        );
-
-        vitneKontaktInfo.setCellValueFactory(
-                new PropertyValueFactory<>("VitneKontaktInfo")
-        );
-
-        takseringsBeløp.setCellValueFactory(
-                new PropertyValueFactory<>("TakseringsBeloep")
-        );
-
-        erstatningsBeløp.setCellValueFactory(
-                new PropertyValueFactory<>("ErstatningsBeloep")
-        );
-
+        dateOfDamage.setCellValueFactory(new PropertyValueFactory<>("dateOfDamage"));
+        damageReportNumber.setCellValueFactory(new PropertyValueFactory<>("reportNumber"));
+        typeOfDamage.setCellValueFactory(new PropertyValueFactory<>("typeOfDamage"));
+        damageDescription.setCellValueFactory(new PropertyValueFactory<>("damageDescription"));
+        witnessContactInfo.setCellValueFactory(new PropertyValueFactory<>("witnessContactInfo"));
+        assessmentAmount.setCellValueFactory(new PropertyValueFactory<>("assessmentAmount"));
+        paidCompensation.setCellValueFactory(new PropertyValueFactory<>("paidCompensation"));
     }
 
     private void assignAllColumns(){
         assignKunderColumns();
         assignBoatInsuranceColumns();
         assignPrimaryHouseColumns();
+        assignSecondaryHouseColumns();
+        assignTravelInsuranceColumns();
         assignSkademldColumns();
+    }
+
+    private void assignSecondaryHouseColumns() {
+        secondaryHouseAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        secondaryHousePremium.setCellValueFactory(new PropertyValueFactory<>("insurancePremium"));
+        secondaryHouseDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        secondaryHousePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
+        secondaryHouseConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
+        secondaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear")); //@@@@@@@@@@@@@@@@@@@@@@@);
+        secondaryHouseResidentialType.setCellValueFactory(new PropertyValueFactory<>("residentialType"));
+        secondaryHouseMaterials.setCellValueFactory(new PropertyValueFactory<>("materials"));
+        secondaryHouseStandard.setCellValueFactory(new PropertyValueFactory<>("standard"));
+        secondaryHouseSquareMeters.setCellValueFactory(new PropertyValueFactory<>("squareMeters"));
+        secondaryHouseInsuredFor.setCellValueFactory(new PropertyValueFactory<>("buildingInsuranceAmount"));
+        secondaryHouseContentInsuredFor.setCellValueFactory(new PropertyValueFactory<>("contentInsuranceAmount"));
+    }
+
+    private void assignTravelInsuranceColumns() {
+        travelInsuranceArea.setCellValueFactory(new PropertyValueFactory<>("insuranceArea"));
+        travelInsurancePremium.setCellValueFactory(new PropertyValueFactory<>("insurancePremium"));
+        travelInsuranceDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
+        travelInsurancePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
+        travelInsuranceConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
+        travelInsuranceInsuredFor.setCellValueFactory(new PropertyValueFactory<>("insuredFor"));
     }
 
     @FXML
@@ -393,15 +303,15 @@ public class FXMLController {
     @FXML
     private void testButton(ActionEvent event) throws IOException {
         //TODO Popup med verdier, fyll dem, trykk på knappen, verdiene sendes inn i metoden her, valideres, også lages hele objektet.
-        Clients clients = new Clients();
+        /*Clients clients = new Clients();
         clients.setDateCreated("1");
         clients.setFirstName("2");
         clients.setLastName("3");
-        clients.setAdress("4");
-        clients.setForsikringsNR("5");
+        clients.setAddress("4");
+        clients.setInsuranceNumber("5");
         clients.setForsikringer("6");
         clients.setSkademeldinger("7");
-        clients.setUbetalt("8");
+        clients.setUbetalt("8");*/
         //data.add(clients);
     }
 
@@ -457,26 +367,91 @@ public class FXMLController {
     }
 
     private void setEditableColumns(){
+        setEditableClient();
+        setEditableBoat();
+        setEditablePrimaryHouse();
+        setEditableSecondaryHouse();
+        setEditableTravel();
+        setEditableDamageReport();
+    }
+
+
+    private void setEditableDamageReport(){
+        dateOfDamage.setCellFactory(TextFieldTableCell.forTableColumn());
+        damageReportNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeOfDamage.setCellFactory(TextFieldTableCell.forTableColumn());
+        damageDescription.setCellFactory(TextFieldTableCell.forTableColumn());
+        witnessContactInfo.setCellFactory(TextFieldTableCell.forTableColumn());
+        assessmentAmount.setCellFactory(TextFieldTableCell.forTableColumn());
+        paidCompensation.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+    private void setEditableBoat(){
+        boatDate.setCellFactory(TextFieldTableCell.forTableColumn());
+        boatOwner.setCellFactory(TextFieldTableCell.forTableColumn());
+        boatInsurancePrice.setCellFactory(TextFieldTableCell.forTableColumn());
+        boatInsuranceAmount.setCellFactory(TextFieldTableCell.forTableColumn());
+        boatInsuranceConditions.setCellFactory(TextFieldTableCell.forTableColumn());
+        licenseNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeModel.setCellFactory(TextFieldTableCell.forTableColumn());
+        length.setCellFactory(TextFieldTableCell.forTableColumn());
+        yearModel.setCellFactory(TextFieldTableCell.forTableColumn());
+        motorType.setCellFactory(TextFieldTableCell.forTableColumn());
+        motorStrength.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    private void setEditablePrimaryHouse() {
+        primaryHouseAddress.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHousePremium.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseDate.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHousePrice.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseConditions.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseConstructionYear.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseResidentialType.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseMaterials.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseStandard.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseSquareMeters.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseInsuredFor.setCellFactory(TextFieldTableCell.forTableColumn());
+        primaryHouseContentInsuredFor.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+
+
+   private void setEditableTravel() {
+       travelInsuranceArea.setCellFactory(TextFieldTableCell.forTableColumn());
+       travelInsurancePremium.setCellFactory(TextFieldTableCell.forTableColumn());
+       travelInsuranceDate.setCellFactory(TextFieldTableCell.forTableColumn());
+       travelInsurancePrice.setCellFactory(TextFieldTableCell.forTableColumn());
+       travelInsuranceConditions.setCellFactory(TextFieldTableCell.forTableColumn());
+       travelInsuranceInsuredFor.setCellFactory(TextFieldTableCell.forTableColumn());
+   }
+
+
+    private void setEditableSecondaryHouse() {
+        secondaryHouseAddress.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHousePremium.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseDate.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHousePrice.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseConditions.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseConstructionYear.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseResidentialType.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseMaterials.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseStandard.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseSquareMeters.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseInsuredFor.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondaryHouseContentInsuredFor.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    private void setEditableClient(){
         clientDateCreated.setCellFactory(TextFieldTableCell.forTableColumn());
-        fornavn.setCellFactory(TextFieldTableCell.forTableColumn());
-        etternavn.setCellFactory(TextFieldTableCell.forTableColumn());
-        forsikringsNR.setCellFactory(TextFieldTableCell.forTableColumn());
-        adress.setCellFactory(TextFieldTableCell.forTableColumn());
-        skademeldinger.setCellFactory(TextFieldTableCell.forTableColumn());
+        firstName.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastName.setCellFactory(TextFieldTableCell.forTableColumn());
+        insuranceNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+        address.setCellFactory(TextFieldTableCell.forTableColumn());
+        damageReports.setCellFactory(TextFieldTableCell.forTableColumn());
         insurances.setCellFactory(TextFieldTableCell.forTableColumn());
         unpaid.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
-        smDato.setCellFactory(TextFieldTableCell.forTableColumn());
-        skadeNr.setCellFactory(TextFieldTableCell.forTableColumn());
-        skadeType.setCellFactory(TextFieldTableCell.forTableColumn());
-        skadeBeskrivelse.setCellFactory(TextFieldTableCell.forTableColumn());
-        vitneKontaktInfo.setCellFactory(TextFieldTableCell.forTableColumn());
-        takseringsBeløp.setCellFactory(TextFieldTableCell.forTableColumn());
-        erstatningsBeløp.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        //TODO Fyll ut denne lille satanen
     }
+
 
 
     private void clientSearch() {
@@ -501,23 +476,23 @@ public class FXMLController {
                     else if (clients.getLastName().contains(lowerCaseClient)) {
                         return true;
                     }
-                    else if (clients.getAdress().contains(newValue)) {
+                    else if (clients.getAddress().contains(newValue)) {
                         return true;
                     }
 
-                    else if (clients.getForsikringsNR().contains(newValue)) {
+                    else if (clients.getInsuranceNumber().contains(newValue)) {
                         return true;
                     }
 
-                    else if (clients.getForsikringer().contains(newValue)) {
+                    else if (clients.getInsurances().contains(newValue)) {
                         return true;
                     }
 
-                    else if (clients.getSkademeldinger().contains(newValue)) {
+                    else if (clients.getDamageReports().contains(newValue)) {
                         return true;
                     }
 
-                    else if (clients.getUbetalt().contains(newValue)) {
+                    else if (clients.getUnpaid().contains(newValue)) {
                         return true;
                     }
 
@@ -552,7 +527,7 @@ public class FXMLController {
                         return true;
                     }
 
-                    else if (boat.getInsuranceAmount().contains(newValue)) {
+                    else if (boat.getInsurancePremium().contains(newValue)) {
                         return true;
                     }
 
@@ -560,7 +535,7 @@ public class FXMLController {
                         return true;
                     }
 
-                    else if (boat.getRegNr().contains(newValue)) {
+                    else if (boat.getLicenseNumber().contains(newValue)) {
                         return true;
                     }
 
@@ -572,7 +547,7 @@ public class FXMLController {
                         return true;
                     }
 
-                    else if (boat.getYear().contains(newValue)) {
+                    else if (boat.getYearModel().contains(newValue)) {
                         return true;
                     }
 
@@ -592,41 +567,41 @@ public class FXMLController {
 
 
     private void damageRepSearch() {
-        FilteredList<Skademelding> filteredDamageRep;
+        FilteredList<DamageReport> filteredDamageRep;
         filteredDamageRep = new FilteredList<>(data, b -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
-                filteredDamageRep.setPredicate((Skademelding damageRep) -> {
+                filteredDamageRep.setPredicate((DamageReport damageRep) -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
 
                     String lowerCaseDamageRep = newValue.toLowerCase();
 
-                    if (damageRep.getSMDato().contains(newValue)) {
+                    if (damageRep.getDateOfDamage().contains(newValue)) {
                         return true;
                     }
 
-                    else if (damageRep.getSkadeNR().contains(newValue)) {
+                    else if (damageRep.getReportNumber().contains(newValue)) {
                         return true;
                     }
 
-                    else if (damageRep.getSkadeType().contains(lowerCaseDamageRep)) {
+                    else if (damageRep.getTypeOfDamage().contains(lowerCaseDamageRep)) {
                         return true;
                     }
 
-                    else if (damageRep.getSkadeBeskrivelse().contains(lowerCaseDamageRep)) {
+                    else if (damageRep.getDamageDescription().contains(lowerCaseDamageRep)) {
                         return true;
                     }
 
-                    else if (damageRep.getVitneKontaktInfo().contains(lowerCaseDamageRep)) {
+                    else if (damageRep.getWitnessContactInfo().contains(lowerCaseDamageRep)) {
                         return true;
                     }
 
-                    else if (damageRep.getTakseringsBeloep().contains(newValue)) {
+                    else if (damageRep.getAssessmentAmount().contains(newValue)) {
                         return true;
                     }
 
-                    else if (damageRep.getErstatningsBeloep().contains(newValue)) {
+                    else if (damageRep.getPaidCompensation().contains(newValue)) {
                         return true;
                     }
 
@@ -666,20 +641,20 @@ public class FXMLController {
         KunderTable = kunderTable;
     }
 
-    public TableColumn<Clients, String> getFornavn() {
-        return fornavn;
+    public TableColumn<Clients, String> getFirstName() {
+        return firstName;
     }
 
-    public void setFornavn(TableColumn<Clients, String> fornavn) {
-        this.fornavn = fornavn;
+    public void setFirstName(TableColumn<Clients, String> firstName) {
+        this.firstName = firstName;
     }
 
-    public TableColumn<Clients, String> getEtternavn() {
-        return etternavn;
+    public TableColumn<Clients, String> getLastName() {
+        return lastName;
     }
 
-    public void setEtternavn(TableColumn<Clients, String> etternavn) {
-        this.etternavn = etternavn;
+    public void setLastName(TableColumn<Clients, String> lastName) {
+        this.lastName = lastName;
     }
 
     public TextField getTestFelt() {
@@ -690,12 +665,12 @@ public class FXMLController {
         this.testFelt = testFelt;
     }
 
-    public TableColumn<Clients, String> getForsikringsNR() {
-        return forsikringsNR;
+    public TableColumn<Clients, String> getInsuranceNumber() {
+        return insuranceNumber;
     }
 
-    public void setForsikringsNR(TableColumn<Clients, String> forsikringsNR) {
-        this.forsikringsNR = forsikringsNR;
+    public void setInsuranceNumber(TableColumn<Clients, String> insuranceNumber) {
+        this.insuranceNumber = insuranceNumber;
     }
 
     public ObservableList getData() {

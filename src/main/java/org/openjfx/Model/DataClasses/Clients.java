@@ -1,6 +1,5 @@
 package org.openjfx.Model.DataClasses;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.*;
@@ -9,26 +8,26 @@ public class Clients implements Serializable {
     transient private SimpleStringProperty  dateCreated,
                                             firstName,
                                             lastName,
-                                            adress,
-                                            forsikringsNR,
-                                            skademeldinger,
-                                            forsikringer,
-                                            ubetalt;
+                                            address,
+                                            insuranceNumber,
+                                            damageReports,
+                                            insurances,
+                                            unpaid;
 
 
     public Clients() {
         initProperties();
     }
 
-    public Clients(String dateCreated, String firstName, String lastName, String forsikringsNR, String adress, String skademeldinger, String forsikringer, String ubetalt){
+    public Clients(String dateCreated, String firstName, String lastName, String insuranceNumber, String address, String damageReports, String insurances, String unpaid){
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
+        this.insuranceNumber = new SimpleStringProperty(insuranceNumber);
         this.dateCreated = new SimpleStringProperty(dateCreated);
-        this.adress = new SimpleStringProperty(adress);
-        this.skademeldinger = new SimpleStringProperty(skademeldinger);
-        this.forsikringer = new SimpleStringProperty(forsikringer);
-        this.ubetalt = new SimpleStringProperty(ubetalt);
+        this.address = new SimpleStringProperty(address);
+        this.damageReports = new SimpleStringProperty(damageReports);
+        this.insurances = new SimpleStringProperty(insurances);
+        this.unpaid = new SimpleStringProperty(unpaid);
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {
@@ -36,11 +35,11 @@ public class Clients implements Serializable {
         s.writeUTF(dateCreated.getValueSafe());
         s.writeUTF(firstName.getValueSafe());
         s.writeUTF(lastName.getValueSafe());
-        s.writeUTF(adress.getValueSafe());
-        s.writeUTF(forsikringsNR.getValueSafe());
-        s.writeUTF(skademeldinger.getValueSafe());
-        s.writeUTF(forsikringer.getValueSafe());
-        s.writeUTF(ubetalt.getValueSafe());
+        s.writeUTF(address.getValueSafe());
+        s.writeUTF(insuranceNumber.getValueSafe());
+        s.writeUTF(damageReports.getValueSafe());
+        s.writeUTF(insurances.getValueSafe());
+        s.writeUTF(unpaid.getValueSafe());
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
@@ -48,22 +47,22 @@ public class Clients implements Serializable {
         dateCreated.set(s.readUTF());
         firstName.set(s.readUTF());
         lastName.set(s.readUTF());
-        adress.set(s.readUTF());
-        forsikringsNR.set(s.readUTF());
-        skademeldinger.set(s.readUTF());
-        forsikringer.set(s.readUTF());
-        ubetalt.set(s.readUTF());
+        address.set(s.readUTF());
+        insuranceNumber.set(s.readUTF());
+        damageReports.set(s.readUTF());
+        insurances.set(s.readUTF());
+        unpaid.set(s.readUTF());
     }
 
     private void initProperties(){
         this.dateCreated = new SimpleStringProperty();
         this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
-        this.adress = new SimpleStringProperty();
-        this.forsikringsNR = new SimpleStringProperty();
-        this.skademeldinger = new SimpleStringProperty();
-        this.forsikringer = new SimpleStringProperty();
-        this.ubetalt = new SimpleStringProperty();
+        this.address = new SimpleStringProperty();
+        this.insuranceNumber = new SimpleStringProperty();
+        this.damageReports = new SimpleStringProperty();
+        this.insurances = new SimpleStringProperty();
+        this.unpaid = new SimpleStringProperty();
     }
 
 
@@ -77,16 +76,16 @@ public class Clients implements Serializable {
         this.dateCreated.set(dateCreated);
     }
 
-    public String getForsikringsNR() {
-        return forsikringsNR.get();
+    public String getInsuranceNumber() {
+        return insuranceNumber.get();
     }
 
-    public SimpleStringProperty forsikringsNRProperty() {
-        return forsikringsNR;
+    public SimpleStringProperty insuranceNumberProperty() {
+        return insuranceNumber;
     }
 
-    public void setForsikringsNR(String forsikringsNR) {
-        this.forsikringsNR.set(forsikringsNR);
+    public void setInsuranceNumber(String insuranceNumber) {
+        this.insuranceNumber.set(insuranceNumber);
     }
 
     public String getFirstName() {
@@ -113,35 +112,35 @@ public class Clients implements Serializable {
         this.lastName.set(lastName);
     }
 
-    public String getAdress() {
-        return adress.get();
+    public String getAddress() {
+        return address.get();
     }
 
-    public void setAdress(String adress) {
-        this.adress.set(adress);
+    public void setAddress(String address) {
+        this.address.set(address);
     }
 
-    public String getSkademeldinger() {
-        return skademeldinger.get();
+    public String getDamageReports() {
+        return damageReports.get();
     }
 
-    public void setSkademeldinger(String skademeldinger) {
-        this.skademeldinger.set(skademeldinger);
+    public void setDamageReports(String damageReports) {
+        this.damageReports.set(damageReports);
     }
 
-    public String getForsikringer() {
-        return forsikringer.get();
+    public String getInsurances() {
+        return insurances.get();
     }
 
-    public void setForsikringer(String forsikringer) {
-        this.forsikringer.set(forsikringer);
+    public void setInsurances(String insurances) {
+        this.insurances.set(insurances);
     }
 
-    public String getUbetalt() {
-        return ubetalt.get();
+    public String getUnpaid() {
+        return unpaid.get();
     }
 
-    public void setUbetalt(String ubetalt) {
-        this.ubetalt.set(ubetalt);
+    public void setUnpaid(String unpaid) {
+        this.unpaid.set(unpaid);
     }
 }

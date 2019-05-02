@@ -2,6 +2,7 @@ package org.openjfx.Model.ReadAndWrite;
 
 import javafx.collections.ObservableList;
 import org.openjfx.Model.DataClasses.*;
+import org.openjfx.Model.ErrorMessage;
 
 
 import java.io.File;
@@ -24,24 +25,23 @@ public class CSVWriter extends FileHandler{
                 case "Clients":
                     saveClient(data);
                     break;
-                case "Skademelding":
-                    saveSkademelding(data);
+                case "DamageReport":
+                    saveDamageReport(data);
                     break;
                 case "BoatInsurance":
                     saveBoatInsurance(data);
                     break;
-                case "SecondaryHouseInsurance":
-                    saveHouseholdInsurance(data);
+                case "PrimaryHouseInsurance":
+                    savePrimaryHouseInsurance(data);
                     break;
-                case "ExtraHouse":
-                    saveHouseholdInsurance(data); //TODO Fiks navn til bare hus
+                case "SecondaryHouseInsurance":
+                    saveSecondaryHouseInsurance(data);
                     break;
                 case "TravelingInsurance":
                     saveTravelInsurance(data);
                     break;
-
                 default:
-                    throw new NullPointerException("noe");
+                    new ErrorMessage("Error loading file");
             }
             fileWriter.close();
 
@@ -57,11 +57,11 @@ public class CSVWriter extends FileHandler{
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getFirstName() + ";");
                 fileWriter.write(datum.getLastName() + ";");
-                fileWriter.write(datum.getAdress() + ";");
-                fileWriter.write(datum.getForsikringsNR() + ";");
-                fileWriter.write(datum.getForsikringer() + ";");
-                fileWriter.write(datum.getSkademeldinger() + ";");
-                fileWriter.write(datum.getUbetalt() + "\n");
+                fileWriter.write(datum.getAddress() + ";");
+                fileWriter.write(datum.getInsuranceNumber() + ";");
+                fileWriter.write(datum.getInsurances() + ";");
+                fileWriter.write(datum.getDamageReports() + ";");
+                fileWriter.write(datum.getUnpaid() + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -70,17 +70,17 @@ public class CSVWriter extends FileHandler{
 
 
 
-    private void saveSkademelding(ObservableList data) {
-        ObservableList<Skademelding> a = data;
-        for (Skademelding datum : a) {
+    private void saveDamageReport(ObservableList data) {
+        ObservableList<DamageReport> a = data;
+        for (DamageReport datum : a) {
             try {
-                fileWriter.write(datum.getSMDato() + ";");
-                fileWriter.write(datum.getSkadeNR() + ";");
-                fileWriter.write(datum.getSkadeType() + ";");
-                fileWriter.write(datum.getSkadeBeskrivelse() + ";");
-                fileWriter.write(datum.getVitneKontaktInfo() + ";");
-                fileWriter.write(datum.getTakseringsBeloep() + ";");
-                fileWriter.write(datum.getErstatningsBeloep() + "\n");
+                fileWriter.write(datum.getDateOfDamage() + ";");
+                fileWriter.write(datum.getReportNumber() + ";");
+                fileWriter.write(datum.getTypeOfDamage() + ";");
+                fileWriter.write(datum.getDamageDescription() + ";");
+                fileWriter.write(datum.getWitnessContactInfo() + ";");
+                fileWriter.write(datum.getAssessmentAmount() + ";");
+                fileWriter.write(datum.getPaidCompensation() + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,13 +93,13 @@ public class CSVWriter extends FileHandler{
             try {
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getOwner() + ";");
+                fileWriter.write(datum.getInsurancePremium() + ";");
                 fileWriter.write(datum.getInsurancePrice() + ";");
-                fileWriter.write(datum.getInsuranceAmount() + ";");
                 fileWriter.write(datum.getInsuranceConditions() + ";");
-                fileWriter.write(datum.getRegNr() + ";");
+                fileWriter.write(datum.getLicenseNumber() + ";");
                 fileWriter.write(datum.getTypeModel() + ";");
                 fileWriter.write(datum.getLength() + ";");
-                fileWriter.write(datum.getYear() + ";");
+                fileWriter.write(datum.getYearModel() + ";");
                 fileWriter.write(datum.getMotorType() + ";");
                 fileWriter.write(datum.getMotorStrength() + "\n");
             } catch (IOException e) {
@@ -108,20 +108,42 @@ public class CSVWriter extends FileHandler{
         }
     }
 
-    private void saveHouseholdInsurance(ObservableList data) {
+    private void saveSecondaryHouseInsurance(ObservableList data) {
         ObservableList<SecondaryHouseInsurance> a = data;
         for (SecondaryHouseInsurance datum : a) {
             try {
-                fileWriter.write(datum.getAdress() + ";");
+                fileWriter.write(datum.getAddress() + ";");
                 fileWriter.write(datum.getInsurancePrice() + ";");
                 fileWriter.write(datum.getDateCreated() + ";");
-                fileWriter.write(datum.getInsuranceAmount() + ";");
+                fileWriter.write(datum.getInsurancePrice() + ";");
                 fileWriter.write(datum.getInsuranceConditions() + ";");
                 fileWriter.write(datum.getConstructionYear() + ";");
                 fileWriter.write(datum.getResidentialType() + ";");
                 fileWriter.write(datum.getMaterials() + ";");
                 fileWriter.write(datum.getStandard() + ";");
-                fileWriter.write(datum.getSqMeters() + ";");
+                fileWriter.write(datum.getSquareMeters() + ";");
+                fileWriter.write(datum.getBuildingInsuranceAmount() + ";");
+                fileWriter.write(datum.getContentInsuranceAmount() + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void savePrimaryHouseInsurance(ObservableList data) {
+        ObservableList<PrimaryHouseInsurance> a = data;
+        for (PrimaryHouseInsurance datum : a) {
+            try {
+                fileWriter.write(datum.getAddress() + ";");
+                fileWriter.write(datum.getInsurancePrice() + ";");
+                fileWriter.write(datum.getDateCreated() + ";");
+                fileWriter.write(datum.getInsurancePrice() + ";");
+                fileWriter.write(datum.getInsuranceConditions() + ";");
+                fileWriter.write(datum.getConstructionYear() + ";");
+                fileWriter.write(datum.getResidentialType() + ";");
+                fileWriter.write(datum.getMaterials() + ";");
+                fileWriter.write(datum.getStandard() + ";");
+                fileWriter.write(datum.getSquareMeters() + ";");
                 fileWriter.write(datum.getBuildingInsuranceAmount() + ";");
                 fileWriter.write(datum.getContentInsuranceAmount() + "\n");
             } catch (IOException e) {
@@ -132,17 +154,15 @@ public class CSVWriter extends FileHandler{
 
 
     private void saveTravelInsurance(ObservableList data) {
-        ObservableList<TravelingInsurance> a = data;
-        for (TravelingInsurance datum : a) {
+        ObservableList<TravelInsurance> a = data;
+        for (TravelInsurance datum : a) {
             try {
-                fileWriter.write(datum.getDateCreated() + ";");
-                fileWriter.write(datum.getInsuranceAmount() + ";");
+                fileWriter.write(datum.getInsuranceArea() + ";");
+                fileWriter.write(datum.getInsurancePremium() + ";");
                 fileWriter.write(datum.getDateCreated() + ";");
                 fileWriter.write(datum.getInsurancePrice() + ";");
                 fileWriter.write(datum.getInsuranceConditions() + ";");
-                fileWriter.write(datum.getInsuranceConditions() + "\n");
-
-
+                fileWriter.write(datum.getInsuredFor() + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
