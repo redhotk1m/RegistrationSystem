@@ -38,7 +38,7 @@ public class checkArguments {
 
     public boolean dateTest(String s) {
         checkIfNull(s);
-        DateFormat format = new SimpleDateFormat("dd-MM-yy");
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         format.setLenient(false);
 
         try {

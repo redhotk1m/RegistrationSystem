@@ -1,6 +1,9 @@
 package org.openjfx.Model.ReadAndWrite;
 
+import javafx.application.Platform;
 import javafx.scene.control.TableView;
+import org.openjfx.Model.ErrorMessage;
+
 import java.io.*;
 public class CSVReader extends FileHandler {
 
@@ -11,6 +14,13 @@ public class CSVReader extends FileHandler {
     BufferedReader br;
 
     public CSVReader(File file) throws IOException {
+        Platform.runLater(() -> {
+            try {
+                new ErrorMessage("Hei Even");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         try {
             br = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {

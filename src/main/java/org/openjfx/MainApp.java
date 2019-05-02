@@ -11,15 +11,19 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
+    public static Stage primaryStage;
+    public static Scene primaryScene;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
-
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle("Easy Insurance");
         stage.setScene(scene);
         stage.show();
+        primaryStage = stage;
+        primaryScene = scene;
 
 
     }
@@ -36,4 +40,16 @@ public class MainApp extends Application {
         launch(args);
     }
 
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        MainApp.primaryStage = primaryStage;
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static Scene getPrimaryScene() {
+        return primaryScene;
+    }
 }
