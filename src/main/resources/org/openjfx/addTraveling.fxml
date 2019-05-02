@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="136.0" layoutY="35.0" text="Add to traveling insurance">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <TextField fx:id="address" layoutX="136.0" layoutY="84.0" onKeyReleased="#checkAddress" prefHeight="30.0" prefWidth="216.0" promptText="Area" />
+        <TextField fx:id="area" layoutX="136.0" layoutY="84.0" onKeyReleased="#checkArea" prefHeight="30.0" prefWidth="216.0" promptText="Area" />
         <TextField fx:id="premium" layoutX="136.0" layoutY="141.0" onKeyReleased="#checkPremium" prefHeight="30.0" prefWidth="216.0" promptText="Premium" />
         <TextField fx:id="date" layoutX="136.0" layoutY="198.0" onKeyReleased="#checkDateCreated" prefHeight="30.0" prefWidth="216.0" promptText="Date" />
         <TextField fx:id="price" layoutX="136.0" layoutY="254.0" onKeyReleased="#checkPrice" prefHeight="30.0" prefWidth="216.0" promptText="Price" />
@@ -54,7 +54,7 @@
                 <Font size="14.0" />
             </font>
         </Button>
-        <Label fx:id="addressLabel" layoutX="366.0" layoutY="93.0" textFill="RED">
+        <Label fx:id="areaLabel" layoutX="366.0" layoutY="93.0" textFill="RED">
             <font>
                 <Font size="14.0" />
             </font>

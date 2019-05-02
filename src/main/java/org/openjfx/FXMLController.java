@@ -13,9 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.openjfx.Controller.BoatController;
-import org.openjfx.Controller.ClientController;
-import org.openjfx.Controller.PrimaryHouseController;
+import org.openjfx.Controller.*;
 import org.openjfx.Model.*;
 import org.openjfx.Model.DataClasses.*;
 import org.openjfx.Model.ReadAndWrite.CSVWriter;
@@ -377,6 +375,27 @@ public class FXMLController {
             loader.setController(new PrimaryHouseController(primaryHouseData));
             primaryHouseTable.setItems(primaryHouseData);
             primaryHouseTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(secondaryHouseTable)) {
+            loader = new FXMLLoader(getClass().getResource("addSecondaryHouse.fxml"));
+            loader.setController(new SecondaryHouseController(secondaryHouseData));
+            secondaryHouseTable.setItems(secondaryHouseData);
+            secondaryHouseTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(travelTable)) {
+            loader = new FXMLLoader(getClass().getResource("addTraveling.fxml"));
+            loader.setController(new TravelingController(travelInsuranceData));
+            travelTable.setItems(travelInsuranceData);
+            travelTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(SkadeMldTable)) {
+            loader = new FXMLLoader(getClass().getResource("addDamageReport.fxml"));
+            loader.setController(new DamageReportController(damageReportData));
+            SkadeMldTable.setItems(damageReportData);
+            SkadeMldTable.setEditable(true);
         }
 
         Parent root = loader.load();

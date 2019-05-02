@@ -11,8 +11,8 @@ public class TravelInsurance extends Insurances implements Serializable {
     private transient SimpleStringProperty  insuranceArea,
                                             insuredFor;
 
-    TravelInsurance(String insuranceArea, String insuredFor, String insurancePrice,
-                    String dateCreated, String insuranceAmount, String insuranceConditions){
+    public TravelInsurance(String insuranceArea, String insuredFor, String insurancePrice,
+                           String dateCreated, String insuranceAmount, String insuranceConditions){
         super(insurancePrice,dateCreated,insuranceAmount,insuranceConditions);
         this.insuranceArea = new SimpleStringProperty(insuranceArea);
         this.insuredFor = new SimpleStringProperty(insuredFor);
