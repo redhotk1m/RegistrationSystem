@@ -26,19 +26,15 @@ public class ReadDataTask extends Task<Integer> {
 
 
     @Override
-    public Integer call() throws EmptyTableException {
+    public Integer call() throws EmptyTableException, IOException {
         if (file.getName().endsWith(".jobj")){
             fileHandler = new JOBJReader(file);
             setDataObjects(fileHandler.getData());
         }else if (file.getName().endsWith(".csv")){
-            try {
-                fileHandler = new CSVReader(file);
-                this.typeOfObject = fileHandler.getTypeOfObject();
-                this.amountOfRows = fileHandler.getAmountOfRows();
-                createAllObjectsFromCSV();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fileHandler = new CSVReader(file);
+            this.typeOfObject = fileHandler.getTypeOfObject();
+            this.amountOfRows = fileHandler.getAmountOfRows();
+            createAllObjectsFromCSV();
         }
         return amountOfRows;
     }

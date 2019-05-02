@@ -51,7 +51,6 @@ public class BoatController {
     @FXML
     private boolean checkAllFields(){
         try {
-
             checkDate(dateCreated.getText());
             checkString(owner.getText());
             checkNumber(insurancePrice.getText());
@@ -63,7 +62,6 @@ public class BoatController {
             checkNumber(yearModel.getText());
             checkString(motorType.getText());
             checkNumber(motorStrength.getText());
-
         } catch (EmptyTableException e) {
             e.showErrorGUI("Some fields are wrong");
             return false;

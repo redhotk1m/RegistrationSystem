@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="KunderTable" layoutX="-1.0" layoutY="13.0" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="clientTable" layoutX="-1.0" layoutY="13.0" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                           <columns>
                               <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Date created" />
                             <TableColumn fx:id="firstName" onEditCommit="#onEdit" prefWidth="65.0" text="Firstname" />
@@ -131,7 +131,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="SkadeMldTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="damageReportTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
                            <columns>
                               <TableColumn fx:id="dateOfDamage" prefWidth="110.0" text="Date of damage" />
                               <TableColumn fx:id="damageReportNumber" prefWidth="89.0" text="Damage number" />

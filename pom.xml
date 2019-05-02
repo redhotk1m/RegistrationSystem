@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Group26</groupId>
-    <artifactId>hellofx</artifactId>
+    <artifactId>easyInsurance</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>hellofx</name>
+    <name>easy Insurance</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,7 +16,7 @@
 
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
+        <name>Easy insurance</name>
     </organization>
 
     <dependencies>
@@ -60,6 +60,7 @@
                     <mainClass>org.openjfx.MainApp</mainClass>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

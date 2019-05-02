@@ -40,7 +40,7 @@ public class FXMLController {
     private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
 
     @FXML
-    private TableView KunderTable, SkadeMldTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
+    private TableView clientTable, damageReportTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
 
     @FXML
     private TableColumn<Clients, String> clientDateCreated, firstName, lastName, address, insuranceNumber, damageReports,
@@ -69,7 +69,6 @@ public class FXMLController {
     @FXML
     private TextField searchField;
 
-    FileHandler reader;
     ObservableList data =  observableArrayList();
     ObservableList boatData = observableArrayList();
     ObservableList clientData = observableArrayList();
@@ -81,7 +80,7 @@ public class FXMLController {
     @FXML
     private TableView chooseTable() {
         if (clientTab.isSelected())
-            return KunderTable;
+            return clientTable;
         if(boatTab.isSelected())
             return BoatTable;
         if (primaryHouseTab.isSelected())
@@ -91,7 +90,7 @@ public class FXMLController {
         if (travelTab.isSelected())
             return travelTable;
         if(skadeTab.isSelected())
-            return SkadeMldTable;
+            return damageReportTable;
         return null;
     }
 
@@ -131,9 +130,11 @@ public class FXMLController {
                 try {
                     readDataTask.call();
                 } catch (EmptyTableException e) {
-                    e.showErrorGUI();
+                    e.showErrorGUI("Error loading the file, the file is corrupt");
                     progressBar.setVisible(false);
                     return;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 data = (readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
                 if (data.get(0).getClass().getName().endsWith("Clients"))
@@ -160,7 +161,7 @@ public class FXMLController {
 
     private TableView setCorrectTable(String typeOfObject) {
         if (typeOfObject.endsWith("Clients")){
-            return KunderTable;
+            return clientTable;
         } else if (typeOfObject.endsWith("BoatInsurance")) {
             return BoatTable;
         } else if (typeOfObject.endsWith("PrimaryHouseInsurance")){
@@ -170,7 +171,7 @@ public class FXMLController {
         } else if (typeOfObject.endsWith("TravelInsurance")){
             return travelTable;
         } else if (typeOfObject.endsWith("DamageReport")){
-            return SkadeMldTable;
+            return damageReportTable;
         }
        throw new NullPointerException("No valid stuffs"); //TODO Fikse her
     }
@@ -188,14 +189,14 @@ public class FXMLController {
 
     private void assignBoatInsuranceColumns() {
         boatOwner.setCellValueFactory(new PropertyValueFactory<>("owner"));
-        boatInsurancePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
+        boatInsurancePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePremium"));
         boatDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
-        boatInsuranceAmount.setCellValueFactory(new PropertyValueFactory<>("insuranceAmount"));
+        boatInsuranceAmount.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
         boatInsuranceConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
         licenseNumber.setCellValueFactory(new PropertyValueFactory<>("licenseNumber"));
         typeModel.setCellValueFactory(new PropertyValueFactory<>("typeModel"));
         length.setCellValueFactory(new PropertyValueFactory<>("length"));
-        yearModel.setCellValueFactory(new PropertyValueFactory<>("year"));
+        yearModel.setCellValueFactory(new PropertyValueFactory<>("yearModel"));
         motorType.setCellValueFactory(new PropertyValueFactory<>("motorType"));
         motorStrength.setCellValueFactory(new PropertyValueFactory<>("motorStrength"));
     }
@@ -286,7 +287,7 @@ public class FXMLController {
     private void deleteButton(ActionEvent event){
         TableView tableView = chooseTable();
         ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
-        if (tableView == KunderTable)
+        if (tableView == clientTable)
             clientData.removeAll(objectToRemove);
         if (tableView == BoatTable)
             boatData.removeAll(objectToRemove);
@@ -296,7 +297,7 @@ public class FXMLController {
             secondaryHouseData.removeAll(objectToRemove); //TODO Denne kan forenkles LETT!
         if (tableView == travelTable)
             travelInsuranceData.removeAll(objectToRemove);
-        if (tableView == SkadeMldTable)
+        if (tableView == damageReportTable)
             damageReportData.removeAll(objectToRemove);
     }
 
@@ -317,8 +318,8 @@ public class FXMLController {
 
     @FXML
     private void onEdit(TableColumn.CellEditEvent editEvent){
-        getKunderTable().getSelectionModel().getSelectedItem();
-        Clients Clients = getKunderTable().getSelectionModel().getSelectedItem();
+        getClientTable().getSelectionModel().getSelectedItem();
+        Clients Clients = getClientTable().getSelectionModel().getSelectedItem();
         //Clients.setFirstName(editEvent.getNewValue());
         String Column = editEvent.getTableColumn().getText();
         String Value = editEvent.getNewValue().toString();
@@ -342,12 +343,12 @@ public class FXMLController {
     }
 
     private void setItemsAllTableViews(){
-        KunderTable.setItems(clientData);
+        clientTable.setItems(clientData);
         BoatTable.setItems(boatData);
         primaryHouseTable.setItems(primaryHouseData);
         secondaryHouseTable.setItems(secondaryHouseData);
         travelTable.setItems(travelInsuranceData);
-        SkadeMldTable.setItems(damageReportData);
+        damageReportTable.setItems(damageReportData);
     }
 
     @FXML
@@ -355,15 +356,14 @@ public class FXMLController {
         FXMLLoader loader = null;
         Stage stage = new Stage();
 
-        if (chooseTable().equals(KunderTable)){
+        if (chooseTable().equals(clientTable)){
             loader = new FXMLLoader(getClass().getResource("addKunde.fxml"));
             loader.setController(new ClientController(clientData));
-            KunderTable.setItems(clientData);
-            KunderTable.setEditable(true);
+            clientTable.setItems(clientData);
+            clientTable.setEditable(true);
         }
 
         if (chooseTable().equals(BoatTable)){
-            System.out.println("Her skjer det noe");
             loader = new FXMLLoader(getClass().getResource("addBoat.fxml"));
             loader.setController(new BoatController(boatData));
             BoatTable.setItems(boatData);
@@ -391,11 +391,11 @@ public class FXMLController {
             travelTable.setEditable(true);
         }
 
-        if (chooseTable().equals(SkadeMldTable)) {
+        if (chooseTable().equals(damageReportTable)) {
             loader = new FXMLLoader(getClass().getResource("addDamageReport.fxml"));
             loader.setController(new DamageReportController(damageReportData));
-            SkadeMldTable.setItems(damageReportData);
-            SkadeMldTable.setEditable(true);
+            damageReportTable.setItems(damageReportData);
+            damageReportTable.setEditable(true);
         }
 
         Parent root = loader.load();
@@ -537,7 +537,7 @@ public class FXMLController {
                 })
         );
         System.out.println(filteredClients.size());
-        KunderTable.setItems(filteredClients);
+        clientTable.setItems(filteredClients);
     }
 
 
@@ -645,17 +645,17 @@ public class FXMLController {
                     return false;
                 })
         );
-        SkadeMldTable.setItems(filteredDamageRep);
+        damageReportTable.setItems(filteredDamageRep);
     }
 
     @FXML
     private void tableSearch() {
 
-        if (chooseTable().equals(KunderTable) && clientData != null && !clientData.isEmpty()) {
+        if (chooseTable().equals(clientTable) && clientData != null && !clientData.isEmpty()) {
           clientSearch();
         }
 
-        if(chooseTable().equals(SkadeMldTable)) {
+        if(chooseTable().equals(damageReportTable)) {
             damageRepSearch();
         }
 
@@ -670,12 +670,12 @@ public class FXMLController {
         return BoatTable;
     }
 
-    public TableView<Clients> getKunderTable() {
-        return KunderTable;
+    public TableView<Clients> getClientTable() {
+        return clientTable;
     }
 
-    public void setKunderTable(TableView<Clients> kunderTable) {
-        KunderTable = kunderTable;
+    public void setClientTable(TableView<Clients> clientTable) {
+        this.clientTable = clientTable;
     }
 
     public TableColumn<Clients, String> getFirstName() {

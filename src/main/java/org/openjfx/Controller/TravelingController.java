@@ -53,7 +53,6 @@ public class TravelingController {
             checkNumber(price.getText());
             checkString(conditions.getText());
             checkNumber(insured.getText());
-
         } catch (EmptyTableException e) {
             e.showErrorGUI("Some fields are wrong");
             return false;

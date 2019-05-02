@@ -66,10 +66,13 @@ public class DamageReportController {
     @FXML
     private void addToDamageReport() {
         if (checkAllFields()) {
+            System.out.println(damageReportData.size());
             damageReportData.add(new DamageReport(date.getText(), damageNumber.getText(), damageType.getText(),
                     description.getText(), contact.getText(), assessment.getText(), compensation.getText()));
             Stage stage = (Stage) damageReportButton.getScene().getWindow();
             stage.close();
+            System.out.println(damageReportData.size());
+            System.out.println(contact.getText());
         }
     }
 
