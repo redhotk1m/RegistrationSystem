@@ -1,13 +1,18 @@
 package org.openjfx;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.openjfx.Model.*;
 import org.openjfx.Model.DataClasses.BoatInsurance;
 import org.openjfx.Model.DataClasses.Clients;
@@ -19,6 +24,8 @@ import org.openjfx.Model.ReadAndWrite.JOBJWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class FXMLController {
     @FXML
@@ -57,9 +64,11 @@ public class FXMLController {
                                                     houseInsuranceConditions, houseConstructionYear, houseResidentalType,
                                                     houseMaterials, houseStandard, houseSqMeters,
                                                     houseBuildingInsuranceAmount, HouseHousingInsuranceAmount;
+    @FXML
+    private TextField searchField;
 
     FileHandler reader;
-    ObservableList data;
+    ObservableList data,clientData,boatData,damageReportData;
 
     @FXML
     private TableView chooseTable() {
@@ -90,7 +99,7 @@ public class FXMLController {
     }
 
     @FXML
-    private void loadFile() throws IOException {
+    private void loadFile(){
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         ReadDataTask readDataTask = new ReadDataTask(file);
         progressBar.progressProperty().bind(readDataTask.progressProperty());
@@ -101,8 +110,14 @@ public class FXMLController {
             new Thread(() ->{
                 progressBar.setVisible(true);
                 readDataTask.call();
-                setData(readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
-                setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName()).setItems(data);
+                data = (readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
+                if (data.get(0).getClass().getName().endsWith("Clients"))
+                    clientData = data;
+                if (data.get(0).getClass().getName().endsWith("BoatInsurance"))
+                    boatData = data;
+                TableView tableView = setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName());
+                tableView.setItems(data);
+                tableView.setEditable(true);
                 progressBar.setVisible(false);
             }).start();
         } catch (Exception e) {
@@ -300,7 +315,7 @@ public class FXMLController {
             } else if (saveDestination.getName().endsWith(".jobj")){
                 fileHandler = new JOBJWriter();
             }
-            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
+            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable()); //TODO Ikke currentTableview.getItems() men observableListen som tilhører viewet. (ikke sortedlist)
         }).start();
     }
 
@@ -313,11 +328,16 @@ public class FXMLController {
     @FXML
     private void deleteButton(ActionEvent event){
         TableView tableView = chooseTable();
-        tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems());
+        ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
+        if (tableView == KunderTable)
+            clientData.removeAll(objectToRemove);
+        if (tableView == BoatTable)
+            boatData.removeAll(objectToRemove);
+        //tableView.getItems().removeAll(a);
     }
 
     @FXML
-    private void testButton(ActionEvent event){
+    private void testButton(ActionEvent event) throws IOException {
         //TODO Popup med verdier, fyll dem, trykk på knappen, verdiene sendes inn i metoden her, valideres, også lages hele objektet.
         Clients clients = new Clients();
         clients.setDateCreated("1");
@@ -328,7 +348,7 @@ public class FXMLController {
         clients.setForsikringer("6");
         clients.setSkademeldinger("7");
         clients.setUbetalt("8");
-        data.add(clients);
+        //data.add(clients);
     }
 
     @FXML
@@ -378,6 +398,181 @@ public class FXMLController {
         //TODO Fyll ut denne lille satanen
     }
 
+
+    private void clientSearch() {
+        FilteredList<Clients> filteredClients;
+        filteredClients = new FilteredList<>(clientData, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredClients.setPredicate((Clients clients) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseClient = newValue.toLowerCase();
+
+                    if (clients.getDateCreated().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (clients.getFirstName().contains(lowerCaseClient)) {
+                        return true;
+                    }
+
+                    else if (clients.getLastName().contains(lowerCaseClient)) {
+                        return true;
+                    }
+                    else if (clients.getAdress().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (clients.getForsikringsNR().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (clients.getForsikringer().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (clients.getSkademeldinger().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (clients.getUbetalt().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        KunderTable.setItems(filteredClients);
+    }
+
+
+    private void boatSearch() {
+        FilteredList<BoatInsurance> filteredBoat;
+        filteredBoat = new FilteredList<>(boatData, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredBoat.setPredicate((BoatInsurance boat) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseBoat = newValue.toLowerCase();
+
+                    if (boat.getDateCreated().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getOwner().contains(lowerCaseBoat)) {
+                        return true;
+                    }
+
+                    else if (boat.getInsurancePrice().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getInsuranceAmount().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getInsuranceConditions().contains(lowerCaseBoat)) {
+                        return true;
+                    }
+
+                    else if (boat.getRegNr().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getTypeModel().contains(lowerCaseBoat)) {
+                        return true;
+                    }
+
+                    else if (boat.getLength().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getYear().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (boat.getMotorType().contains(lowerCaseBoat)) {
+                        return true;
+                    }
+
+                    else if (boat.getMotorStrength().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        BoatTable.setItems(filteredBoat);
+    }
+
+
+    private void damageRepSearch() {
+        FilteredList<Skademelding> filteredDamageRep;
+        filteredDamageRep = new FilteredList<>(data, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredDamageRep.setPredicate((Skademelding damageRep) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseDamageRep = newValue.toLowerCase();
+
+                    if (damageRep.getSMDato().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getSkadeNR().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getSkadeType().contains(lowerCaseDamageRep)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getSkadeBeskrivelse().contains(lowerCaseDamageRep)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getVitneKontaktInfo().contains(lowerCaseDamageRep)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getTakseringsBeloep().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (damageRep.getErstatningsBeloep().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        SkadeMldTable.setItems(filteredDamageRep);
+    }
+
+    @FXML
+    private void tableSearch() {
+        if (data == null || data.isEmpty()) {
+            return;
+        }
+
+        if (chooseTable().equals(KunderTable)) {
+          clientSearch();
+        }
+
+        if(chooseTable().equals(SkadeMldTable)) {
+            damageRepSearch();
+        }
+
+        if (chooseTable().equals(BoatTable)) {
+            boatSearch();
+        }
+    }
 
     //Setter and getter
 
@@ -431,5 +626,9 @@ public class FXMLController {
 
     public void setData(ObservableList data) {
         this.data = data;
+    }
+
+    public TextField getSearchField() {
+        return searchField;
     }
 }

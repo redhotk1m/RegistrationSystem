@@ -20,6 +20,17 @@ public class Clients implements Serializable {
         initProperties();
     }
 
+    public Clients(String dateCreated, String firstName, String lastName, String forsikringsNR, String adress, String skademeldinger, String forsikringer, String ubetalt){
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.forsikringsNR = new SimpleStringProperty(forsikringsNR);
+        this.dateCreated = new SimpleStringProperty(dateCreated);
+        this.adress = new SimpleStringProperty(adress);
+        this.skademeldinger = new SimpleStringProperty(skademeldinger);
+        this.forsikringer = new SimpleStringProperty(forsikringer);
+        this.ubetalt = new SimpleStringProperty(ubetalt);
+    }
+
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
         s.writeUTF(dateCreated.getValueSafe());
