@@ -47,6 +47,7 @@ public class DamageReportController {
 
     @FXML
     private boolean checkAllFields(){
+        //Sjekker at alle feltene er riktige, før objektet kan lages
         try {
             checkDate(date.getText());
             checkNumber(damageNumber.getText());

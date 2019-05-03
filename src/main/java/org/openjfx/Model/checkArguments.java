@@ -26,7 +26,6 @@ public class checkArguments {
         }
     }
 
-
     public void streetTest(String s) throws  EmptyTableException {
         checkIfNull(s);
         char[] chars = s.toCharArray();
@@ -41,7 +40,7 @@ public class checkArguments {
     public void dateTest(String s) throws EmptyTableException {
         checkIfNull(s);
         if (!s.matches(
-                "([0-9]{2})" + "([.])" + "([0-9]{2})" + "([.])" + "([0-9]{2})"))
+                "([0-9]{2})" + "([.])" + "([0-9]{2})" + "([.])" + "([0-9]{4})"))
             throw new EmptyTableException("This is not a valid date");
     }
 

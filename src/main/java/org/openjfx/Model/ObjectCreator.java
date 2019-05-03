@@ -11,14 +11,14 @@ import java.security.InvalidParameterException;
 
 public class ObjectCreator {
     Object object;
-    checkArguments inputCheck = new checkArguments();
 
     ObjectCreator(){
 
     }
     checkArguments checker = new checkArguments();
 
-
+    //Lager objektene vi ønsker, ettersom hvilke type objekt vi ønsker å skape.
+    //Sjekker også at alle feltene som skal lages, stemmer før objektet kan lages.
     public void createObject(String typeOfObject, String[] valuesOfObject) throws EmptyTableException {
         switch (typeOfObject){
             case "Clients":

@@ -49,6 +49,7 @@ public class ClientController {
     @FXML
     private boolean checkAllFields(){
         try {
+            //Sjekker at alle feltene er riktige, før objektet kan lages
             checkDate(dateCreated.getText());
             checkString(firstName.getText());
             checkString(lastName.getText());

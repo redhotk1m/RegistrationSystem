@@ -13,6 +13,7 @@ public class JOBJReader extends FileHandler {
 
     ObservableList data;
     public JOBJReader(File file) throws EmptyTableException, FileNotFoundException, IOException, ClassNotFoundException {
+        //Lager en liste, leser inn den lagrede Arraylisten, og setter den til observableArrayList (data)
         data = observableArrayList();
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
         List list = (List) in.readObject();

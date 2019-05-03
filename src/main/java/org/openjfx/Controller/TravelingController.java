@@ -46,6 +46,7 @@ public class TravelingController {
 
     @FXML
     private boolean checkAllFields(){
+        //Sjekker at alle feltene er riktige, før objektet kan lages
         try {
             checkString(area.getText());
             checkNumber(premium.getText());

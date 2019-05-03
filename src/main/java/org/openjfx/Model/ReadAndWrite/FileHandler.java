@@ -11,10 +11,12 @@ public abstract class FileHandler {
 
     };
 
+    //Hvis noen av disse metodene blir kalt på, der de ikke blir overriden, kastes en exception.
+    //Vi skulle egentlig lage en ordentlig exception, men det rakk vi ikke.
+
     public ObservableList getData(){
         return null;
     }
-//TODO fikse hva vi thrower, feil.
     public String getTypeOfObject() {
         throw new InvalidParameterException("");
     }

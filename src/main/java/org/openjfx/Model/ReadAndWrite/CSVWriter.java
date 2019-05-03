@@ -16,17 +16,18 @@ public class CSVWriter extends FileHandler{
     FileWriter fileWriter;
     @Override
     public void saveFile(File file, ObservableList data, String tableClassType) {
+        //Lagrer filen, ettersom hvilken klasse som skal lagres
         try {
+            //Skriver de to første linjene, klassetype og hvor mange objekter filen skal inneholde
             fileWriter =  new FileWriter(file);
-            String typeOfObject = tableClassType;
             fileWriter.write(tableClassType + ";");
             fileWriter.write(data.size() +";" + "\n");
             switch (tableClassType){
                 case "Clients":
-                    saveClient(data);
+                    saveClient(data); //Lagrer client, setter alle feltene som trengs
                     break;
                 case "DamageReport":
-                    saveDamageReport(data);
+                    saveDamageReport(data); //Samme som client, bare andre felt
                     break;
                 case "BoatInsurance":
                     saveBoatInsurance(data);
@@ -41,7 +42,8 @@ public class CSVWriter extends FileHandler{
                     saveTravelInsurance(data);
                     break;
                 default:
-                    new ErrorMessage("Error loading file");
+                    //Error popup som sier ifra at det er noe galt
+                    new ErrorMessage("Error saving the file");
             }
             fileWriter.close();
 

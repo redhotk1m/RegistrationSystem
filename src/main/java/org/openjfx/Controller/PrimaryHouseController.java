@@ -48,8 +48,8 @@ public class PrimaryHouseController {
 
     @FXML
     private boolean checkAllFields(){
+        //Sjekker at alle feltene er riktige, før objektet kan lages
         try {
-
             checkIntegerAndString(address.getText());
             checkNumber(premium.getText());
             checkDate(date.getText());

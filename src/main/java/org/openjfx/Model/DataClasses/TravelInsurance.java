@@ -28,12 +28,14 @@ public class TravelInsurance extends Insurances implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {
+        //Skriver objektet til .jobj (til stream)
         s.writeUTF(insuranceArea.getValueSafe());
         s.writeUTF(insuredFor.getValueSafe());
     }
 
     private void readObject(ObjectInputStream s) throws IOException {
-        initTravelingInsurance();
+        //Leser inn objektet fra stream (.jobj)
+        initTravelingInsurance();//Brukes fordi konstruktøren ikke blir kalt
         insuranceArea.set(s.readUTF());
         insuredFor.set(s.readUTF());
     }

@@ -14,26 +14,28 @@ public class CSVReader extends FileHandler {
     BufferedReader br;
 
     public CSVReader(File file) {
+        //Tar inn filen (hentet med fileChooser)
         try {
             br = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            //TODO lage fileNotFound GUI
             e.printStackTrace();
         }
+        //Lager et array med første linje i CSV filen (Vi bruker det til å identifisere hvor mange objekter den inneholder)
+        //og hvilken klasse den inneholder (Client, TravelInsurance, etc).
         String[] infoAboutFileSize = new String[0];
         try {
-            infoAboutFileSize = getNextLine();
+            infoAboutFileSize = getNextLine(); //Henter første linje
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.typeOfObject = infoAboutFileSize[0];
-        this.amountOfRows = Integer.parseInt(infoAboutFileSize[1]);
+        this.typeOfObject = infoAboutFileSize[0]; //Lagrer datatypen (Client, TravelInsurance, etc)
+        this.amountOfRows = Integer.parseInt(infoAboutFileSize[1]); //Lagrer hvor mange objekter som skal lages
     }
 
 
     @Override
     public String[] getNextLine() throws IOException {
-        return br.readLine().split(";");
+        return br.readLine().split(";"); //Leser inn en linje, lager array men semikolon som splitter.
     }
 
 
@@ -56,13 +58,5 @@ public class CSVReader extends FileHandler {
         this.amountOfRows = amountOfRows;
     }
 
-
-    public TableView getTableView() {
-        return tableView;
-    }
-
-    public void setTableView(TableView tableView) {
-        this.tableView = tableView;
-    }
 }
 

@@ -48,6 +48,7 @@ public class HouseInsurance extends Insurances implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
+        //Skriver objektet til .jobj (til stream)
         s.defaultWriteObject();
         s.writeUTF(address.getValueSafe());
         s.writeUTF(constructionYear.getValueSafe());
@@ -59,7 +60,8 @@ public class HouseInsurance extends Insurances implements Serializable {
         s.writeUTF(contentInsuranceAmount.getValueSafe());
     }
     private void readObject(ObjectInputStream s) throws IOException{
-        InitHouseInsurance();
+        //Leser inn objektet fra stream (.jobj)
+        InitHouseInsurance();//Brukes fordi konstruktøren ikke blir kalt
         address.set(s.readUTF());
         constructionYear.set(s.readUTF());
         residentialType.set(s.readUTF());

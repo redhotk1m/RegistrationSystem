@@ -20,9 +20,9 @@ public class BoatInsurance extends Insurances implements Serializable {
         initProperties();
     }
 
-    public BoatInsurance (String insurancePremium, String dateCreated, String insurancePrice, String insuranceConditions,
-                          String owner, String licenseNumber, String typeModel, String length, String yearModel, String motorType,
-                          String motorStrength) {
+    public BoatInsurance (String insurancePremium, String dateCreated, String insurancePrice,
+                          String insuranceConditions, String owner, String licenseNumber, String typeModel,
+                          String length, String yearModel, String motorType, String motorStrength) {
         super(insurancePremium, dateCreated, insurancePrice, insuranceConditions);
         this.owner = new SimpleStringProperty(owner);
         this.licenseNumber = new SimpleStringProperty(licenseNumber);
@@ -34,6 +34,7 @@ public class BoatInsurance extends Insurances implements Serializable {
     }
 
     public void initProperties(){
+        //Trenger denne fordi konstruktøren ikke blir tilkalt når man leser inn objekt fra stream (.jobj).
         this.owner = new SimpleStringProperty();
         this.licenseNumber = new SimpleStringProperty();
         this.typeModel = new SimpleStringProperty();
@@ -44,6 +45,7 @@ public class BoatInsurance extends Insurances implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
+        //Skriver objektet til .jobj (til stream)
         s.writeUTF(owner.getValueSafe());
         s.writeUTF(licenseNumber.getValueSafe());
         s.writeUTF(typeModel.getValueSafe());
@@ -54,7 +56,8 @@ public class BoatInsurance extends Insurances implements Serializable {
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
-        initProperties();
+        //Leser inn objektet fra stream (.jobj)
+        initProperties(); //Brukes fordi konstruktøren ikke blir kalt
         owner.set(s.readUTF());
         licenseNumber.set(s.readUTF());
         typeModel.set(s.readUTF());

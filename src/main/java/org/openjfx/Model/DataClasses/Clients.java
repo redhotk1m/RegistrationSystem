@@ -32,6 +32,7 @@ public class Clients implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {
+        //Skriver objektet til .jobj (til stream)
         s.defaultWriteObject();
         s.writeUTF(dateCreated.getValueSafe());
         s.writeUTF(firstName.getValueSafe());
@@ -44,7 +45,8 @@ public class Clients implements Serializable {
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
-        initProperties();
+        //Leser inn objektet fra stream (.jobj)
+        initProperties();//Brukes fordi konstruktøren ikke blir kalt
         dateCreated.set(s.readUTF());
         firstName.set(s.readUTF());
         lastName.set(s.readUTF());

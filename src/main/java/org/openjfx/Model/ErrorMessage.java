@@ -22,7 +22,10 @@ import java.io.IOException;
 public class ErrorMessage {
 
 
-
+    //Lager et GUI popupvindu med feilmelding, som den får som input i konstruktøren (fra Throw new EmptyTableException)
+    //GUI kan KUN lukkes med knapp, ikke alt + f4 eller lignende, den kan heller ikke resizes, flyttes på, legges ned.
+    //Når denne popupen er åpen, disables den andre, fordi den ikke skal kunne benyttes før man trykker OK.
+    //I tillegg er popupen MODAL, som tvinger oss til å bruke den, før hovedscenet kan brukes igjen.
     public ErrorMessage(String exception) throws IOException {
         MainApp.primaryScene.getRoot().setDisable(true);
         Stage stage = new Stage();

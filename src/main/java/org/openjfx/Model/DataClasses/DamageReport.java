@@ -43,6 +43,7 @@ public class DamageReport implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {
+        //Skriver objektet til .jobj (til stream)
         s.writeUTF(dateOfDamage.getValueSafe());
         s.writeUTF(reportNumber.getValueSafe());
         s.writeUTF(typeOfDamage.getValueSafe());
@@ -53,7 +54,8 @@ public class DamageReport implements Serializable {
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
-        initProperties();
+        //Leser inn objektet fra stream (.jobj)
+        initProperties();//Brukes fordi konstruktøren ikke blir kalt
         dateOfDamage.set(s.readUTF());
         reportNumber.set(s.readUTF());
         typeOfDamage.set(s.readUTF());

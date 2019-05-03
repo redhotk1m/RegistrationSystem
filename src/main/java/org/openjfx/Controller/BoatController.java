@@ -50,6 +50,7 @@ public class BoatController {
 
     @FXML
     private boolean checkAllFields(){
+        //Sjekker at alle feltene er riktige, før objektet kan lages
         try {
             checkNumber(insurancePremium.getText());
             checkDate(dateCreated.getText());

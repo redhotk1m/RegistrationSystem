@@ -22,24 +22,13 @@ public class MainApp extends Application {
         stage.setTitle("Easy Insurance");
         stage.setScene(scene);
         stage.show();
+        //Disse to brukes for å disable hovedScenet vårt ved eventuell feilmelding (ErrorMessage, EmptyTableException).
         primaryStage = stage;
         primaryScene = scene;
-
-
     }
-
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
-
 
     public static void setPrimaryStage(Stage primaryStage) {
         MainApp.primaryStage = primaryStage;

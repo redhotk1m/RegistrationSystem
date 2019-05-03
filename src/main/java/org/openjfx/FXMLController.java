@@ -28,6 +28,10 @@ import java.util.ArrayList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class FXMLController {
+
+    @FXML
+    ToolBar toolBar;
+
     @FXML
     ProgressIndicator progressBar;
 
@@ -80,6 +84,7 @@ public class FXMLController {
 
     @FXML
     private TableView chooseTable() {
+        //Returnerer det tableViewet som er åpent i tabPane
         if (clientTab.isSelected())
             return clientTable;
         if(boatTab.isSelected())
@@ -96,6 +101,7 @@ public class FXMLController {
     }
 
     private String getChosenTable(){
+        //returnerer en streng med hvilken tab som er åpen i tabPane (Burde generaliseres sammen med chooseTable()
         if (clientTab.isSelected()) {
             return "Clients";
         }
@@ -114,39 +120,48 @@ public class FXMLController {
         if (damageReportTab.isSelected()) {
             return "DamageReport";
         }
-        return null; //TODO Throw noSuchTabSelected?
+        return null;
     }
 
     @FXML
     private void loadFile(){
+        //Laster inn filen, ved bruk av fileChooser
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         ReadDataTask readDataTask = new ReadDataTask(file);
+        //Binder progressbaren til ReadDataTask sin call metode, sånn at den oppdateres når vi laster inn store filer
         progressBar.progressProperty().bind(readDataTask.progressProperty());
         progressBar.setVisible(true);
         if (file == null){
-            return;
+            return; //Hvis ingen fil blir valgt, return
         }
+        toolBar.setDisable(true); //Setter alle knappene som kan redigere elementer i listen til disable
         new Thread(() ->{
+            //Prøver å laste inn filen på en ny thread
             try {
-                readDataTask.call();
+                readDataTask.call(); //Selve innlastingen
             } catch (EmptyTableException e) {
                 e.showErrorGUI("Error loading the file, the file is corrupt");
                 progressBar.setVisible(false);
-                return;
+                toolBar.setDisable(false);
+                return;//Dersom noe går galt med innlastingen, kan toolbar brukes igjen, og indicator fjernes
             }
-            data = readDataTask.getDataObjects(); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
-            if (data.size() > 0) {
+            data = readDataTask.getDataObjects(); //Henter dataen som ble innlastet (observableList)
+            if (data.size() > 0) { //Hvis listen inneholder elementer
                 String dataObjectType = readDataTask.getDataObjectType();
-                setCorrectDataList(dataObjectType);
-                TableView tableView = setCorrectTable(dataObjectType);
-                tableView.setItems(data);
-                tableView.setEditable(true);
+                setCorrectDataList(dataObjectType); //Lagrer dataen i riktig liste
+                // (Må være flere, for å kunne endre/slette elementer i alle)
+                TableView tableView = setCorrectTable(dataObjectType); //Setter tableview til det som tilhører den innlastede filen
+                tableView.setItems(data); //Oppdaterer tableviewet sin liste, med den nye innlastede dataen (listen)
+                tableView.setEditable(true); //Sørger for at man kan endre på listen, etter innlasting
             }
+            //Fjerner progressbaren, og gjør knappene tilgjengelige igjen
             progressBar.setVisible(false);
+            toolBar.setDisable(false);
         }).start();
     }
 
     private void setCorrectDataList(String dataObjectType){
+        //Returnerer riktig observableList etter datatype
         if (dataObjectType.endsWith("Clients"))
             clientData = data;
         if (dataObjectType.endsWith("BoatInsurance"))
@@ -162,6 +177,7 @@ public class FXMLController {
     }
 
     private TableView setCorrectTable(String typeOfObject) {
+        //Returnerer riktig tableView etter hvilke objekt vi bruker
         if (typeOfObject.endsWith("Clients")){
             return clientTable;
         } else if (typeOfObject.endsWith("BoatInsurance")) {
@@ -175,10 +191,20 @@ public class FXMLController {
         } else if (typeOfObject.endsWith("DamageReport")){
             return damageReportTable;
         }
-       throw new NullPointerException("No valid stuffs"); //TODO Fikse her
+       throw new NullPointerException("No such object");
     }
 
-    private void assignKunderColumns() {
+    private void assignAllColumns(){
+        //Setter alle kolonnene til å fungere med sine klasser
+        assignClientColumns();
+        assignBoatInsuranceColumns();
+        assignPrimaryHouseColumns();
+        assignSecondaryHouseColumns();
+        assignTravelInsuranceColumns();
+        assignDamageReportColumns();
+    }
+
+    private void assignClientColumns() {
         clientDateCreated.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
         firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -218,7 +244,7 @@ public class FXMLController {
         primaryHouseContentInsuredFor.setCellValueFactory(new PropertyValueFactory<>("contentInsuranceAmount"));
     }
 
-    private void assignSkademldColumns() {
+    private void assignDamageReportColumns() {
         dateOfDamage.setCellValueFactory(new PropertyValueFactory<>("dateOfDamage"));
         damageReportNumber.setCellValueFactory(new PropertyValueFactory<>("reportNumber"));
         typeOfDamage.setCellValueFactory(new PropertyValueFactory<>("typeOfDamage"));
@@ -228,22 +254,13 @@ public class FXMLController {
         paidCompensation.setCellValueFactory(new PropertyValueFactory<>("paidCompensation"));
     }
 
-    private void assignAllColumns(){
-        assignKunderColumns();
-        assignBoatInsuranceColumns();
-        assignPrimaryHouseColumns();
-        assignSecondaryHouseColumns();
-        assignTravelInsuranceColumns();
-        assignSkademldColumns();
-    }
-
     private void assignSecondaryHouseColumns() {
         secondaryHouseAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         secondaryHousePremium.setCellValueFactory(new PropertyValueFactory<>("insurancePremium"));
         secondaryHouseDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
         secondaryHousePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
         secondaryHouseConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
-        secondaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear")); //@@@@@@@@@@@@@@@@@@@@@@@);
+        secondaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear"));
         secondaryHouseResidentialType.setCellValueFactory(new PropertyValueFactory<>("residentialType"));
         secondaryHouseMaterials.setCellValueFactory(new PropertyValueFactory<>("materials"));
         secondaryHouseStandard.setCellValueFactory(new PropertyValueFactory<>("standard"));
@@ -263,19 +280,21 @@ public class FXMLController {
 
     @FXML
     private void saveFile(){
+        //Lagrer filen som tilhører tableviewet du er inne på
         FileChooser fileChooser = new FileChooser();
-        setExtentionFilters(fileChooser);
+        setExtentionFilters(fileChooser); //Setter filters til .jobj og .csv
         File saveDestination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
-        TableView currentTableview = chooseTable();
+        TableView currentTableview = chooseTable(); //Setter tableview vi skal bruke, til det vi er inne på
         new Thread(() -> {
-            //TODO Ny thread inne i en annen klasse?
             FileHandler fileHandler = null;
             if (saveDestination.getName().endsWith(".csv")){
                 fileHandler = new CSVWriter();
             } else if (saveDestination.getName().endsWith(".jobj")){
                 fileHandler = new JOBJWriter();
             }
-            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable()); //TODO Ikke currentTableview.getItems() men observableListen som tilhører viewet. (ikke sortedlist)
+            //Tilkaller saveFile, sender hvor det skal lagres, dataene som ligger på viewet og hvilke view vi snakker om
+            //Det gjør at vi kan lagre elementene vi har søkt på, hvis vi ønsker det.
+            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
         }).start();
     }
 
@@ -287,8 +306,11 @@ public class FXMLController {
 
     @FXML
     private void deleteButton(ActionEvent event){
+        //Sletter elementet som er trykket på, etter hvilke view det er snakk om
         TableView tableView = chooseTable();
+        //Lager et arraylist som inneholder det elementet vi ønsker å fjerne
         ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
+        //Fjerner objektet ettersom hvilket table vi er inne på
         if (tableView == clientTable)
             clientData.removeAll(objectToRemove);
         if (tableView == boatTable)
@@ -296,7 +318,7 @@ public class FXMLController {
         if (tableView == primaryHouseTable)
             primaryHouseData.removeAll(objectToRemove);
         if (tableView == secondaryHouseTable)
-            secondaryHouseData.removeAll(objectToRemove); //TODO Denne kan forenkles LETT!
+            secondaryHouseData.removeAll(objectToRemove);
         if (tableView == travelTable)
             travelInsuranceData.removeAll(objectToRemove);
         if (tableView == damageReportTable)
@@ -305,10 +327,12 @@ public class FXMLController {
 
     @FXML
     private void onEdit(TableColumn.CellEditEvent editEvent){
+        //Tilkalles når man dobbeltklikker på et felt, slik at man kan endre det
         String column = editEvent.getTableColumn().getText();
         String newValue = editEvent.getNewValue().toString();
         try {
-            clientSetNewValue(column, newValue);
+            clientSetNewValue(column, newValue); //Hvis det man skriver er gyldig, endres feltet
+            //Bare laget for client, da vi ikke rakk for alle
         }catch (EmptyTableException e){
             e.showErrorGUI();
         }
@@ -360,6 +384,7 @@ public class FXMLController {
     }
 
     private void setItemsAllTableViews(){
+        //Setter alle tableView sine items, til en tom observableList
         clientTable.setItems(clientData);
         boatTable.setItems(boatData);
         primaryHouseTable.setItems(primaryHouseData);
@@ -370,6 +395,7 @@ public class FXMLController {
 
     @FXML
     private void insert() throws IOException {
+        //Åpner nytt scene som gjør at man kan lage nye elementer, ettersom hvilket tableView vi er inne på
         FXMLLoader loader = null;
         Stage stage = new Stage();
 
@@ -421,6 +447,7 @@ public class FXMLController {
     }
 
     private void setEditableColumns(){
+        //Setter alle kolonner til å være editable (Dvs dobbeltklikke dem for å endre dem)
         setEditableClient();
         setEditableBoat();
         setEditablePrimaryHouse();
@@ -509,9 +536,13 @@ public class FXMLController {
 
 
     private void clientSearch() {
+        //Lager en filteredList av typen clients
         FilteredList<Clients> filteredClients;
+        //Fyller listen med clientData (setter den til å være)
         filteredClients = new FilteredList<>(clientData, b -> true);
+        //Legger til listener som sjekker når vi søker
         searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                //Setter søkingen etter hva vi har skrevet
                 filteredClients.setPredicate((Clients clients) -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
@@ -838,7 +869,7 @@ public class FXMLController {
 
     @FXML
     private void tableSearch() {
-
+        //Søker i feltet ettersom hvilke table vi er inne på, setter itemsa til den nye filteredListen
         if (chooseTable().equals(clientTable)) {
           clientSearch();
         }

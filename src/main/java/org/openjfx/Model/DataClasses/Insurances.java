@@ -27,6 +27,7 @@ public class Insurances implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException{
+        //Skriver objektet til .jobj (til stream)
         s.writeUTF(insurancePremium.getValueSafe());
         s.writeUTF(dateCreated.getValueSafe());
         s.writeUTF(insurancePrice.getValueSafe());
@@ -34,7 +35,8 @@ public class Insurances implements Serializable {
     }
 
     private void readObject(ObjectInputStream s) throws IOException{
-        initInsuranceProperties();
+        //Leser inn objektet fra stream (.jobj)
+        initInsuranceProperties();//Brukes fordi konstruktøren ikke blir kalt
         insurancePremium.set(s.readUTF());
         dateCreated.set(s.readUTF());
         insurancePrice.set(s.readUTF());

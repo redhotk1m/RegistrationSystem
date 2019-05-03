@@ -9,6 +9,10 @@ public class EmptyTableException extends Exception {
 
     String errorMessage;
 
+    //Denne klassen skulle egentlig bli splittet i flere exceptions, men det rakk vi ikke, derfor dårlig navngivning og bruk.
+    //Jobben den gjør er å sende exceptionstrengen videre til ErrorMessage (popup med beskjed hva feilen er).
+
+
     public EmptyTableException (String message){
         this.errorMessage=message;
     }
