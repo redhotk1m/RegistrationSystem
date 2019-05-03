@@ -8,61 +8,61 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="dateCreated" layoutX="207.0" layoutY="71.0" onKeyReleased="#checkDateCreated" prefHeight="34.0" prefWidth="257.0" promptText="Dato Opprettet" />
-      <TextField fx:id="firstName" layoutX="207.0" layoutY="128.0" onKeyReleased="#checkFirstName" prefHeight="34.0" prefWidth="257.0" promptText="Fornavn" />
-      <TextField fx:id="lastName" layoutX="207.0" layoutY="189.0" onKeyReleased="#checkLastName" prefHeight="34.0" prefWidth="257.0" promptText="Etternavn" />
-      <TextField fx:id="adress" layoutX="207.0" layoutY="254.0" onKeyReleased="#checkAdress" prefHeight="34.0" prefWidth="257.0" promptText="Adresse" />
-      <TextField fx:id="insuranceNumber" layoutX="207.0" layoutY="315.0" onKeyReleased="#checkInsuranceNumb" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringsnummer" />
-      <TextField fx:id="insurances" layoutX="207.0" layoutY="382.0" onKeyReleased="#checkInsurances" prefHeight="34.0" prefWidth="257.0" promptText="Forsikringer" />
-      <TextField fx:id="damageReport" layoutX="207.0" layoutY="449.0" onKeyReleased="#checkDamageReports" prefHeight="34.0" prefWidth="257.0" promptText="Skademeldinger" />
-      <TextField fx:id="unpaid" layoutX="207.0" layoutY="510.0" onKeyReleased="#checkUnpaidComp" prefHeight="34.0" prefWidth="257.0" promptText="Ubetalte erstatninger" />
-      <Label layoutX="77.0" layoutY="78.0" prefHeight="20.0" prefWidth="103.0" text="Dato opprettet:">
+      <TextField fx:id="dateCreated" layoutX="207.0" layoutY="71.0" onKeyReleased="#checkDateCreated" prefHeight="34.0" prefWidth="257.0" promptText="Date created" />
+      <TextField fx:id="firstName" layoutX="207.0" layoutY="128.0" onKeyReleased="#checkFirstName" prefHeight="34.0" prefWidth="257.0" promptText="First name" />
+      <TextField fx:id="lastName" layoutX="207.0" layoutY="189.0" onKeyReleased="#checkLastName" prefHeight="34.0" prefWidth="257.0" promptText="Last name" />
+      <TextField fx:id="address" layoutX="207.0" layoutY="254.0" onKeyReleased="#checkAddress" prefHeight="34.0" prefWidth="257.0" promptText="Address" />
+      <TextField fx:id="insuranceNumber" layoutX="207.0" layoutY="315.0" onKeyReleased="#checkInsuranceNumb" prefHeight="34.0" prefWidth="257.0" promptText="Insurance number" />
+      <TextField fx:id="insurances" layoutX="207.0" layoutY="382.0" onKeyReleased="#checkInsurances" prefHeight="34.0" prefWidth="257.0" promptText="Insurances" />
+      <TextField fx:id="damageReport" layoutX="207.0" layoutY="449.0" onKeyReleased="#checkDamageReports" prefHeight="34.0" prefWidth="257.0" promptText="Damage reports" />
+      <TextField fx:id="unpaid" layoutX="207.0" layoutY="510.0" onKeyReleased="#checkUnpaidComp" prefHeight="34.0" prefWidth="257.0" promptText="Unpaid compensations" />
+      <Label layoutX="69.0" layoutY="78.0" prefHeight="20.0" prefWidth="103.0" text="Date created:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="135.0" text="Fornavn:">
+      <Label layoutX="81.0" layoutY="135.0" text="First name:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="196.0" text="Etternavn:">
+      <Label layoutX="82.0" layoutY="196.0" text="Last name:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="261.0" text="Adresse:">
+      <Label layoutX="88.0" layoutY="261.0" text="Address:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="57.0" layoutY="322.0" text="Forsikringsnummer:">
+      <Label layoutX="57.0" layoutY="322.0" text="Insurance number:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="81.0" layoutY="389.0" text="Forsikringer:">
+      <Label layoutX="80.0" layoutY="389.0" text="Insurances:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="68.0" layoutY="456.0" text="Skademeldinger:">
+      <Label layoutX="63.0" layoutY="456.0" text="Damage reports:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="53.0" layoutY="517.0" text="Ubetalte erstatninger:">
+      <Label layoutX="42.0" layoutY="517.0" text="Unpaid compensations:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="27.0" prefHeight="27.0" prefWidth="192.0" text="Informasjon om Kunde">
+      <Label layoutX="269.0" layoutY="27.0" prefHeight="27.0" prefWidth="134.0" text="Add to clients ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="createClientButton" layoutX="275.0" layoutY="563.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Legg til" />
-      <Label fx:id="fornavnLabel" layoutX="487.0" layoutY="137.0" textFill="RED">
+      <Button fx:id="createClientButton" layoutX="275.0" layoutY="563.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="122.0" text="Add to table" />
+      <Label fx:id="firstNameLabel" layoutX="487.0" layoutY="137.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -76,7 +76,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="adressLabel" layoutX="487.0" layoutY="261.0" textFill="RED">
+      <Label fx:id="addressLabel" layoutX="487.0" layoutY="261.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
@@ -101,7 +101,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="75.0" layoutY="95.0" text="(DD.MM.YYYY)">
+      <Label layoutX="69.0" layoutY="95.0" text="(DD.MM.YYYY)">
          <font>
             <Font size="14.0" />
          </font>

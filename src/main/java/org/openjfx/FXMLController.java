@@ -37,7 +37,7 @@ public class FXMLController {
     private AnchorPane mainFrame;
 
     @FXML
-    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
+    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, damageReportTab;
 
     @FXML
     private TableView clientTable, damageReportTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
@@ -89,7 +89,7 @@ public class FXMLController {
             return secondaryHouseTable;
         if (travelTab.isSelected())
             return travelTable;
-        if(skadeTab.isSelected())
+        if(damageReportTab.isSelected())
             return damageReportTable;
         return null;
     }
@@ -110,7 +110,7 @@ public class FXMLController {
         if (travelTab.isSelected()){
             return "TravelInsurance";
         }
-        if (skadeTab.isSelected()) {
+        if (damageReportTab.isSelected()) {
             return "DamageReport";
         }
         return null; //TODO Throw noSuchTabSelected?
@@ -357,7 +357,7 @@ public class FXMLController {
         Stage stage = new Stage();
 
         if (chooseTable().equals(clientTable)){
-            loader = new FXMLLoader(getClass().getResource("addKunde.fxml"));
+            loader = new FXMLLoader(getClass().getResource("addClient.fxml"));
             loader.setController(new ClientController(clientData));
             clientTable.setItems(clientData);
             clientTable.setEditable(true);

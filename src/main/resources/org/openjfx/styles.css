@@ -32,12 +32,12 @@
     -fx-background-color: #f0f0f5;
 }
 
-#clientTab, #boatTab, #skadeTab, #homeTab, #houseHoldTab, #travelingTab {
+#clientTab, #boatTab, #primaryHouseTab, #secondaryHouseTab, #travelTab, #damageReportTab {
     -fx-background-color: #CDCDCD;
     -fx-border-color: #88BBD6;
     -fx-border-radius: 5px, 5px, 5px, 5px;
 }
-#clientTab:selected, #boatTab:selected, #skadeTab:selected, #homeTab:selected, #houseHoldTab:selected,
-#travelingTab:selected {
+#clientTab:selected, #boatTab:selected, #primaryHouseTab:selected, #secondaryHouseTab:selected, #travelTab:selected,
+#damageReportTab:selected {
     -fx-background-color: #b3cce6;
 }
