@@ -1,7 +1,7 @@
 package org.openjfx.Model;
 
 import javafx.application.Platform;
-import org.openjfx.EmptyTableException;
+import org.openjfx.Exceptions.EmptyTableException;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -40,12 +40,9 @@ public class checkArguments {
 
     public void dateTest(String s) throws EmptyTableException {
         checkIfNull(s);
-        DateFormat format = new SimpleDateFormat("dd.MM.yy");
-        try {
-            format.parse(s);
-        } catch (ParseException e) {
+        if (!s.matches(
+                "([0-9]{2})" + "([.])" + "([0-9]{2})" + "([.])" + "([0-9]{2})"))
             throw new EmptyTableException("This is not a valid date");
-        }
     }
 
 

@@ -2,7 +2,7 @@ package org.openjfx.Model;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import org.openjfx.EmptyTableException;
+import org.openjfx.Exceptions.EmptyTableException;
 import org.openjfx.Model.ReadAndWrite.CSVReader;
 import org.openjfx.Model.ReadAndWrite.FileHandler;
 import org.openjfx.Model.ReadAndWrite.JOBJReader;
@@ -26,7 +26,7 @@ public class ReadDataTask extends Task<Integer> {
 
 
     @Override
-    public Integer call() throws EmptyTableException, IOException {
+    public Integer call() throws EmptyTableException {
         if (file.getName().endsWith(".jobj")){
             fileHandler = new JOBJReader(file);
             setDataObjects(fileHandler.getData());

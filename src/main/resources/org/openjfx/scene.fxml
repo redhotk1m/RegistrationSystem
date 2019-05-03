@@ -151,8 +151,6 @@
       <ToolBar layoutX="119.0" layoutY="48.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="48.0">
         <items>
           <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
-            <Button mnemonicParsing="false" text="Edit" />
-            <Button mnemonicParsing="false" onAction="#testButton" text="Open File" />
             <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />
             <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadFile" text="Load File" />
             <Button fx:id="delete" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />

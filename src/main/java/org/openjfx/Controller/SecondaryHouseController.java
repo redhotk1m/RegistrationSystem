@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.openjfx.EmptyTableException;
+import org.openjfx.Exceptions.EmptyTableException;
 import org.openjfx.Model.DataClasses.PrimaryHouseInsurance;
 import org.openjfx.Model.DataClasses.SecondaryHouseInsurance;
 import org.openjfx.Model.checkArguments;

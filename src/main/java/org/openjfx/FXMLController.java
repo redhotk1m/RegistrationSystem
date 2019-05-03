@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.openjfx.Controller.*;
+import org.openjfx.Exceptions.EmptyTableException;
 import org.openjfx.Model.*;
 import org.openjfx.Model.DataClasses.*;
 import org.openjfx.Model.ReadAndWrite.CSVWriter;
@@ -121,34 +122,28 @@ public class FXMLController {
         File file = new FileChooser().showOpenDialog(mainFrame.getScene().getWindow());
         ReadDataTask readDataTask = new ReadDataTask(file);
         progressBar.progressProperty().bind(readDataTask.progressProperty());
+        progressBar.setVisible(true);
         if (file == null){
             return;
         }
-        try {
-            new Thread(() ->{
-                progressBar.setVisible(true);
-                try {
-                    readDataTask.call();
-                } catch (EmptyTableException e) {
-                    e.showErrorGUI("Error loading the file, the file is corrupt");
-                    progressBar.setVisible(false);
-                    return;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                data = readDataTask.getDataObjects(); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
-                if (data.size() > 0) {
-                    String dataObjectType = readDataTask.getDataObjectType();
-                    setCorrectDataList(dataObjectType);
-                    TableView tableView = setCorrectTable(dataObjectType);
-                    tableView.setItems(data);
-                    tableView.setEditable(true);
-                }
+        new Thread(() ->{
+            try {
+                readDataTask.call();
+            } catch (EmptyTableException e) {
+                e.showErrorGUI("Error loading the file, the file is corrupt");
                 progressBar.setVisible(false);
-            }).start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                return;
+            }
+            data = readDataTask.getDataObjects(); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
+            if (data.size() > 0) {
+                String dataObjectType = readDataTask.getDataObjectType();
+                setCorrectDataList(dataObjectType);
+                TableView tableView = setCorrectTable(dataObjectType);
+                tableView.setItems(data);
+                tableView.setEditable(true);
+            }
+            progressBar.setVisible(false);
+        }).start();
     }
 
     private void setCorrectDataList(String dataObjectType){

@@ -3,7 +3,7 @@ package org.openjfx.Model;
 
 
 import javafx.application.Platform;
-import org.openjfx.EmptyTableException;
+import org.openjfx.Exceptions.EmptyTableException;
 import org.openjfx.Model.DataClasses.*;
 
 import java.io.IOException;

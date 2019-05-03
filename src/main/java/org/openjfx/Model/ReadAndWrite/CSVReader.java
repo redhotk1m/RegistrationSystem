@@ -13,22 +13,19 @@ public class CSVReader extends FileHandler {
     private int amountOfRows;
     BufferedReader br;
 
-    public CSVReader(File file) throws IOException {
-        /*Platform.runLater(() -> {
-            try {
-                new ErrorMessage("Hei Even");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        */
+    public CSVReader(File file) {
         try {
             br = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
             //TODO lage fileNotFound GUI
             e.printStackTrace();
         }
-        String[] infoAboutFileSize = getNextLine();
+        String[] infoAboutFileSize = new String[0];
+        try {
+            infoAboutFileSize = getNextLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.typeOfObject = infoAboutFileSize[0];
         this.amountOfRows = Integer.parseInt(infoAboutFileSize[1]);
     }

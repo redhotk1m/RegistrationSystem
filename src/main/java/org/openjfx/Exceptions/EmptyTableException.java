@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.openjfx.Exceptions;
 
 import javafx.application.Platform;
 import org.openjfx.Model.ErrorMessage;
