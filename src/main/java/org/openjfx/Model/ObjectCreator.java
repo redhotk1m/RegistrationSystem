@@ -171,6 +171,7 @@ public class ObjectCreator {
 
         private void createBoatInsurance(String[] valuesOfObject) throws EmptyTableException {
         BoatInsurance boatInsurance = new BoatInsurance();
+
         checker.dateTest(valuesOfObject[0]);
         boatInsurance.setDateCreated(valuesOfObject[0]);
 
@@ -186,7 +187,7 @@ public class ObjectCreator {
         checker.stringTest(valuesOfObject[4]);
         boatInsurance.setInsuranceConditions(valuesOfObject[4]);
 
-        checker.numberTest(valuesOfObject[5]);
+        checker.streetTest(valuesOfObject[5]);
         boatInsurance.setLicenseNumber(valuesOfObject[5]);
 
         checker.stringTest(valuesOfObject[6]);

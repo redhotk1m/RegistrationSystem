@@ -37,7 +37,7 @@ public class CSVWriter extends FileHandler{
                 case "SecondaryHouseInsurance":
                     saveSecondaryHouseInsurance(data);
                     break;
-                case "TravelingInsurance":
+                case "TravelInsurance":
                     saveTravelInsurance(data);
                     break;
                 default:

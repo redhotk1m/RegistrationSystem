@@ -26,10 +26,14 @@ public class ReadDataTask extends Task<Integer> {
 
 
     @Override
-    public Integer call() throws EmptyTableException {
+    public Integer call() throws EmptyTableException{
         if (file.getName().endsWith(".jobj")){
-            fileHandler = new JOBJReader(file);
-            setDataObjects(fileHandler.getData());
+            try {
+                fileHandler = new JOBJReader(file);
+                setDataObjects(fileHandler.getData());
+            } catch (IOException | ClassNotFoundException e) {
+                throw new EmptyTableException("Error loading this file, the file is corrupt");
+            }
         }else if (file.getName().endsWith(".csv")){
             fileHandler = new CSVReader(file);
             this.typeOfObject = fileHandler.getTypeOfObject();
