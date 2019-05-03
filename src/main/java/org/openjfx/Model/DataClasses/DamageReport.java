@@ -23,13 +23,13 @@ public class DamageReport implements Serializable {
 
     public DamageReport (String dateOfDamage, String reportNumber, String typeOfDamage, String damageDescription,
                          String witnessContactInfo, String assessmentAmount, String paidCompensation) {
-        this.dateOfDamage = new SimpleStringProperty();
-        this.reportNumber = new SimpleStringProperty();
-        this.typeOfDamage = new SimpleStringProperty();
-        this.damageDescription = new SimpleStringProperty();
-        this.witnessContactInfo = new SimpleStringProperty();
-        this.assessmentAmount = new SimpleStringProperty();
-        this.paidCompensation = new SimpleStringProperty();
+        this.dateOfDamage = new SimpleStringProperty(dateOfDamage);
+        this.reportNumber = new SimpleStringProperty(reportNumber);
+        this.typeOfDamage = new SimpleStringProperty(typeOfDamage);
+        this.damageDescription = new SimpleStringProperty(damageDescription);
+        this.witnessContactInfo = new SimpleStringProperty(witnessContactInfo);
+        this.assessmentAmount = new SimpleStringProperty(assessmentAmount);
+        this.paidCompensation = new SimpleStringProperty(paidCompensation);
     }
 
     private void initProperties(){

@@ -43,7 +43,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="BoatTable" editable="true" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="boatTable" editable="true" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Date created" />
                             <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Owner" />
