@@ -23,8 +23,7 @@ public class HouseInsurance extends Insurances implements Serializable {
         InitHouseInsurance();
     }
 
-    public HouseInsurance(String address, String insurancePremium, String dateCreated, String insurancePrice,
-                          String insuranceConditions, String constructionYear, String residentialType, String materials, String standard,
+    public HouseInsurance(String insurancePremium, String dateCreated, String insurancePrice, String insuranceConditions, String address, String constructionYear, String residentialType, String materials, String standard,
                           String squareMeters, String buildingInsuranceAmount, String contentInsuranceAmount) {
         super(insurancePremium, dateCreated, insurancePrice, insuranceConditions);
         this.address = new SimpleStringProperty(address);

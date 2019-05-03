@@ -20,10 +20,10 @@ public class BoatInsurance extends Insurances implements Serializable {
         initProperties();
     }
 
-    public BoatInsurance (String dateCreated, String insurancePremium, String insurancePrice, String insuranceConditions,
+    public BoatInsurance (String insurancePremium, String dateCreated, String insurancePrice, String insuranceConditions,
                           String owner, String licenseNumber, String typeModel, String length, String yearModel, String motorType,
                           String motorStrength) {
-        super(dateCreated, insurancePremium, insurancePrice, insuranceConditions);
+        super(insurancePremium, dateCreated, insurancePrice, insuranceConditions);
         this.owner = new SimpleStringProperty(owner);
         this.licenseNumber = new SimpleStringProperty(licenseNumber);
         this.typeModel = new SimpleStringProperty(typeModel);
