@@ -19,11 +19,11 @@ public class BoatController {
     private Button createBoatButton;
 
     @FXML
-    private TextField dateCreated, owner, insurancePrice, insuranceAmount, insuranceConditions, licencePlate, typeModel,
+    private TextField dateCreated, owner, insurancePremium, insurancePrice, insuranceConditions, licencePlate, typeModel,
                         feetLength, yearModel, motorType, motorStrength;
 
     @FXML
-    private Label dateLabel, ownerLabel, insurancePriceLabel, insuranceAmountLabel, insuranceCondLabel, licenceNrLabel,
+    private Label dateLabel, ownerLabel, insurancePremiumLabel, insurancePriceLabel, insuranceCondLabel, licenceNrLabel,
                     typeModelLabel, lengthLabel, yearLabel, motorTypeLabel, motorStrengthLabel;
 
     checkArguments check = new checkArguments();
@@ -51,11 +51,11 @@ public class BoatController {
     @FXML
     private boolean checkAllFields(){
         try {
+            checkNumber(insurancePremium.getText());
             checkDate(dateCreated.getText());
-            checkString(owner.getText());
             checkNumber(insurancePrice.getText());
-            checkNumber(insuranceAmount.getText());
             checkString(insuranceConditions.getText());
+            checkString(owner.getText());
             checkIntegerAndString(licencePlate.getText());
             checkIntegerAndString(typeModel.getText());
             checkNumber(feetLength.getText());
@@ -73,8 +73,8 @@ public class BoatController {
 
     private void createBoat() {
         if (checkAllFields()) {
-            boatData.add(new BoatInsurance(insurancePrice.getText(), dateCreated.getText(),
-                    insuranceAmount.getText(), insuranceConditions.getText(),  owner.getText(), licencePlate.getText(),
+            boatData.add(new BoatInsurance(insurancePremium.getText(), dateCreated.getText(),
+                    insurancePrice.getText(), insuranceConditions.getText(),  owner.getText(), licencePlate.getText(),
                     typeModel.getText(), feetLength.getText(), yearModel.getText(), motorType.getText(),
                     motorStrength.getText()));
             Stage stage = (Stage) createBoatButton.getScene().getWindow();
@@ -105,6 +105,17 @@ public class BoatController {
     }
 
     @FXML
+    private void checkInsurancePremium() {
+        try {
+            checkNumber(insurancePremium.getText());
+        } catch (EmptyTableException e) {
+            insurancePremiumLabel.setText("Kun tall er tilatt");
+            return;
+        }
+        insurancePremiumLabel.setText("");
+    }
+
+    @FXML
     private void checkInsurancePrice() {
         try {
             checkNumber(insurancePrice.getText());
@@ -113,17 +124,6 @@ public class BoatController {
             return;
         }
         insurancePriceLabel.setText("");
-    }
-
-    @FXML
-    private void checkInsuranceAmount() {
-        try {
-            checkNumber(insuranceAmount.getText());
-        } catch (EmptyTableException e) {
-            insuranceAmountLabel.setText("Kun tall er tilatt");
-            return;
-        }
-        insuranceAmountLabel.setText("");
     }
 
     @FXML

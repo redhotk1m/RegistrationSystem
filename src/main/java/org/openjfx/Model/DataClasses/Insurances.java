@@ -52,15 +52,15 @@ public class Insurances implements Serializable {
     //getters and setters ?
 
     public String getInsurancePremium() {
-        return insurancePrice.get();
+        return insurancePremium.get();
     }
 
     public SimpleStringProperty insurancePremiumProperty() {
-        return insurancePrice;
+        return insurancePremium;
     }
 
     public void setInsurancePremium(String insurancePremium) {
-        this.insurancePrice.set(insurancePremium);
+        this.insurancePremium.set(insurancePremium);
     }
 
     public String getDateCreated() {

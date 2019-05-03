@@ -19,7 +19,8 @@ public class Clients implements Serializable {
         initProperties();
     }
 
-    public Clients(String dateCreated, String firstName, String lastName, String insuranceNumber, String address, String damageReports, String insurances, String unpaid){
+    public Clients(String dateCreated, String firstName, String lastName, String address, String insuranceNumber,
+                   String damageReports, String insurances, String unpaid){
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.insuranceNumber = new SimpleStringProperty(insuranceNumber);
