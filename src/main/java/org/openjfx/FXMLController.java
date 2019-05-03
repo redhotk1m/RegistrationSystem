@@ -602,6 +602,177 @@ public class FXMLController {
         boatTable.setItems(filteredBoat);
     }
 
+    private void primaryHouseSearch() {
+        FilteredList<PrimaryHouseInsurance> filteredPrimaryHouse;
+        filteredPrimaryHouse = new FilteredList<>(primaryHouseData, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredPrimaryHouse.setPredicate((PrimaryHouseInsurance primaryHouse) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCasePrimary = newValue.toLowerCase();
+
+                    if (primaryHouse.getAddress().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getInsurancePremium().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getDateCreated().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getInsurancePrice().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getInsuranceConditions().contains(lowerCasePrimary)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getConstructionYear().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getResidentialType().contains(lowerCasePrimary)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getMaterials().contains(lowerCasePrimary)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getStandard().contains(lowerCasePrimary)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getSquareMeters().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getBuildingInsuranceAmount().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (primaryHouse.getContentInsuranceAmount().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        primaryHouseTable.setItems(filteredPrimaryHouse);
+    }
+
+    private void secondaryHouseSearch() {
+        FilteredList<SecondaryHouseInsurance> filteredSecondaryHouse;
+        filteredSecondaryHouse = new FilteredList<>(secondaryHouseData, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredSecondaryHouse.setPredicate((SecondaryHouseInsurance secondaryHouse) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseSecondary = newValue.toLowerCase();
+
+                    if (secondaryHouse.getAddress().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getInsurancePremium().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getDateCreated().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getInsurancePrice().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getInsuranceConditions().contains(lowerCaseSecondary)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getConstructionYear().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getResidentialType().contains(lowerCaseSecondary)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getMaterials().contains(lowerCaseSecondary)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getStandard().contains(lowerCaseSecondary)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getSquareMeters().contains(lowerCaseSecondary)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getBuildingInsuranceAmount().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (secondaryHouse.getContentInsuranceAmount().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        secondaryHouseTable.setItems(filteredSecondaryHouse);
+    }
+
+    private void travelSearch() {
+        FilteredList<TravelInsurance> filteredTravel;
+        filteredTravel = new FilteredList<>(travelInsuranceData, b -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
+                filteredTravel.setPredicate((TravelInsurance travelInsurance) -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseTravel = newValue.toLowerCase();
+
+                    if (travelInsurance.getInsuranceArea().contains(lowerCaseTravel)) {
+                        return true;
+                    }
+
+                    else if (travelInsurance.getInsurancePremium().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (travelInsurance.getDateCreated().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (travelInsurance.getInsurancePrice().contains(newValue)) {
+                        return true;
+                    }
+
+                    else if (travelInsurance.getInsuranceConditions().contains(lowerCaseTravel)) {
+                        return true;
+                    }
+
+                    else if (travelInsurance.getInsuredFor().contains(newValue)) {
+                        return true;
+                    }
+
+                    return false;
+                })
+        );
+        travelTable.setItems(travelInsuranceData);
+    }
+
 
     private void damageRepSearch() {
         FilteredList<DamageReport> filteredDamageRep;
@@ -651,16 +822,28 @@ public class FXMLController {
     @FXML
     private void tableSearch() {
 
-        if (chooseTable().equals(clientTable) && clientData != null && !clientData.isEmpty()) {
+        if (chooseTable().equals(clientTable)) {
           clientSearch();
-        }
-
-        if(chooseTable().equals(damageReportTable)) {
-            damageRepSearch();
         }
 
         if (chooseTable().equals(boatTable)) {
             boatSearch();
+        }
+
+        if (chooseTable().equals(primaryHouseTable)) {
+            primaryHouseSearch();
+        }
+
+        if (chooseTable().equals(secondaryHouseTable)) {
+            secondaryHouseSearch();
+        }
+
+        if(chooseTable().equals(travelTable)) {
+            travelSearch();
+        }
+
+        if(chooseTable().equals(damageReportTable)) {
+            damageRepSearch();
         }
     }
 
