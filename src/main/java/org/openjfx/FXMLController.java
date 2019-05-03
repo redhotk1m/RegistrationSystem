@@ -772,13 +772,13 @@ public class FXMLController {
                     return false;
                 })
         );
-        travelTable.setItems(travelInsuranceData);
+        travelTable.setItems(filteredTravel);
     }
 
 
     private void damageRepSearch() {
         FilteredList<DamageReport> filteredDamageRep;
-        filteredDamageRep = new FilteredList<>(data, b -> true);
+        filteredDamageRep = new FilteredList<>(damageReportData, b -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) ->
                 filteredDamageRep.setPredicate((DamageReport damageRep) -> {
                     if (newValue == null || newValue.isEmpty()) {

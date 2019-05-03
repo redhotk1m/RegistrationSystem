@@ -27,6 +27,17 @@ public class TODO {
     *   SØK!!!!
     *
     *
+    *   ON EDIT
+    *   Thea BUGFIX Insert
+    *   Thea fiks all search
+    *   Thea (engelsk)
+    *
+    *   CLEAN CODE
+    *   MVC
+    *   CSS
+    *
+    *
+    *
     *
     * */
 
