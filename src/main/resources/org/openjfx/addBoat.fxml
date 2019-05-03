@@ -16,8 +16,8 @@
       </Label>
       <TextField fx:id="dateCreated" layoutX="215.0" layoutY="87.0" onKeyReleased="#checkDateCreated" prefHeight="34.0" prefWidth="267.0" promptText="Date created" />
       <TextField fx:id="owner" layoutX="215.0" layoutY="135.0" onKeyReleased="#checkOwner" prefHeight="34.0" prefWidth="267.0" promptText="Owner" />
-      <TextField fx:id="insurancePrice" layoutX="216.0" layoutY="187.0" onKeyReleased="#checkInsurancePrice" prefHeight="34.0" prefWidth="267.0" promptText="Insurance premium" />
-      <TextField fx:id="insuranceAmount" layoutX="216.0" layoutY="242.0" onKeyReleased="#checkInsuranceAmount" prefHeight="34.0" prefWidth="267.0" promptText="Insurance price" />
+      <TextField fx:id="insurancePremium" layoutX="216.0" layoutY="187.0" onKeyReleased="#checkInsurancePremium" prefHeight="34.0" prefWidth="267.0" promptText="Insurance premium" />
+      <TextField fx:id="insurancePrice" layoutX="216.0" layoutY="242.0" onKeyReleased="#checkInsurancePrice" prefHeight="34.0" prefWidth="267.0" promptText="Insurance price" />
       <TextField fx:id="insuranceConditions" layoutX="216.0" layoutY="294.0" onKeyReleased="#checkInsuranceConditions" prefHeight="34.0" prefWidth="267.0" promptText="Conditions" />
       <TextField fx:id="licencePlate" layoutX="216.0" layoutY="346.0" onKeyReleased="#checkLicenceNumber" prefHeight="34.0" prefWidth="267.0" promptText="Licence number" />
       <TextField fx:id="typeModel" layoutX="215.0" layoutY="399.0" onKeyReleased="#checkTypeModel" prefHeight="34.0" prefWidth="267.0" promptText="Type and model" />
@@ -95,12 +95,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="insurancePriceLabel" layoutX="494.0" layoutY="196.0" textFill="RED">
+      <Label fx:id="insurancePremiumLabel" layoutX="494.0" layoutY="196.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="insuranceAmountLabel" layoutX="494.0" layoutY="251.0" textFill="RED">
+      <Label fx:id="insurancePriceLabel" layoutX="494.0" layoutY="251.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
