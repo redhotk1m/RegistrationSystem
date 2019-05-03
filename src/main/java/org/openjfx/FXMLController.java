@@ -320,21 +320,57 @@ public class FXMLController {
 
     @FXML
     private void onEdit(TableColumn.CellEditEvent editEvent){
-        getClientTable().getSelectionModel().getSelectedItem();
-        Clients Clients = getClientTable().getSelectionModel().getSelectedItem();
-        //Clients.setFirstName(editEvent.getNewValue());
-        String Column = editEvent.getTableColumn().getText();
-        String Value = editEvent.getNewValue().toString();
-        switch (Column){
-            case "Opprettet":
-                Clients.setDateCreated(Value);
+        String column = editEvent.getTableColumn().getText();
+        String newValue = editEvent.getNewValue().toString();
+        try {
+            clientSetNewValue(column, newValue);
+        }catch (EmptyTableException e){
+            e.showErrorGUI();
+        }
+    }
+
+    private void clientSetNewValue(String column, String newValue) throws EmptyTableException{
+        Clients clients = getClientTable().getSelectionModel().getSelectedItem();
+        checkArguments checkArguments = new checkArguments();
+        switch (column){
+            case "Date created":
+                checkArguments.dateTest(newValue);
+                clients.setDateCreated(newValue);
                 break;
-            case "Fornavn":
-                Clients.setFirstName(Value);
+            case "Firstname":
+                checkArguments.stringTest(newValue);
+                clients.setFirstName(newValue);
                 break;
-            case "Etternavn":
-                Clients.setLastName(Value);
+            case "Lastname":
+                checkArguments.stringTest(newValue);
+                clients.setLastName(newValue);
                 break;
+            case "Address":
+                checkArguments.streetTest(newValue);
+                clients.setAddress(newValue);
+                break;
+            case "Insurance Number":
+                System.out.println("insurancenumber test");
+                checkArguments.numberTest(newValue);
+                clients.setInsuranceNumber(newValue);
+                break;
+            case "Insurances":
+                System.out.println("insurances test");
+                checkArguments.stringTest(newValue);
+                clients.setInsurances(newValue);
+                break;
+            case "Damage reports":
+                System.out.println("damageReport test");
+                checkArguments.stringTest(newValue);
+                clients.setDamageReports(newValue);
+                break;
+            case "Unpaid compensations":
+                System.out.println("unpaidComp test");
+                checkArguments.numberTest(newValue);
+                clients.setUnpaid(newValue);
+                break;
+                default:
+                    System.out.println(column);
         }
     }
 
