@@ -37,10 +37,10 @@ public class FXMLController {
     private AnchorPane mainFrame;
 
     @FXML
-    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, skadeTab;
+    private Tab clientTab, boatTab, primaryHouseTab, secondaryHouseTab, travelTab, damageReportTab;
 
     @FXML
-    private TableView clientTable, damageReportTable, BoatTable, primaryHouseTable, secondaryHouseTable, travelTable;
+    private TableView clientTable, damageReportTable, boatTable, primaryHouseTable, secondaryHouseTable, travelTable;
 
     @FXML
     private TableColumn<Clients, String> clientDateCreated, firstName, lastName, address, insuranceNumber, damageReports,
@@ -82,14 +82,14 @@ public class FXMLController {
         if (clientTab.isSelected())
             return clientTable;
         if(boatTab.isSelected())
-            return BoatTable;
+            return boatTable;
         if (primaryHouseTab.isSelected())
             return primaryHouseTable;
         if (secondaryHouseTab.isSelected())
             return secondaryHouseTable;
         if (travelTab.isSelected())
             return travelTable;
-        if(skadeTab.isSelected())
+        if(damageReportTab.isSelected())
             return damageReportTable;
         return null;
     }
@@ -110,7 +110,7 @@ public class FXMLController {
         if (travelTab.isSelected()){
             return "TravelInsurance";
         }
-        if (skadeTab.isSelected()) {
+        if (damageReportTab.isSelected()) {
             return "DamageReport";
         }
         return null; //TODO Throw noSuchTabSelected?
@@ -165,7 +165,7 @@ public class FXMLController {
         if (typeOfObject.endsWith("Clients")){
             return clientTable;
         } else if (typeOfObject.endsWith("BoatInsurance")) {
-            return BoatTable;
+            return boatTable;
         } else if (typeOfObject.endsWith("PrimaryHouseInsurance")){
             return primaryHouseTable;
         } else if (typeOfObject.endsWith("SecondaryHouseInsurance")){
@@ -291,7 +291,7 @@ public class FXMLController {
         ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
         if (tableView == clientTable)
             clientData.removeAll(objectToRemove);
-        if (tableView == BoatTable)
+        if (tableView == boatTable)
             boatData.removeAll(objectToRemove);
         if (tableView == primaryHouseTable)
             primaryHouseData.removeAll(objectToRemove);
@@ -346,7 +346,7 @@ public class FXMLController {
 
     private void setItemsAllTableViews(){
         clientTable.setItems(clientData);
-        BoatTable.setItems(boatData);
+        boatTable.setItems(boatData);
         primaryHouseTable.setItems(primaryHouseData);
         secondaryHouseTable.setItems(secondaryHouseData);
         travelTable.setItems(travelInsuranceData);
@@ -359,17 +359,17 @@ public class FXMLController {
         Stage stage = new Stage();
 
         if (chooseTable().equals(clientTable)){
-            loader = new FXMLLoader(getClass().getResource("addKunde.fxml"));
+            loader = new FXMLLoader(getClass().getResource("addClient.fxml"));
             loader.setController(new ClientController(clientData));
             clientTable.setItems(clientData);
             clientTable.setEditable(true);
         }
 
-        if (chooseTable().equals(BoatTable)){
+        if (chooseTable().equals(boatTable)){
             loader = new FXMLLoader(getClass().getResource("addBoat.fxml"));
             loader.setController(new BoatController(boatData));
-            BoatTable.setItems(boatData);
-            BoatTable.setEditable(true);
+            boatTable.setItems(boatData);
+            boatTable.setEditable(true);
         }
 
         if (chooseTable().equals(primaryHouseTable)){
@@ -601,7 +601,7 @@ public class FXMLController {
                     return false;
                 })
         );
-        BoatTable.setItems(filteredBoat);
+        boatTable.setItems(filteredBoat);
     }
 
 
@@ -661,7 +661,7 @@ public class FXMLController {
             damageRepSearch();
         }
 
-        if (chooseTable().equals(BoatTable)) {
+        if (chooseTable().equals(boatTable)) {
             boatSearch();
         }
     }
@@ -669,7 +669,7 @@ public class FXMLController {
     //Setter and getter
 
     public TableView<BoatInsurance> getBoatTable(){
-        return BoatTable;
+        return boatTable;
     }
 
     public TableView<Clients> getClientTable() {

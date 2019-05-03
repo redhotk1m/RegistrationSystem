@@ -18,8 +18,11 @@ public class ClientController {
     private Button createClientButton;
 
     @FXML
-    private Label dateLabel, fornavnLabel, lastNameLabel, adressLabel, insuranceNrLabel, insurancesLabel,
+    private Label dateLabel, firstNameLabel, lastNameLabel, addressLabel, insuranceNrLabel, insurancesLabel,
                     damageReportLabel, unpaidCompLabel;
+
+    @FXML
+    private TextField dateCreated, firstName, lastName, address, insuranceNumber, insurances, damageReport, unpaid;
 
     checkArguments check = new checkArguments();
 
@@ -49,7 +52,7 @@ public class ClientController {
             checkDate(dateCreated.getText());
             checkString(firstName.getText());
             checkString(lastName.getText());
-            checkIntegerAndString(adress.getText());
+            checkIntegerAndString(address.getText());
             checkNumber(insuranceNumber.getText());
             checkString(damageReport.getText());
             checkString(insurances.getText());
@@ -62,21 +65,12 @@ public class ClientController {
     }
 
     @FXML
-    private TextField
-            dateCreated,
-            firstName,
-            lastName,
-            adress,
-            insuranceNumber,
-            insurances,
-            damageReport,
-            unpaid;
-
-    @FXML
     private void createClient() {
         if (checkAllFields()) {
-            clientData.add(new Clients(dateCreated.getText(), firstName.getText(), lastName.getText(), adress.getText(),
-                    insuranceNumber.getText(), damageReport.getText(), insurances.getText(), unpaid.getText()));
+            clientData.add(new Clients(dateCreated.getText(), firstName.getText(), lastName.getText(),
+                    address.getText(), insuranceNumber.getText(), damageReport.getText(), insurances.getText(),
+                    unpaid.getText()));
+
             Stage stage = (Stage) createClientButton.getScene().getWindow();
             stage.close();
         }
@@ -87,7 +81,7 @@ public class ClientController {
         try {
             checkDate(dateCreated.getText());
         } catch (EmptyTableException e) {
-            dateLabel.setText("Ikke riktig datoformat");
+            dateLabel.setText("You need to use the right date format");
             return;
         }
         dateLabel.setText("");
@@ -98,10 +92,10 @@ public class ClientController {
         try {
             checkString(firstName.getText());
         } catch (EmptyTableException e) {
-            fornavnLabel.setText("Kun bokstaver er tilatt");
+            firstNameLabel.setText("Only letters are allowed");
             return;
         }
-        fornavnLabel.setText("");
+        firstNameLabel.setText("");
     }
 
     @FXML
@@ -109,21 +103,21 @@ public class ClientController {
         try {
             checkString(lastName.getText());
         } catch (EmptyTableException e) {
-            lastNameLabel.setText("Kun bokstaver er tilatt");
+            lastNameLabel.setText("Only letters are allowed");
             return;
         }
         lastNameLabel.setText("");
     }
 
     @FXML
-    private void checkAdress() {
+    private void checkAddress() {
         try {
-            checkIntegerAndString(adress.getText());
+            checkIntegerAndString(address.getText());
         } catch (EmptyTableException e) {
-            adressLabel.setText("Kun bokstaver og tall er tilatt");
+            addressLabel.setText("Only letters and/or numbers are allowed");
             return;
         }
-        adressLabel.setText("");
+        addressLabel.setText("");
     }
 
     @FXML
@@ -131,7 +125,7 @@ public class ClientController {
         try {
             checkNumber(insuranceNumber.getText());
         } catch (EmptyTableException e) {
-            insuranceNrLabel.setText("Kun tall er tilatt");
+            insuranceNrLabel.setText("Only numbers are allowed");
             return;
         }
         insuranceNrLabel.setText("");
@@ -142,7 +136,7 @@ public class ClientController {
         try {
             checkString(insurances.getText());
         } catch (EmptyTableException e) {
-            insurancesLabel.setText("Kun bokstaver er tilatt");
+            insurancesLabel.setText("Only letters are allowed");
             return;
         }
         insurancesLabel.setText("");
@@ -153,7 +147,7 @@ public class ClientController {
         try {
             checkString(damageReport.getText());
         } catch (EmptyTableException e) {
-            damageReportLabel.setText("Kun bokstaver er tilatt");
+            damageReportLabel.setText("Only letters are allowed");
             return;
         }
         damageReportLabel.setText("");
@@ -164,7 +158,7 @@ public class ClientController {
         try {
             checkNumber(unpaid.getText());
         } catch (EmptyTableException e) {
-            unpaidCompLabel.setText("Kun tall er tilatt");
+            unpaidCompLabel.setText("Only numbers are allowed");
             return;
         }
         unpaidCompLabel.setText("");

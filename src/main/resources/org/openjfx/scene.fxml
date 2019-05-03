@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
     <children>
       <ProgressIndicator fx:id="progressBar" layoutX="818.0" layoutY="37.0" progress="0.0" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <TabPane layoutX="119.0" layoutY="87.0" prefHeight="376.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="87.0">
@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="clientTable" layoutX="-1.0" layoutY="13.0" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="clientTable" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Date created" />
                             <TableColumn fx:id="firstName" onEditCommit="#onEdit" prefWidth="65.0" text="Firstname" />
@@ -43,7 +43,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="BoatTable" editable="true" layoutY="13.0" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="boatTable" editable="true" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Date created" />
                             <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Owner" />
@@ -65,7 +65,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="primaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="primaryHouseTable" editable="true" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="primaryHouseAddress" prefWidth="47.0" text="Address" />
                               <TableColumn fx:id="primaryHousePremium" prefWidth="49.0" text="Premium" />
@@ -89,7 +89,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="secondaryHouseTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="761.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="secondaryHouseTable" editable="true" prefHeight="200.0" prefWidth="761.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="secondaryHouseAddress" prefWidth="51.0" text="Address" />
                               <TableColumn fx:id="secondaryHousePremium" prefWidth="51.0" text="Premium" />
@@ -113,7 +113,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="travelTable" editable="true" layoutY="13.0" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="travelTable" editable="true" layoutX="-6.0" prefHeight="200.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="travelInsuranceArea" prefWidth="136.0" text="Area" />
                               <TableColumn fx:id="travelInsurancePremium" prefWidth="111.0" text="Premium" />
@@ -127,11 +127,11 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="skadeTab" text="Damage Report">
+            <Tab fx:id="damageReportTab" text="Damage Report">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="526.0">
                      <children>
-                        <TableView fx:id="damageReportTable" editable="true" layoutY="6.0" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="damageReportTable" editable="true" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="dateOfDamage" prefWidth="110.0" text="Date of damage" />
                               <TableColumn fx:id="damageReportNumber" prefWidth="89.0" text="Damage number" />
