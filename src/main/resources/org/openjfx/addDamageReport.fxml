@@ -16,9 +16,10 @@
         <TextField fx:id="date" layoutX="154.0" layoutY="84.0" onKeyReleased="#checkDateOfDamage" prefHeight="30.0" prefWidth="216.0" promptText="Date" />
         <TextField fx:id="damageNumber" layoutX="154.0" layoutY="143.0" onKeyReleased="#checkDamageNumber" prefHeight="30.0" prefWidth="216.0" promptText="Damage number" />
         <TextField fx:id="damageType" layoutX="154.0" layoutY="198.0" onKeyReleased="#checkDamageType" prefHeight="30.0" prefWidth="216.0" promptText="Type" />
-        <TextField fx:id="contact" layoutX="154.0" layoutY="314.0" onKeyReleased="#checkContact" prefHeight="30.0" prefWidth="216.0" promptText="Witness contact" />
         <TextField fx:id="description" layoutX="154.0" layoutY="256.0" onKeyReleased="#checkDescription" prefHeight="30.0" prefWidth="216.0" promptText="Description" />
+        <TextField fx:id="contact" layoutX="154.0" layoutY="314.0" onKeyReleased="#checkContact" prefHeight="30.0" prefWidth="216.0" promptText="Witness contact" />
         <TextField fx:id="assessment" layoutX="154.0" layoutY="365.0" onKeyReleased="#checkAssessment" prefHeight="30.0" prefWidth="216.0" promptText="Assessment amount" />
+      <TextField fx:id="compensation" layoutX="154.0" layoutY="420.0" onKeyReleased="#checkCompensation" prefHeight="30.0" prefWidth="216.0" promptText="Compensation" />
         <Label layoutX="33.0" layoutY="89.0" text="Date of Damage:">
             <font>
                 <Font size="14.0" />
@@ -49,6 +50,11 @@
                 <Font size="14.0" />
             </font>
         </Label>
+      <Label layoutX="39.0" layoutY="425.0" text="Compensation:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
         <Button fx:id="damageReportButton" layoutX="196.0" layoutY="482.0" mnemonicParsing="false" onAction="#addToDamageReport" text="Add to table">
             <font>
                 <Font size="14.0" />
@@ -84,12 +90,6 @@
                 <Font size="14.0" />
             </font>
         </Label>
-      <TextField fx:id="compensation" layoutX="154.0" layoutY="420.0" onKeyReleased="#checkCompensation" prefHeight="30.0" prefWidth="216.0" promptText="Compensation" />
-      <Label layoutX="39.0" layoutY="425.0" text="Compensation:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <Label fx:id="compensationLabel" layoutX="380.0" layoutY="427.0" textFill="RED">
          <font>
             <Font size="14.0" />

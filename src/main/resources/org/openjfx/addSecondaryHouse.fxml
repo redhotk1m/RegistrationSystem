@@ -18,7 +18,7 @@
         <TextField fx:id="date" layoutX="211.0" layoutY="198.0" onKeyReleased="#checkDateCreated" prefHeight="30.0" prefWidth="216.0" promptText="Date" />
         <TextField fx:id="price" layoutX="211.0" layoutY="254.0" onKeyReleased="#checkPrice" prefHeight="30.0" prefWidth="216.0" promptText="Price" />
         <TextField fx:id="conditions" layoutX="211.0" layoutY="312.0" onKeyReleased="#checkConditions" prefHeight="30.0" prefWidth="216.0" promptText="Conditions" />
-        <TextField fx:id="year" layoutX="211.0" layoutY="365.0" onKeyReleased="#checkYear" prefHeight="30.0" prefWidth="216.0" promptText="Construction year" />
+        <TextField fx:id="constructionYear" layoutX="211.0" layoutY="365.0" onKeyReleased="#checkYear" prefHeight="30.0" prefWidth="216.0" promptText="Construction year" />
         <TextField fx:id="residentialType" layoutX="211.0" layoutY="423.0" onKeyReleased="#checkResidentialType" prefHeight="30.0" prefWidth="216.0" promptText="Residential type" />
         <TextField fx:id="materials" layoutX="211.0" layoutY="478.0" onKeyReleased="#checkMaterials" prefHeight="30.0" prefWidth="216.0" promptText="Buildingmaterial" />
         <TextField fx:id="standard" layoutX="211.0" layoutY="533.0" onKeyReleased="#checkStandard" prefHeight="30.0" prefWidth="216.0" promptText="Standard" />

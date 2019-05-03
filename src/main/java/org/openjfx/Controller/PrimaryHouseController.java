@@ -145,7 +145,7 @@ public class PrimaryHouseController {
             constructionLabel.setText("Kun tall er tilatt");
             return;
         }
-        constructionYear.setText("");
+        constructionLabel.setText("");
     }
 
     @FXML
