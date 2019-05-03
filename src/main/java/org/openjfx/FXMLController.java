@@ -209,7 +209,7 @@ public class FXMLController {
         primaryHouseDate.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
         primaryHousePrice.setCellValueFactory(new PropertyValueFactory<>("insurancePrice"));
         primaryHouseConditions.setCellValueFactory(new PropertyValueFactory<>("insuranceConditions"));
-        primaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear")); //@@@@@@@@@@@@@@@@@@@@@@@);
+        primaryHouseConstructionYear.setCellValueFactory(new PropertyValueFactory<>("constructionYear"));
         primaryHouseResidentialType.setCellValueFactory(new PropertyValueFactory<>("residentialType"));
         primaryHouseMaterials.setCellValueFactory(new PropertyValueFactory<>("materials"));
         primaryHouseStandard.setCellValueFactory(new PropertyValueFactory<>("standard"));
