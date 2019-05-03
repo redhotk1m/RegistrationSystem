@@ -20,7 +20,7 @@ public class checkArguments {
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-                throw new EmptyTableException("Feil i StringTest");
+                throw new EmptyTableException("Not a valid string");
 
             }
         }
@@ -32,7 +32,7 @@ public class checkArguments {
         char[] chars = s.toCharArray();
         for (char c : chars) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c) && !Character.isDigit(c)) {
-                throw new EmptyTableException("Gateadresse er feil");
+                throw new EmptyTableException("Special characters are not allowed");
             }
         }
     }
@@ -44,7 +44,7 @@ public class checkArguments {
         try {
             format.parse(s);
         } catch (ParseException e) {
-            throw new EmptyTableException("Date test");
+            throw new EmptyTableException("This is not a valid date");
         }
     }
 
@@ -52,15 +52,12 @@ public class checkArguments {
     public void numberTest(String s) throws EmptyTableException{
         checkIfNull(s);
         if(!s.matches("[0-9]*$"))
-            throw new EmptyTableException("Nummertest feilet");
+            throw new EmptyTableException("This is not a valid number");
     }
 
     public void checkIfNull(String s) throws EmptyTableException {
         if (s == null || s.length() < 1){
-            throw new EmptyTableException("Field cannot be empty");
-            //throw new NullPointerException("Strengen eksisterer ikke");
-            //Thrower ikke fordi den aldri får nullpointer?
-            //TODO Fiks dette, sånn at objekter uten felter ikke blir laget, eller feilmelding gis
+            throw new EmptyTableException("Cannot be empty");
         }
     }
 }
