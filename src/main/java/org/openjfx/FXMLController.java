@@ -100,28 +100,6 @@ public class FXMLController {
         return null;
     }
 
-    private String getChosenTable(){
-        //returnerer en streng med hvilken tab som er åpen i tabPane (Burde generaliseres sammen med chooseTable()
-        if (clientTab.isSelected()) {
-            return "Clients";
-        }
-        if (boatTab.isSelected()) {
-            return "BoatInsurance";
-        }
-        if (primaryHouseTab.isSelected()){
-            return "PrimaryHouseInsurance";
-        }
-        if (secondaryHouseTab.isSelected()){
-            return "SecondaryHouseInsurance";
-        }
-        if (travelTab.isSelected()){
-            return "TravelInsurance";
-        }
-        if (damageReportTab.isSelected()) {
-            return "DamageReport";
-        }
-        return null;
-    }
 
     @FXML
     private void loadFile(){
@@ -160,6 +138,139 @@ public class FXMLController {
         }).start();
     }
 
+    @FXML
+    private void saveFile(){
+        //Lagrer filen som tilhører tableviewet du er inne på
+        FileChooser fileChooser = new FileChooser();
+        setExtentionFilters(fileChooser); //Setter filters til .jobj og .csv
+        File saveDestination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
+        TableView currentTableview = chooseTable(); //Setter tableview vi skal bruke, til det vi er inne på
+        new Thread(() -> {
+            FileHandler fileHandler = null;
+            if (saveDestination.getName().endsWith(".csv")){
+                fileHandler = new CSVWriter();
+            } else if (saveDestination.getName().endsWith(".jobj")){
+                fileHandler = new JOBJWriter();
+            }
+            //Tilkaller saveFile, sender hvor det skal lagres, dataene som ligger på viewet og hvilke view vi snakker om
+            //Det gjør at vi kan lagre elementene vi har søkt på, hvis vi ønsker det.
+            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
+        }).start();
+    }
+
+    @FXML
+    private void onEdit(TableColumn.CellEditEvent editEvent){
+        //Tilkalles når man dobbeltklikker på et felt, slik at man kan endre det
+        String column = editEvent.getTableColumn().getText();
+        String newValue = editEvent.getNewValue().toString();
+        try {
+            clientSetNewValue(column, newValue); //Hvis det man skriver er gyldig, endres feltet
+            //Bare laget for client, da vi ikke rakk for alle
+        }catch (EmptyTableException e){
+            e.showErrorGUI();
+        }
+    }
+
+
+    @FXML
+    private void insert() throws IOException {
+        //Åpner nytt scene som gjør at man kan lage nye elementer, ettersom hvilket tableView vi er inne på
+        FXMLLoader loader = null;
+        Stage stage = new Stage();
+
+        if (chooseTable().equals(clientTable)){
+            loader = new FXMLLoader(getClass().getResource("addClient.fxml"));
+            loader.setController(new ClientController(clientData));
+            clientTable.setItems(clientData);
+            clientTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(boatTable)){
+            loader = new FXMLLoader(getClass().getResource("addBoat.fxml"));
+            loader.setController(new BoatController(boatData));
+            boatTable.setItems(boatData);
+            boatTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(primaryHouseTable)){
+            loader = new FXMLLoader(getClass().getResource("addPrimaryHouse.fxml"));
+            loader.setController(new PrimaryHouseController(primaryHouseData));
+            primaryHouseTable.setItems(primaryHouseData);
+            primaryHouseTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(secondaryHouseTable)) {
+            loader = new FXMLLoader(getClass().getResource("addSecondaryHouse.fxml"));
+            loader.setController(new SecondaryHouseController(secondaryHouseData));
+            secondaryHouseTable.setItems(secondaryHouseData);
+            secondaryHouseTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(travelTable)) {
+            loader = new FXMLLoader(getClass().getResource("addTraveling.fxml"));
+            loader.setController(new TravelingController(travelInsuranceData));
+            travelTable.setItems(travelInsuranceData);
+            travelTable.setEditable(true);
+        }
+
+        if (chooseTable().equals(damageReportTable)) {
+            loader = new FXMLLoader(getClass().getResource("addDamageReport.fxml"));
+            loader.setController(new DamageReportController(damageReportData));
+            damageReportTable.setItems(damageReportData);
+            damageReportTable.setEditable(true);
+        }
+
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    private void deleteButton(ActionEvent event){
+        //Sletter elementet som er trykket på, etter hvilke view det er snakk om
+        TableView tableView = chooseTable();
+        //Lager et arraylist som inneholder det elementet vi ønsker å fjerne
+        ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
+        //Fjerner objektet ettersom hvilket table vi er inne på
+        if (tableView == clientTable)
+            clientData.removeAll(objectToRemove);
+        if (tableView == boatTable)
+            boatData.removeAll(objectToRemove);
+        if (tableView == primaryHouseTable)
+            primaryHouseData.removeAll(objectToRemove);
+        if (tableView == secondaryHouseTable)
+            secondaryHouseData.removeAll(objectToRemove);
+        if (tableView == travelTable)
+            travelInsuranceData.removeAll(objectToRemove);
+        if (tableView == damageReportTable)
+            damageReportData.removeAll(objectToRemove);
+    }
+
+
+    private String getChosenTable(){
+        //returnerer en streng med hvilken tab som er åpen i tabPane (Burde generaliseres sammen med chooseTable()
+        if (clientTab.isSelected()) {
+            return "Clients";
+        }
+        if (boatTab.isSelected()) {
+            return "BoatInsurance";
+        }
+        if (primaryHouseTab.isSelected()){
+            return "PrimaryHouseInsurance";
+        }
+        if (secondaryHouseTab.isSelected()){
+            return "SecondaryHouseInsurance";
+        }
+        if (travelTab.isSelected()){
+            return "TravelInsurance";
+        }
+        if (damageReportTab.isSelected()) {
+            return "DamageReport";
+        }
+        return null;
+    }
+
+
     private void setCorrectDataList(String dataObjectType){
         //Returnerer riktig observableList etter datatype
         if (dataObjectType.endsWith("Clients"))
@@ -193,6 +304,11 @@ public class FXMLController {
         }
        throw new NullPointerException("No such object");
     }
+    public void initialize() {
+        assignAllColumns();
+        setEditableColumns();
+        setItemsAllTableViews();
+    }
 
     private void assignAllColumns(){
         //Setter alle kolonnene til å fungere med sine klasser
@@ -203,6 +319,27 @@ public class FXMLController {
         assignTravelInsuranceColumns();
         assignDamageReportColumns();
     }
+
+    private void setEditableColumns(){
+        //Setter alle kolonner til å være editable (Dvs dobbeltklikke dem for å endre dem)
+        setEditableClient();
+        setEditableBoat();
+        setEditablePrimaryHouse();
+        setEditableSecondaryHouse();
+        setEditableTravel();
+        setEditableDamageReport();
+    }
+
+    private void setItemsAllTableViews(){
+        //Setter alle tableView sine items, til en tom observableList
+        clientTable.setItems(clientData);
+        boatTable.setItems(boatData);
+        primaryHouseTable.setItems(primaryHouseData);
+        secondaryHouseTable.setItems(secondaryHouseData);
+        travelTable.setItems(travelInsuranceData);
+        damageReportTable.setItems(damageReportData);
+    }
+
 
     private void assignClientColumns() {
         clientDateCreated.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
@@ -278,65 +415,12 @@ public class FXMLController {
         travelInsuranceInsuredFor.setCellValueFactory(new PropertyValueFactory<>("insuredFor"));
     }
 
-    @FXML
-    private void saveFile(){
-        //Lagrer filen som tilhører tableviewet du er inne på
-        FileChooser fileChooser = new FileChooser();
-        setExtentionFilters(fileChooser); //Setter filters til .jobj og .csv
-        File saveDestination = fileChooser.showSaveDialog(mainFrame.getScene().getWindow());
-        TableView currentTableview = chooseTable(); //Setter tableview vi skal bruke, til det vi er inne på
-        new Thread(() -> {
-            FileHandler fileHandler = null;
-            if (saveDestination.getName().endsWith(".csv")){
-                fileHandler = new CSVWriter();
-            } else if (saveDestination.getName().endsWith(".jobj")){
-                fileHandler = new JOBJWriter();
-            }
-            //Tilkaller saveFile, sender hvor det skal lagres, dataene som ligger på viewet og hvilke view vi snakker om
-            //Det gjør at vi kan lagre elementene vi har søkt på, hvis vi ønsker det.
-            fileHandler.saveFile(saveDestination, currentTableview.getItems(), getChosenTable());
-        }).start();
-    }
-
     private void setExtentionFilters(FileChooser fileChooser){
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(".csv", "*.csv");
         FileChooser.ExtensionFilter extensionFilter1 = new FileChooser.ExtensionFilter(".jobj","*.jobj");
         fileChooser.getExtensionFilters().addAll(extensionFilter, extensionFilter1);
     }
 
-    @FXML
-    private void deleteButton(ActionEvent event){
-        //Sletter elementet som er trykket på, etter hvilke view det er snakk om
-        TableView tableView = chooseTable();
-        //Lager et arraylist som inneholder det elementet vi ønsker å fjerne
-        ArrayList objectToRemove = new ArrayList(tableView.getSelectionModel().getSelectedItems());
-        //Fjerner objektet ettersom hvilket table vi er inne på
-        if (tableView == clientTable)
-            clientData.removeAll(objectToRemove);
-        if (tableView == boatTable)
-            boatData.removeAll(objectToRemove);
-        if (tableView == primaryHouseTable)
-            primaryHouseData.removeAll(objectToRemove);
-        if (tableView == secondaryHouseTable)
-            secondaryHouseData.removeAll(objectToRemove);
-        if (tableView == travelTable)
-            travelInsuranceData.removeAll(objectToRemove);
-        if (tableView == damageReportTable)
-            damageReportData.removeAll(objectToRemove);
-    }
-
-    @FXML
-    private void onEdit(TableColumn.CellEditEvent editEvent){
-        //Tilkalles når man dobbeltklikker på et felt, slik at man kan endre det
-        String column = editEvent.getTableColumn().getText();
-        String newValue = editEvent.getNewValue().toString();
-        try {
-            clientSetNewValue(column, newValue); //Hvis det man skriver er gyldig, endres feltet
-            //Bare laget for client, da vi ikke rakk for alle
-        }catch (EmptyTableException e){
-            e.showErrorGUI();
-        }
-    }
 
     private void clientSetNewValue(String column, String newValue) throws EmptyTableException{
         Clients clients = getClientTable().getSelectionModel().getSelectedItem();
@@ -375,85 +459,6 @@ public class FXMLController {
                 clients.setUnpaid(newValue);
                 break;
         }
-    }
-
-    public void initialize() {
-        assignAllColumns();
-        setEditableColumns();
-        setItemsAllTableViews();
-    }
-
-    private void setItemsAllTableViews(){
-        //Setter alle tableView sine items, til en tom observableList
-        clientTable.setItems(clientData);
-        boatTable.setItems(boatData);
-        primaryHouseTable.setItems(primaryHouseData);
-        secondaryHouseTable.setItems(secondaryHouseData);
-        travelTable.setItems(travelInsuranceData);
-        damageReportTable.setItems(damageReportData);
-    }
-
-    @FXML
-    private void insert() throws IOException {
-        //Åpner nytt scene som gjør at man kan lage nye elementer, ettersom hvilket tableView vi er inne på
-        FXMLLoader loader = null;
-        Stage stage = new Stage();
-
-        if (chooseTable().equals(clientTable)){
-            loader = new FXMLLoader(getClass().getResource("addClient.fxml"));
-            loader.setController(new ClientController(clientData));
-            clientTable.setItems(clientData);
-            clientTable.setEditable(true);
-        }
-
-        if (chooseTable().equals(boatTable)){
-            loader = new FXMLLoader(getClass().getResource("addBoat.fxml"));
-            loader.setController(new BoatController(boatData));
-            boatTable.setItems(boatData);
-            boatTable.setEditable(true);
-        }
-
-        if (chooseTable().equals(primaryHouseTable)){
-            loader = new FXMLLoader(getClass().getResource("addPrimaryHouse.fxml"));
-            loader.setController(new PrimaryHouseController(primaryHouseData));
-            primaryHouseTable.setItems(primaryHouseData);
-            primaryHouseTable.setEditable(true);
-        }
-
-        if (chooseTable().equals(secondaryHouseTable)) {
-            loader = new FXMLLoader(getClass().getResource("addSecondaryHouse.fxml"));
-            loader.setController(new SecondaryHouseController(secondaryHouseData));
-            secondaryHouseTable.setItems(secondaryHouseData);
-            secondaryHouseTable.setEditable(true);
-        }
-
-        if (chooseTable().equals(travelTable)) {
-            loader = new FXMLLoader(getClass().getResource("addTraveling.fxml"));
-            loader.setController(new TravelingController(travelInsuranceData));
-            travelTable.setItems(travelInsuranceData);
-            travelTable.setEditable(true);
-        }
-
-        if (chooseTable().equals(damageReportTable)) {
-            loader = new FXMLLoader(getClass().getResource("addDamageReport.fxml"));
-            loader.setController(new DamageReportController(damageReportData));
-            damageReportTable.setItems(damageReportData);
-            damageReportTable.setEditable(true);
-        }
-
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    private void setEditableColumns(){
-        //Setter alle kolonner til å være editable (Dvs dobbeltklikke dem for å endre dem)
-        setEditableClient();
-        setEditableBoat();
-        setEditablePrimaryHouse();
-        setEditableSecondaryHouse();
-        setEditableTravel();
-        setEditableDamageReport();
     }
 
 
