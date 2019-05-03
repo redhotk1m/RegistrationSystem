@@ -73,8 +73,8 @@ public class PrimaryHouseController {
     @FXML
     private void addToPrimary() {
         if (checkAllFields()) {
-            primaryHouseData.add(new PrimaryHouseInsurance(address.getText(), premium.getText(), date.getText(),
-                    price.getText(), conditions.getText(), constructionYear.getText(),
+            primaryHouseData.add(new PrimaryHouseInsurance(premium.getText(), date.getText(),
+                    price.getText(), conditions.getText(), address.getText(), constructionYear.getText(),
                     residentialType.getText(), materials.getText(), standard.getText(), sqMeters.getText(),
                     insured.getText(), content.getText()));
             Stage stage = (Stage) addPrimaryButton.getScene().getWindow();

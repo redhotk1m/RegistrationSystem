@@ -73,8 +73,8 @@ public class SecondaryHouseController {
     @FXML
     private void addToSecondary() {
         if (checkAllFields()) {
-            secondaryHouseData.add(new SecondaryHouseInsurance(address.getText(), premium.getText(), date.getText(),
-                    price.getText(), conditions.getText(), constructionYear.getText(),
+            secondaryHouseData.add(new SecondaryHouseInsurance(premium.getText(), date.getText(),
+                    price.getText(), conditions.getText(), address.getText(), constructionYear.getText(),
                     residentialType.getText(), materials.getText(), standard.getText(), sqMeters.getText(),
                     insured.getText(), content.getText()));
             Stage stage = (Stage) addSecondaryButton.getScene().getWindow();

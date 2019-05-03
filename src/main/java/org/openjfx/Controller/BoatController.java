@@ -73,8 +73,8 @@ public class BoatController {
 
     private void createBoat() {
         if (checkAllFields()) {
-            boatData.add(new BoatInsurance(dateCreated.getText(), owner.getText(), insurancePrice.getText(),
-                    insuranceAmount.getText(), insuranceConditions.getText(), licencePlate.getText(),
+            boatData.add(new BoatInsurance(insurancePrice.getText(), dateCreated.getText(),
+                    insuranceAmount.getText(), insuranceConditions.getText(),  owner.getText(), licencePlate.getText(),
                     typeModel.getText(), feetLength.getText(), yearModel.getText(), motorType.getText(),
                     motorStrength.getText()));
             Stage stage = (Stage) createBoatButton.getScene().getWindow();

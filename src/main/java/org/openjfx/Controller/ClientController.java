@@ -70,7 +70,6 @@ public class ClientController {
             clientData.add(new Clients(dateCreated.getText(), firstName.getText(), lastName.getText(),
                     address.getText(), insuranceNumber.getText(), damageReport.getText(), insurances.getText(),
                     unpaid.getText()));
-
             Stage stage = (Stage) createClientButton.getScene().getWindow();
             stage.close();
         }
