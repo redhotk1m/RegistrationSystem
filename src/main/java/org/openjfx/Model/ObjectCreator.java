@@ -208,9 +208,6 @@ public class ObjectCreator {
         setObject(boatInsurance);
     }
 
-
-
-
     private void createHouseInsurance(String[] valuesOfObject) throws EmptyTableException {
         SecondaryHouseInsurance houseInsurance = new SecondaryHouseInsurance();
 
@@ -252,7 +249,6 @@ public class ObjectCreator {
 
         setObject(houseInsurance);
     }
-
 
 
     public Object getObject() {
