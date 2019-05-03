@@ -137,21 +137,23 @@ public class FXMLController {
                     e.printStackTrace();
                 }
                 data = (readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
-                if (data.get(0).getClass().getName().endsWith("Clients"))
-                    clientData = data;
-                if (data.get(0).getClass().getName().endsWith("BoatInsurance"))
-                    boatData = data;
-                if (data.get(0).getClass().getName().endsWith("PrimaryHouseInsurance"))
-                    primaryHouseData = data;
-                if (data.get(0).getClass().getName().endsWith("SecondaryHouseInsurance"))
-                    secondaryHouseData = data;
-                if (data.get(0).getClass().getName().endsWith("TravelInsurance"))
-                    travelInsuranceData = data;
-                if (data.get(0).getClass().getName().endsWith("DamageReport"))
-                    damageReportData = data;
-                TableView tableView = setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName());
-                tableView.setItems(data);
-                tableView.setEditable(true);
+                if (data.size() > 0) {
+                    if (data.get(0).getClass().getName().endsWith("Clients"))
+                        clientData = data;
+                    if (data.get(0).getClass().getName().endsWith("BoatInsurance"))
+                        boatData = data;
+                    if (data.get(0).getClass().getName().endsWith("PrimaryHouseInsurance"))
+                        primaryHouseData = data;
+                    if (data.get(0).getClass().getName().endsWith("SecondaryHouseInsurance"))
+                        secondaryHouseData = data;
+                    if (data.get(0).getClass().getName().endsWith("TravelInsurance"))
+                        travelInsuranceData = data;
+                    if (data.get(0).getClass().getName().endsWith("DamageReport"))
+                        damageReportData = data;
+                    TableView tableView = setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName());
+                    tableView.setItems(data);
+                    tableView.setEditable(true);
+                }
                 progressBar.setVisible(false);
             }).start();
         } catch (Exception e) {

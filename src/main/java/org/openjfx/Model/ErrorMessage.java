@@ -33,18 +33,22 @@ public class ErrorMessage {
         stage.initStyle(StageStyle.UNDECORATED);
         Button button = new Button("ok");
         button.setTranslateX(100);
+        button.setTranslateY(70);
         button.setPrefSize(100,50);
         Label label = new Label(exception);
-
+        label.setTranslateX(120);
 
         HBox hBox = new HBox(button);
         HBox spacing = new HBox();
         spacing.setPrefSize(50,50);
         HBox hBox1 = new HBox(label);
-        VBox root = new VBox(hBox1,spacing, hBox);
+        hBox1.setTranslateY(50);
+        hBox1.setTranslateX(-60);
+        VBox root = new VBox(hBox1, hBox);
+
 
         Scene scene = new Scene(root, 300, 200);
-
+        scene.fillProperty().set(Color.BLACK);
 
         stage.setScene(scene);
         stage.show();

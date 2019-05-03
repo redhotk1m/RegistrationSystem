@@ -63,10 +63,10 @@ public class ObjectCreator {
         checker.numberTest(valuesOfObject[4]);
         clients.setInsuranceNumber(valuesOfObject[4]);
 
-        checker.numberTest(valuesOfObject[5]);
+        checker.stringTest(valuesOfObject[5]);
         clients.setInsurances(valuesOfObject[5]);
 
-        checker.numberTest(valuesOfObject[6]);
+        checker.stringTest(valuesOfObject[6]);
         clients.setDamageReports(valuesOfObject[6]);
 
         checker.numberTest(valuesOfObject[7]);
@@ -74,6 +74,7 @@ public class ObjectCreator {
 
         setObject(clients);
     }
+
 
     private void createPrimaryHouseInsurance(String[] valuesOfObject) throws EmptyTableException {
         PrimaryHouseInsurance houseInsurance = new PrimaryHouseInsurance();
