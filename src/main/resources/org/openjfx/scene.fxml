@@ -24,14 +24,14 @@
                      <children>
                         <TableView fx:id="clientTable" prefHeight="409.0" prefWidth="827.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                              <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="75.0" text="Date created" />
-                            <TableColumn fx:id="firstName" onEditCommit="#onEdit" prefWidth="65.0" text="Firstname" />
-                            <TableColumn fx:id="lastName" onEditCommit="#onEdit" prefWidth="71.0" text="Lastname" />
-                              <TableColumn fx:id="address" onEditCommit="#onEdit" prefWidth="73.0" text="Address" />
-                              <TableColumn fx:id="insuranceNumber" onEditCommit="#onEdit" prefWidth="91.0" text="Insurance Number" />
-                              <TableColumn fx:id="insurances" onEditCommit="#onEdit" prefWidth="82.0" text="Insurances" />
-                              <TableColumn fx:id="damageReports" onEditCommit="#onEdit" prefWidth="106.0" text="Damage reports" />
-                              <TableColumn fx:id="unpaid" onEditCommit="#onEdit" prefWidth="126.0" text="Unpaid compensations" />
+                              <TableColumn fx:id="clientDateCreated" onEditCommit="#onEdit" prefWidth="103.0" text="Date created" />
+                            <TableColumn fx:id="firstName" onEditCommit="#onEdit" prefWidth="81.0" text="Firstname" />
+                            <TableColumn fx:id="lastName" onEditCommit="#onEdit" prefWidth="89.0" text="Lastname" />
+                              <TableColumn fx:id="address" onEditCommit="#onEdit" prefWidth="99.0" text="Address" />
+                              <TableColumn fx:id="insuranceNumber" onEditCommit="#onEdit" prefWidth="125.0" text="Insurance Number" />
+                              <TableColumn fx:id="insurances" onEditCommit="#onEdit" prefWidth="71.0" text="Insurances" />
+                              <TableColumn fx:id="damageReports" onEditCommit="#onEdit" prefWidth="101.0" text="Damage reports" />
+                              <TableColumn fx:id="unpaid" onEditCommit="#onEdit" prefWidth="142.0" text="Unpaid compensations" />
                           </columns>
                         </TableView>
                         <TextField fx:id="testFelt" disable="true" layoutX="14.0" layoutY="308.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="540.0" />
@@ -45,17 +45,17 @@
                      <children>
                         <TableView fx:id="boatTable" editable="true" prefHeight="207.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                              <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="40.0" text="Date created" />
-                            <TableColumn fx:id="boatOwner" prefWidth="52.0" text="Owner" />
+                              <TableColumn fx:id="boatDate" minWidth="0.0" prefWidth="47.0" text="Date created" />
+                            <TableColumn fx:id="boatOwner" prefWidth="45.0" text="Owner" />
                             <TableColumn fx:id="boatInsurancePrice" prefWidth="100.0" text="Insurance premium" />
-                              <TableColumn fx:id="boatInsuranceAmount" prefWidth="56.0" text="Insurance price" />
-                              <TableColumn fx:id="boatInsuranceConditions" prefWidth="73.0" text="Insurance conditions" />
+                              <TableColumn fx:id="boatInsuranceAmount" prefWidth="62.0" text="Insurance price" />
+                              <TableColumn fx:id="boatInsuranceConditions" prefWidth="67.0" text="Insurance conditions" />
                               <TableColumn fx:id="licenseNumber" minWidth="0.0" prefWidth="83.0" text="Licence number" />
                               <TableColumn fx:id="typeModel" prefWidth="60.0" text="Type and model" />
                               <TableColumn fx:id="length" prefWidth="83.0" text="Length in feet" />
-                              <TableColumn fx:id="yearModel" prefWidth="36.0" text="Model (year)" />
-                              <TableColumn fx:id="motorType" prefWidth="86.0" text="Motortype" />
-                              <TableColumn fx:id="motorStrength" prefWidth="33.0" text="Motor strength" />
+                              <TableColumn fx:id="yearModel" prefWidth="87.0" text="Model (year)" />
+                              <TableColumn fx:id="motorType" prefWidth="73.0" text="Motortype" />
+                              <TableColumn fx:id="motorStrength" prefWidth="106.0" text="Motor strength" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -97,12 +97,12 @@
                               <TableColumn fx:id="secondaryHousePrice" prefWidth="38.0" text="Price" />
                               <TableColumn fx:id="secondaryHouseConditions" prefWidth="75.0" text="Conditions" />
                               <TableColumn fx:id="secondaryHouseConstructionYear" prefWidth="53.0" text="Construction year" />
-                              <TableColumn fx:id="secondaryHouseResidentialType" prefWidth="67.0" text="Residential type" />
-                              <TableColumn fx:id="secondaryHouseMaterials" prefWidth="89.0" text="Building material" />
-                              <TableColumn fx:id="secondaryHouseStandard" prefWidth="65.0" text="Standard" />
-                              <TableColumn fx:id="secondaryHouseSquareMeters" prefWidth="91.0" text="Square meters" />
-                              <TableColumn fx:id="secondaryHouseInsuredFor" prefWidth="54.0" text="Insured for" />
-                              <TableColumn fx:id="secondaryHouseContentInsuredFor" minWidth="0.0" prefWidth="60.0" text="Contents insured for" />
+                              <TableColumn fx:id="secondaryHouseResidentialType" prefWidth="79.0" text="Residential type" />
+                              <TableColumn fx:id="secondaryHouseMaterials" prefWidth="93.0" text="Building material" />
+                              <TableColumn fx:id="secondaryHouseStandard" prefWidth="70.0" text="Standard" />
+                              <TableColumn fx:id="secondaryHouseSquareMeters" prefWidth="95.0" text="Square meters" />
+                              <TableColumn fx:id="secondaryHouseInsuredFor" prefWidth="82.0" text="Insured for" />
+                              <TableColumn fx:id="secondaryHouseContentInsuredFor" minWidth="0.0" prefWidth="88.0" text="Contents insured for" />
                            </columns>
                         </TableView>
                      </children>
@@ -119,8 +119,8 @@
                               <TableColumn fx:id="travelInsurancePremium" prefWidth="111.0" text="Premium" />
                               <TableColumn fx:id="travelInsuranceDate" prefWidth="84.0" text="Date" />
                               <TableColumn fx:id="travelInsurancePrice" prefWidth="142.0" text="Price" />
-                              <TableColumn fx:id="travelInsuranceConditions" prefWidth="75.0" text="Conditions" />
-                              <TableColumn fx:id="travelInsuranceInsuredFor" prefWidth="153.0" text="Insured for" />
+                              <TableColumn fx:id="travelInsuranceConditions" prefWidth="147.0" text="Conditions" />
+                              <TableColumn fx:id="travelInsuranceInsuredFor" prefWidth="195.0" text="Insured for" />
                            </columns>
                         </TableView>
                      </children>
@@ -134,12 +134,12 @@
                         <TableView fx:id="damageReportTable" editable="true" prefHeight="217.0" prefWidth="703.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="dateOfDamage" prefWidth="110.0" text="Date of damage" />
-                              <TableColumn fx:id="damageReportNumber" prefWidth="89.0" text="Damage number" />
-                              <TableColumn fx:id="typeOfDamage" prefWidth="70.0" text="Type of damage" />
-                              <TableColumn fx:id="damageDescription" prefWidth="94.0" text="Description" />
-                              <TableColumn fx:id="witnessContactInfo" prefWidth="168.0" text="Witness contact" />
-                              <TableColumn fx:id="assessmentAmount" prefWidth="91.0" text="Assessment amount" />
-                              <TableColumn fx:id="paidCompensation" prefWidth="79.0" text="Paid compensation" />
+                              <TableColumn fx:id="damageReportNumber" prefWidth="120.0" text="Damage number" />
+                              <TableColumn fx:id="typeOfDamage" prefWidth="122.0" text="Type of damage" />
+                              <TableColumn fx:id="damageDescription" prefWidth="95.0" text="Description" />
+                              <TableColumn fx:id="witnessContactInfo" prefWidth="108.0" text="Witness contact" />
+                              <TableColumn fx:id="assessmentAmount" prefWidth="128.0" text="Assessment amount" />
+                              <TableColumn fx:id="paidCompensation" prefWidth="130.0" text="Paid compensation" />
                            </columns>
                         </TableView>
                      </children>
