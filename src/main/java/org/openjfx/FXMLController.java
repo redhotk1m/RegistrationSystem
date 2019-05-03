@@ -28,6 +28,10 @@ import java.util.ArrayList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class FXMLController {
+
+    @FXML
+    ToolBar toolBar;
+
     @FXML
     ProgressIndicator progressBar;
 
@@ -126,12 +130,14 @@ public class FXMLController {
         if (file == null){
             return;
         }
+        toolBar.setDisable(true);
         new Thread(() ->{
             try {
                 readDataTask.call();
             } catch (EmptyTableException e) {
                 e.showErrorGUI("Error loading the file, the file is corrupt");
                 progressBar.setVisible(false);
+                toolBar.setDisable(false);
                 return;
             }
             data = readDataTask.getDataObjects(); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
@@ -143,6 +149,7 @@ public class FXMLController {
                 tableView.setEditable(true);
             }
             progressBar.setVisible(false);
+            toolBar.setDisable(false);
         }).start();
     }
 

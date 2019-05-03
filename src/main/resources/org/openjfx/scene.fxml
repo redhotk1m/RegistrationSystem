@@ -148,12 +148,12 @@
             </Tab>
         </tabs>
       </TabPane>
-      <ToolBar layoutX="119.0" layoutY="48.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="48.0">
+      <ToolBar fx:id="toolBar" layoutX="119.0" layoutY="48.0" prefHeight="40.0" prefWidth="703.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="48.0">
         <items>
-          <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
-            <Button mnemonicParsing="false" onAction="#saveFile" text="Save File" />
-            <Button fx:id="loadFile" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadFile" text="Load File" />
-            <Button fx:id="delete" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
+          <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insert" text="Insert" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" text="Save File" />
+            <Button fx:id="loadButton" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadFile" text="Load File" />
+            <Button fx:id="deleteButton" layoutX="269.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete" />
         </items>
       </ToolBar>
       <ImageView fitHeight="114.0" fitWidth="89.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
