@@ -62,4 +62,8 @@ public class ReadDataTask extends Task<Integer> {
     public void setDataObjects(ObservableList dataObjects) {
         this.dataObjects = dataObjects;
     }
+
+    public String getDataObjectType(){
+        return dataObjects.get(0).getClass().getName();
+    }
 }

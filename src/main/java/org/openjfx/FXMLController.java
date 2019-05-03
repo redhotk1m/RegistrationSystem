@@ -136,21 +136,11 @@ public class FXMLController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                data = (readDataTask.getDataObjects()); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
+                data = readDataTask.getDataObjects(); //TODO Switch case, for hver dataTable sånn at de kan bli accessed
                 if (data.size() > 0) {
-                    if (data.get(0).getClass().getName().endsWith("Clients"))
-                        clientData = data;
-                    if (data.get(0).getClass().getName().endsWith("BoatInsurance"))
-                        boatData = data;
-                    if (data.get(0).getClass().getName().endsWith("PrimaryHouseInsurance"))
-                        primaryHouseData = data;
-                    if (data.get(0).getClass().getName().endsWith("SecondaryHouseInsurance"))
-                        secondaryHouseData = data;
-                    if (data.get(0).getClass().getName().endsWith("TravelInsurance"))
-                        travelInsuranceData = data;
-                    if (data.get(0).getClass().getName().endsWith("DamageReport"))
-                        damageReportData = data;
-                    TableView tableView = setCorrectTable(readDataTask.getDataObjects().get(0).getClass().getName());
+                    String dataObjectType = readDataTask.getDataObjectType();
+                    setCorrectDataList(dataObjectType);
+                    TableView tableView = setCorrectTable(dataObjectType);
                     tableView.setItems(data);
                     tableView.setEditable(true);
                 }
@@ -159,6 +149,21 @@ public class FXMLController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setCorrectDataList(String dataObjectType){
+        if (dataObjectType.endsWith("Clients"))
+            clientData = data;
+        if (dataObjectType.endsWith("BoatInsurance"))
+            boatData = data;
+        if (dataObjectType.endsWith("PrimaryHouseInsurance"))
+            primaryHouseData = data;
+        if (dataObjectType.endsWith("SecondaryHouseInsurance"))
+            secondaryHouseData = data;
+        if (dataObjectType.endsWith("TravelInsurance"))
+            travelInsuranceData = data;
+        if (dataObjectType.endsWith("DamageReport"))
+            damageReportData = data;
     }
 
     private TableView setCorrectTable(String typeOfObject) {
@@ -304,21 +309,6 @@ public class FXMLController {
     }
 
     @FXML
-    private void testButton(ActionEvent event) throws IOException {
-        //TODO Popup med verdier, fyll dem, trykk på knappen, verdiene sendes inn i metoden her, valideres, også lages hele objektet.
-        /*Clients clients = new Clients();
-        clients.setDateCreated("1");
-        clients.setFirstName("2");
-        clients.setLastName("3");
-        clients.setAddress("4");
-        clients.setInsuranceNumber("5");
-        clients.setForsikringer("6");
-        clients.setSkademeldinger("7");
-        clients.setUbetalt("8");*/
-        //data.add(clients);
-    }
-
-    @FXML
     private void onEdit(TableColumn.CellEditEvent editEvent){
         String column = editEvent.getTableColumn().getText();
         String newValue = editEvent.getNewValue().toString();
@@ -350,27 +340,21 @@ public class FXMLController {
                 clients.setAddress(newValue);
                 break;
             case "Insurance Number":
-                System.out.println("insurancenumber test");
                 checkArguments.numberTest(newValue);
                 clients.setInsuranceNumber(newValue);
                 break;
             case "Insurances":
-                System.out.println("insurances test");
                 checkArguments.stringTest(newValue);
                 clients.setInsurances(newValue);
                 break;
             case "Damage reports":
-                System.out.println("damageReport test");
                 checkArguments.stringTest(newValue);
                 clients.setDamageReports(newValue);
                 break;
             case "Unpaid compensations":
-                System.out.println("unpaidComp test");
                 checkArguments.numberTest(newValue);
                 clients.setUnpaid(newValue);
                 break;
-                default:
-                    System.out.println(column);
         }
     }
 
