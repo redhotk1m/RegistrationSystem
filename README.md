@@ -5,3 +5,7 @@ This is a registration system for an insurance company
 - Working with threads
 - Observable objects
 - JavaFX
+- Importing/exporting to CSV
+- JSON
+- Adding support for EXCEL
+- Error handling, E.g file not readable
