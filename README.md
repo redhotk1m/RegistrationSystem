@@ -9,3 +9,6 @@ This is a registration system for an insurance company
 - JSON
 - Adding support for EXCEL
 - Error handling, E.g file not readable
+- Maven
+- Java 11
+- Adding dependencies, like JavaFX
